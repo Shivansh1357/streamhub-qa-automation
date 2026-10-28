@@ -98,7 +98,8 @@ Useful switches (all read through [`config/env.ts`](config/env.ts), never from `
                                  config/env.ts ← config/env/<TEST_ENV>.env ← .env ← shell
 ```
 
-Design decisions worth knowing about:
+Every non-obvious choice is written up as an architecture decision record in [`docs/adr/`](docs/adr/README.md), using a
+1 / 3 / 1 structure (one problem, three options with their first- and second-order effects, one decision). The short version:
 
 - **Tags provision fixtures.** `@ui`, `@api` and `@sql` hooks create exactly what a scenario needs (a fresh browser context, a
   request context with the API started on demand, a connection pool). Scenarios can't accidentally share state.
@@ -115,7 +116,7 @@ Design decisions worth knowing about:
 streamhub-qa-automation/
 ├── api/                      # B1 — mock API (src/, data/*.json, openapi.yaml, README.md)
 ├── config/                   # env.ts (typed loader) + env/local.env, env/ci.env
-├── docs/SELF_HEALING.md      # AI self-healing design + worked example
+├── docs/                     # SELF_HEALING.md (design + worked example), adr/ (decision records), site/ (Pages index)
 ├── sql/                      # B4 — schema, seed, queries, scripts, outputs, screenshots, README
 ├── tests/
 │   ├── features/{api,ui,sql,self-healing}/   # Gherkin
@@ -129,7 +130,7 @@ streamhub-qa-automation/
 ├── reports/                  # committed execution results per profile
 ├── cucumber.js               # profiles: default | api | ui | sql | selfHealing (UI retries once when CI=true)
 ├── docker-compose.yml        # PostgreSQL 16 pre-seeded for the SQL scenarios
-└── .github/workflows/ci.yml  # typecheck + lint, API, UI, SQL jobs; self-healing demo on demand
+└── .github/workflows/        # ci.yml (quality gates, API, UI, SQL; self-healing demo on demand), pages.yml (publish results)
 ```
 
 ---
@@ -137,7 +138,9 @@ streamhub-qa-automation/
 ## 4. Test execution results
 
 All suites were executed from this repository on 28 October 2026 (macOS, Node 22, headless Chromium, PostgreSQL 16) and the
-reports are committed. Open the HTML reports directly, or read the JSON/JUnit files for machine-readable results.
+reports are committed. **Browse them without cloning at <https://shivansh1357.github.io/streamhub-qa-automation/>** (published
+from the committed files by the `Publish results` workflow), or open the HTML reports locally; the JSON/JUnit files are the
+machine-readable versions.
 
 | Suite | Command | Result | Report |
 | --- | --- | --- | --- |
