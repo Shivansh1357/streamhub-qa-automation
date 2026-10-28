@@ -1,0 +1,15 @@
+-- query:    02b_scoring_streaks_team_matches.sql
+-- database: PostgreSQL 16.10 (Homebrew) on aarch64-apple-darwin24.4.0, compiled by Apple clang version 17.0.0 (clang-1700.0.13.3), 64-bit
+-- executed: 2026-10-28T10:12:18Z
+
+Timing is on.
+   player_name    | streak_start_date | streak_end_date | matches_in_streak | runs_in_streak 
+------------------+-------------------+-----------------+-------------------+----------------
+ Arjun Vellore    | 2024-03-31        | 2024-04-12      |                 3 |            105
+ Devansh Kulkarni | 2024-04-12        | 2024-05-05      |                 3 |             90
+ Rohan Dasgupta   | 2024-03-23        | 2024-04-24      |                 5 |            232
+ Siddharth Rao    | 2024-03-24        | 2024-04-07      |                 3 |            116
+ Siddharth Rao    | 2024-04-21        | 2024-05-21      |                 3 |            139
+(5 rows)
+
+Time: 3.394 ms

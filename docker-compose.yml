@@ -1,0 +1,28 @@
+# PostgreSQL for the SQL scenarios (Section B4).
+#
+#   docker compose up -d          # starts Postgres 16 and loads sql/schema.sql + sql/seed.sql on first boot
+#   TEST_ENV=ci npm run test:sql  # config/env/ci.env already points at postgres:postgres@localhost:5432
+#
+# The init scripts only run when the data volume is created, so `docker compose down -v` gives a clean slate.
+services:
+  postgres:
+    image: postgres:16
+    container_name: streamhub-qa-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: streamhub_qa
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./sql/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+      - streamhub-qa-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d streamhub_qa']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  streamhub-qa-pgdata:

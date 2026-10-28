@@ -1,0 +1,16 @@
+-- query:    01_round_trip_transfers.sql
+-- database: PostgreSQL 16.10 (Homebrew) on aarch64-apple-darwin24.4.0, compiled by Apple clang version 17.0.0 (clang-1700.0.13.3), 64-bit
+-- executed: 2026-10-28T10:12:18Z
+
+Timing is on.
+ original_txn | return_txn | account_a | account_b | amount_out | amount_back | hours_between | pct_difference 
+--------------+------------+-----------+-----------+------------+-------------+---------------+----------------
+ TXN-101      | TXN-102    | AC-1001   | AC-1002   |    1000.00 |      980.00 |          6.50 |           2.00
+ TXN-201      | TXN-202    | AC-1003   | AC-1004   |     500.00 |      500.00 |         24.00 |           0.00
+ TXN-301      | TXN-302    | AC-1005   | AC-1006   |    2000.00 |     1800.00 |         12.00 |          10.00
+ TXN-401      | TXN-402    | AC-1007   | AC-1008   |    1250.00 |     1150.00 |          3.25 |           8.00
+ TXN-501      | TXN-502    | AC-1009   | AC-1010   |     750.00 |      700.00 |          3.00 |           6.67
+ TXN-501      | TXN-503    | AC-1009   | AC-1010   |     750.00 |      745.00 |         21.00 |           0.67
+(6 rows)
+
+Time: 2.781 ms
