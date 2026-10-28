@@ -19,10 +19,14 @@ services:
       - ./sql/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
       - streamhub-qa-pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d streamhub_qa']
+      # Probe over TCP (-h localhost), not the Unix socket: the image's temporary init-time
+      # server answers the socket while the init scripts run but is not listening on 5432 yet,
+      # so a socket probe would let `docker compose up --wait` return before port 5432 accepts.
+      test: ['CMD-SHELL', 'pg_isready -h localhost -U postgres -d streamhub_qa']
       interval: 5s
       timeout: 5s
       retries: 12
+      start_period: 10s
 
 volumes:
   streamhub-qa-pgdata:

@@ -1,6 +1,6 @@
 -- query:    02_scoring_streaks.sql
 -- database: PostgreSQL 16.10 (Homebrew) on aarch64-apple-darwin24.4.0, compiled by Apple clang version 17.0.0 (clang-1700.0.13.3), 64-bit
--- executed: 2026-10-28T10:12:18Z
+-- executed: 2026-10-28T15:06:32Z
 
 Timing is on.
    player_name    | streak_start_date | streak_end_date | matches_in_streak | runs_in_streak 
@@ -13,4 +13,4 @@ Timing is on.
  Siddharth Rao    | 2024-04-21        | 2024-05-21      |                 3 |            139
 (6 rows)
 
-Time: 6.508 ms
+Time: 3.493 ms

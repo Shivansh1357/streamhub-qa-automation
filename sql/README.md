@@ -13,7 +13,7 @@ cricket "season" is IPL-style but not real statistics.
 
 Automated coverage: [`tests/features/sql/round-trip-transfers.feature`](../tests/features/sql/round-trip-transfers.feature)
 and [`tests/features/sql/scoring-streaks.feature`](../tests/features/sql/scoring-streaks.feature)
-(`npm run test:sql`, 24 scenarios).
+(`npm run test:sql`, 27 scenarios).
 
 ## Layout
 
@@ -83,10 +83,10 @@ Design notes that matter for the queries:
 | Rule | Decision | Why |
 | --- | --- | --- |
 | Pairing | Self-join `transactions` on reversed accounts: `t2.from = t1.to AND t2.to = t1.from` | "B sends back to A" is the mirror image of "A sends to B" |
-| Window | **Directional**: `t2.txn_time > t1.txn_time AND t2.txn_time <= t1.txn_time + 24h` | A "return" that precedes the "original" is not a reversal of it. The strict lower bound also guarantees each pair is reported **once**, with the earlier transfer as the original, rather than once per direction |
+| Window | **Directional**: `(t2.txn_time > t1.txn_time OR (t2.txn_time = t1.txn_time AND t2.txn_id > t1.txn_id)) AND t2.txn_time <= t1.txn_time + 24h` | A "return" that precedes the "original" is not a reversal of it. The directional lower bound also guarantees each pair is reported **once**, with the earlier transfer as the original, rather than once per direction. Two legs posted at the **identical** `txn_time` are still one round trip: the tie is broken on `txn_id`, so the lower id is the original and the pair is reported exactly once (`hours_between` 0.00) instead of being silently dropped by a strict `>` |
 | Window bound | Inclusive at exactly 24 hours | "Within a 24-hour window" includes the boundary; a return at 24:00:00 counts, at 24:00:01 it does not |
 | Tolerance | `ABS(t2.amount - t1.amount) <= 0.10 * t1.amount`, **relative to the original amount** | "B sends a similar amount back" is judged against what A sent out. Measuring against the return would make the test asymmetric in the wrong direction (see decoy DC-5) |
-| Tolerance bound | Inclusive at exactly 10% | A return of exactly 90% (or 110%) is "within 10%" |
+| Tolerance bound | Inclusive at exactly 10%, on both sides | A return of exactly 90% (RT-3) or exactly 110% (RT-7) is "within 10%"; 89.99% (DC-7) and 110.001% (DC-9) are not |
 | Several returns | Every qualifying return is reported, one row each | The query reports candidates; deciding which return "belongs" to a payment is a separate business rule and would hide data |
 | Rounding | `hours_between` and `pct_difference` are rounded to 2 dp for display only | Predicates use unrounded values, so rounding can never widen the window or tolerance |
 | Order | `ORDER BY t1.txn_time, t1.txn_id, t2.txn_time, t2.txn_id` | Deterministic output for diffing and for the exact-row assertions |
@@ -94,8 +94,9 @@ Design notes that matter for the queries:
 ### Seed cases
 
 Transaction ids encode the case: the hundreds digit is the case number (`TXN-301`/`TXN-302`
-are case RT-3). Every case sits on its own date at least three days from any other, so cases
-cannot pair with each other across the 24-hour window.
+are case RT-3; the numbering runs on through the decoys and the background noise, so RT-6 is
+`TXN-1501`/`TXN-1502`). Every case sits on its own date at least three days from any other, so
+cases cannot pair with each other across the 24-hour window.
 
 **Positives (must be reported)**
 
@@ -106,6 +107,8 @@ cannot pair with each other across the 24-hour window.
 | RT-3 | `TXN-301` -> `TXN-302` | Return **exactly 10% lower** (inclusive tolerance): 2000.00 -> 1800.00 | 12.00 | 10.00 |
 | RT-4 | `TXN-401` -> `TXN-402` | Partial reversal of 92%: 1250.00 -> 1150.00 | 3.25 | 8.00 |
 | RT-5 | `TXN-501` -> `TXN-502`, `TXN-501` -> `TXN-503` | One payment, **two returns** within 24h: both reported | 3.00 / 21.00 | 6.67 / 0.67 |
+| RT-6 | `TXN-1501` -> `TXN-1502` | Both legs posted at the **identical** `txn_time` (450.00 out, 441.00 back): reported once, lower `txn_id` as the original | 0.00 | 2.00 |
+| RT-7 | `TXN-1601` -> `TXN-1602` | Over-return of **exactly 110%** (inclusive tolerance, high side): 1000.00 -> 1100.00 | 8.00 | 10.00 |
 
 **Negatives (decoys - must not be reported)**
 
@@ -119,8 +122,9 @@ cannot pair with each other across the 24-hour window.
 | DC-6 | `TXN-1101`, `TXN-1102`, `TXN-1103` | Chain A -> B -> C -> A within three hours: the money comes back, but no pair of transactions reverses each other |
 | DC-7 | `TXN-1201`, `TXN-1202` | Returned 10.01% lower (just outside the tolerance) |
 | DC-8 | `TXN-1301`, `TXN-1302` | Returned 24 hours and one second later (just outside the window) |
+| DC-9 | `TXN-1701`, `TXN-1702` | Returned 10.001% higher: 1100.10 back for 1000.00 (just outside the tolerance on the high side) |
 
-### Expected result (6 rows)
+### Expected result (8 rows)
 
 ```
  original_txn | return_txn | account_a | account_b | amount_out | amount_back | hours_between | pct_difference
@@ -131,6 +135,8 @@ cannot pair with each other across the 24-hour window.
  TXN-401      | TXN-402    | AC-1007   | AC-1008   |    1250.00 |     1150.00 |          3.25 |           8.00
  TXN-501      | TXN-502    | AC-1009   | AC-1010   |     750.00 |      700.00 |          3.00 |           6.67
  TXN-501      | TXN-503    | AC-1009   | AC-1010   |     750.00 |      745.00 |         21.00 |           0.67
+ TXN-1501     | TXN-1502   | AC-1004   | AC-1007   |     450.00 |      441.00 |          0.00 |           2.00
+ TXN-1601     | TXN-1602   | AC-1003   | AC-1006   |    1000.00 |     1100.00 |          8.00 |          10.00
 ```
 
 ![Round-trip transfers](screenshots/01_round_trip_transfers.png)
@@ -245,7 +251,15 @@ the schema is idempotent).
   state just the columns that matter for the rule it documents.
 - Decoys are a `Scenario Outline` whose `Examples` table names the reason each row must be
   absent, so the report doubles as a specification.
+- `the round trips involving transaction "..." should be exactly:` filters on **either** leg, so
+  the same-instant scenario proves RT-6 is reported once and not once per direction.
+- The "satisfies the business rule on the raw ledger" scenario does not trust the query's own
+  rounded `hours_between` / `pct_difference` (a return at 24h0m17s would render as `24.00`).
+  It runs a second query that joins every reported pair back to `transactions` and re-applies
+  the rule to the raw values: `txn_time` as whole microseconds since the epoch compared as
+  `bigint`, and `amount` as integer cents, so `|back - out| * 100 <= out * 10` is exact.
 - `DATE` columns are read back as literal `YYYY-MM-DD` text (per-query `pg` type parser) rather
   than JS `Date` objects, which avoids the classic off-by-one-day error on non-UTC machines.
 - A mutation check was run while building this: making either boundary exclusive (`<` instead of
-  `<=`) or changing `runs >= 30` to `runs > 30` fails the boundary scenarios.
+  `<=`), reverting the lower bound to a strict `t2.txn_time > t1.txn_time` (RT-6 disappears) or
+  changing `runs >= 30` to `runs > 30` fails the boundary scenarios.

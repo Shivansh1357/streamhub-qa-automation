@@ -8,10 +8,13 @@
 -- Design decisions
 --   * Self-join on reversed accounts. t1 is the ORIGINAL leg (A -> B), t2 is the
 --     RETURN leg (B -> A): t2 must flow from t1's recipient back to t1's sender.
---   * The window is DIRECTIONAL: the return must happen strictly AFTER the
---     original. A "return" that precedes the "original" is not a reversal of it,
---     and the strict lower bound also guarantees each pair is reported once
---     (with the earlier transaction as original) instead of once per direction.
+--   * The window is DIRECTIONAL: the return must happen AFTER the original, or
+--     at the SAME INSTANT. A "return" that precedes the "original" is not a
+--     reversal of it, and the directional lower bound guarantees each pair is
+--     reported once (with the earlier transaction as original) instead of once
+--     per direction. Two legs posted at the identical txn_time are still one
+--     round trip, so ties are broken on txn_id: the lower txn_id is the original
+--     and the pair is reported exactly once, never dropped and never doubled.
 --     The upper bound is INCLUSIVE: a return exactly 24 hours later still counts.
 --   * The tolerance is RELATIVE TO THE ORIGINAL AMOUNT (10% of what A sent)
 --     because the business rule says B sends "a similar amount back" - similarity
@@ -42,7 +45,10 @@ FROM transactions AS t1
 JOIN transactions AS t2
   ON  t2.from_account = t1.to_account                          -- reversed accounts:
   AND t2.to_account   = t1.from_account                        --   B -> A answers A -> B
-  AND t2.txn_time     >  t1.txn_time                           -- return strictly after the original
+  AND (                                                        -- return after the original ...
+        t2.txn_time > t1.txn_time
+     OR (t2.txn_time = t1.txn_time AND t2.txn_id > t1.txn_id)  -- ... or at the same instant (lower txn_id is the original)
+      )
   AND t2.txn_time     <= t1.txn_time + INTERVAL '24 hours'     -- ... and no later than 24h (inclusive)
   AND ABS(t2.amount - t1.amount) <= 0.10 * t1.amount           -- within 10% of the ORIGINAL (inclusive)
 ORDER BY

@@ -7,9 +7,10 @@
 --
 -- Conventions
 --   * Transfers: the hundreds digit of a txn_id is the case number
---     (TXN-101/TXN-102 belong to case RT-1, TXN-1301/TXN-1302 to case DC-8).
---     Every case sits on its own date, at least three days away from any other
---     case, so cases can never pair with each other across the 24-hour window.
+--     (TXN-101/TXN-102 belong to case RT-1, TXN-1301/TXN-1302 to case DC-8,
+--     TXN-1501/TXN-1502 to case RT-6). Every case sits on its own date, at
+--     least three days away from any other case, so cases can never pair with
+--     each other across the 24-hour window.
 --   * Timestamps are written with an explicit +00 offset so the seed means the
 --     same thing whatever the session time zone is.
 --   * Cricket: an IPL-style 2024 season (22 March - 26 May 2024) with invented
@@ -66,6 +67,19 @@ INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, re
   ('TXN-502', 'AC-1010', 'AC-1009', 700.00, TIMESTAMPTZ '2024-03-16 12:00:00+00', 'RT-5 first return (3h, 6.67%)'),
   ('TXN-503', 'AC-1010', 'AC-1009', 745.00, TIMESTAMPTZ '2024-03-17 06:00:00+00', 'RT-5 second return (21h, 0.67%)');
 
+-- RT-6  Both legs posted at the IDENTICAL txn_time (e.g. a batch run). The window's lower
+--       bound is a tie broken on txn_id: TXN-1501 (lower id) is the original, TXN-1502 the
+--       return, and the pair is reported exactly once with hours_between = 0.00. A strict
+--       "return after original" predicate would silently drop this round trip.
+INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, reference) VALUES
+  ('TXN-1501', 'AC-1004', 'AC-1007', 450.00, TIMESTAMPTZ '2024-04-29 09:00:00+00', 'RT-6 batch payment'),
+  ('TXN-1502', 'AC-1007', 'AC-1004', 441.00, TIMESTAMPTZ '2024-04-29 09:00:00+00', 'RT-6 batch reversal, same instant');
+
+-- RT-7  Over-return of exactly 110% (inclusive upper tolerance bound): |1100 - 1000| = 100 = 0.10 * 1000.
+INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, reference) VALUES
+  ('TXN-1601', 'AC-1003', 'AC-1006', 1000.00, TIMESTAMPTZ '2024-05-03 09:00:00+00', 'RT-7 payment'),
+  ('TXN-1602', 'AC-1006', 'AC-1003', 1100.00, TIMESTAMPTZ '2024-05-03 17:00:00+00', 'RT-7 returned plus 10%');
+
 -- -----------------------------------------------------------------------------
 -- Transactions: NEGATIVE cases (decoys) - none of these may appear in the result
 -- -----------------------------------------------------------------------------
@@ -117,6 +131,11 @@ INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, re
 INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, reference) VALUES
   ('TXN-1301', 'AC-1006', 'AC-1009', 320.00, TIMESTAMPTZ '2024-04-17 09:00:00+00', 'DC-8 payment'),
   ('TXN-1302', 'AC-1009', 'AC-1006', 320.00, TIMESTAMPTZ '2024-04-18 09:00:01+00', 'DC-8 return after 24h 1s');
+
+-- DC-9  Just outside the tolerance on the HIGH side: 1100.10 back for 1000.00 (10.001%).
+INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, reference) VALUES
+  ('TXN-1701', 'AC-1002', 'AC-1009', 1000.00, TIMESTAMPTZ '2024-05-07 09:00:00+00', 'DC-9 payment'),
+  ('TXN-1702', 'AC-1009', 'AC-1002', 1100.10, TIMESTAMPTZ '2024-05-07 11:00:00+00', 'DC-9 return of 110.001%');
 
 -- Background noise: ordinary one-way payments with no counterpart.
 INSERT INTO transactions (txn_id, from_account, to_account, amount, txn_time, reference) VALUES
