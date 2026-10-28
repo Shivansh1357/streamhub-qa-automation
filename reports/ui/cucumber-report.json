@@ -1,0 +1,92 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "framework-smoke-test;the-emi-calculator-home-page-loads",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "The EMI calculator home page loads",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 141750
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1909022042
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2471731374
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I open the EMI calculator",
+            "match": {
+              "location": "tests/steps/ui/smoke.steps.ts:5"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 22450041
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "the page title should contain \"EMI Calculator\"",
+            "match": {
+              "location": "tests/steps/ui/smoke.steps.ts:9"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 4697458
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ui",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "framework-smoke-test",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Framework smoke test",
+    "tags": [
+      {
+        "name": "@ui",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
+        "line": 1
+      }
+    ],
+    "uri": "tests/features/ui/smoke.feature"
+  }
+]

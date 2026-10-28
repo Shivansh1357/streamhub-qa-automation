@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*.local
+reports/**/screenshots/
+reports/**/traces/
+reports/**/videos/
+reports/**/dom-snapshots/
+!reports/**/.gitkeep
+.playwright-mcp/
+*.log
+.DS_Store

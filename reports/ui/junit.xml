@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="4.766" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-28T10:00:18.419Z">
+  <testcase classname="Framework smoke test" name="The EMI calculator home page loads" time="4.409">
+    <system-out><![CDATA[Given I open the EMI calculator.............................................passed
+Then the page title should contain "EMI Calculator".........................passed]]></system-out>
+  </testcase>
+</testsuite>

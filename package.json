@@ -1,0 +1,48 @@
+{
+  "name": "streamhub-qa-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Streamhub QA Automation Assessment (Section B): mock Audience Analytics API, Playwright + Cucumber API/UI/SQL automation, and an AI self-healing locator exercise",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "postinstall": "playwright install chromium",
+    "api:start": "ts-node --transpile-only api/src/server.ts",
+    "test": "cucumber-js",
+    "test:api": "cucumber-js --profile api",
+    "test:ui": "cucumber-js --profile ui",
+    "test:sql": "cucumber-js --profile sql",
+    "test:self-healing": "cucumber-js --profile selfHealing",
+    "test:ci": "cucumber-js --profile ci",
+    "heal": "ts-node --transpile-only tools/self-heal/cli.ts",
+    "report:open": "open reports/default/cucumber-report.html",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "sql:setup": "bash sql/scripts/setup.sh",
+    "sql:run": "bash sql/scripts/run.sh"
+  },
+  "dependencies": {
+    "express": "5.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "1.3.0",
+    "@cucumber/cucumber": "13.3.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/express": "5.0.6",
+    "@types/node": "22.20.5",
+    "@types/pg": "8.23.1",
+    "dotenv": "18.0.9",
+    "eslint": "10.13.0",
+    "pg": "8.23.1",
+    "prettier": "3.9.10",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1"
+  }
+}
