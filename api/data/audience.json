@@ -1,0 +1,1682 @@
+[
+  {
+    "programmeId": "prg_001",
+    "date": "2026-01-01",
+    "viewers": 407530,
+    "avgWatchTimeMinutes": 42.5,
+    "completionRate": 0.696
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-01-16",
+    "viewers": 504565,
+    "avgWatchTimeMinutes": 45.1,
+    "completionRate": 0.78
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-01-17",
+    "viewers": 427766,
+    "avgWatchTimeMinutes": 41.3,
+    "completionRate": 0.728
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-01-26",
+    "viewers": 501751,
+    "avgWatchTimeMinutes": 44.1,
+    "completionRate": 0.733
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-02-04",
+    "viewers": 372314,
+    "avgWatchTimeMinutes": 42.3,
+    "completionRate": 0.759
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-02-17",
+    "viewers": 544473,
+    "avgWatchTimeMinutes": 40.7,
+    "completionRate": 0.706
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-03-14",
+    "viewers": 440867,
+    "avgWatchTimeMinutes": 42.4,
+    "completionRate": 0.715
+  },
+  {
+    "programmeId": "prg_001",
+    "date": "2026-03-29",
+    "viewers": 378464,
+    "avgWatchTimeMinutes": 41.5,
+    "completionRate": 0.711
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-01-01",
+    "viewers": 706337,
+    "avgWatchTimeMinutes": 44.3,
+    "completionRate": 0.836
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-01-04",
+    "viewers": 677057,
+    "avgWatchTimeMinutes": 43.8,
+    "completionRate": 0.837
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-01-18",
+    "viewers": 567820,
+    "avgWatchTimeMinutes": 44.7,
+    "completionRate": 0.853
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-02-04",
+    "viewers": 530806,
+    "avgWatchTimeMinutes": 45.1,
+    "completionRate": 0.826
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-02-06",
+    "viewers": 808880,
+    "avgWatchTimeMinutes": 43.9,
+    "completionRate": 0.839
+  },
+  {
+    "programmeId": "prg_002",
+    "date": "2026-03-21",
+    "viewers": 603427,
+    "avgWatchTimeMinutes": 46.3,
+    "completionRate": 0.87
+  },
+  {
+    "programmeId": "prg_003",
+    "date": "2026-01-17",
+    "viewers": 537330,
+    "avgWatchTimeMinutes": 19.3,
+    "completionRate": 0.693
+  },
+  {
+    "programmeId": "prg_003",
+    "date": "2026-02-07",
+    "viewers": 491596,
+    "avgWatchTimeMinutes": 19.5,
+    "completionRate": 0.685
+  },
+  {
+    "programmeId": "prg_003",
+    "date": "2026-03-07",
+    "viewers": 340500,
+    "avgWatchTimeMinutes": 19.8,
+    "completionRate": 0.676
+  },
+  {
+    "programmeId": "prg_003",
+    "date": "2026-03-20",
+    "viewers": 489234,
+    "avgWatchTimeMinutes": 20.2,
+    "completionRate": 0.717
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-01-14",
+    "viewers": 685059,
+    "avgWatchTimeMinutes": 33.1,
+    "completionRate": 0.781
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-02-01",
+    "viewers": 661042,
+    "avgWatchTimeMinutes": 30.9,
+    "completionRate": 0.708
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-02-19",
+    "viewers": 590325,
+    "avgWatchTimeMinutes": 31,
+    "completionRate": 0.723
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-02-28",
+    "viewers": 613224,
+    "avgWatchTimeMinutes": 30.2,
+    "completionRate": 0.71
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-03-11",
+    "viewers": 600060,
+    "avgWatchTimeMinutes": 32.9,
+    "completionRate": 0.761
+  },
+  {
+    "programmeId": "prg_004",
+    "date": "2026-03-21",
+    "viewers": 590542,
+    "avgWatchTimeMinutes": 30,
+    "completionRate": 0.688
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-01-15",
+    "viewers": 597258,
+    "avgWatchTimeMinutes": 22.3,
+    "completionRate": 0.789
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-01-18",
+    "viewers": 410608,
+    "avgWatchTimeMinutes": 20.9,
+    "completionRate": 0.737
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-02-03",
+    "viewers": 531719,
+    "avgWatchTimeMinutes": 22.8,
+    "completionRate": 0.802
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-02-18",
+    "viewers": 621614,
+    "avgWatchTimeMinutes": 21.7,
+    "completionRate": 0.779
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-02-27",
+    "viewers": 495470,
+    "avgWatchTimeMinutes": 20.8,
+    "completionRate": 0.743
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-03-05",
+    "viewers": 466714,
+    "avgWatchTimeMinutes": 19.9,
+    "completionRate": 0.714
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-03-25",
+    "viewers": 500752,
+    "avgWatchTimeMinutes": 24.6,
+    "completionRate": 0.824
+  },
+  {
+    "programmeId": "prg_005",
+    "date": "2026-03-31",
+    "viewers": 440672,
+    "avgWatchTimeMinutes": 21.5,
+    "completionRate": 0.771
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-01-21",
+    "viewers": 545286,
+    "avgWatchTimeMinutes": 68,
+    "completionRate": 0.773
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-02-23",
+    "viewers": 417518,
+    "avgWatchTimeMinutes": 72.1,
+    "completionRate": 0.863
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-02-28",
+    "viewers": 886761,
+    "avgWatchTimeMinutes": 70.4,
+    "completionRate": 0.805
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-03-09",
+    "viewers": 557045,
+    "avgWatchTimeMinutes": 67.9,
+    "completionRate": 0.752
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-03-20",
+    "viewers": 598423,
+    "avgWatchTimeMinutes": 75.8,
+    "completionRate": 0.826
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-03-26",
+    "viewers": 660840,
+    "avgWatchTimeMinutes": 73.8,
+    "completionRate": 0.859
+  },
+  {
+    "programmeId": "prg_006",
+    "date": "2026-03-30",
+    "viewers": 638145,
+    "avgWatchTimeMinutes": 69.6,
+    "completionRate": 0.779
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-01-08",
+    "viewers": 561096,
+    "avgWatchTimeMinutes": 99,
+    "completionRate": 0.851
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-01-17",
+    "viewers": 799831,
+    "avgWatchTimeMinutes": 105.5,
+    "completionRate": 0.888
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-02-06",
+    "viewers": 421779,
+    "avgWatchTimeMinutes": 101,
+    "completionRate": 0.855
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-02-08",
+    "viewers": 886401,
+    "avgWatchTimeMinutes": 95.6,
+    "completionRate": 0.788
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-02-09",
+    "viewers": 640553,
+    "avgWatchTimeMinutes": 95.1,
+    "completionRate": 0.791
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-03-12",
+    "viewers": 670856,
+    "avgWatchTimeMinutes": 95.4,
+    "completionRate": 0.78
+  },
+  {
+    "programmeId": "prg_007",
+    "date": "2026-03-23",
+    "viewers": 619593,
+    "avgWatchTimeMinutes": 98.7,
+    "completionRate": 0.836
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-01-24",
+    "viewers": 856978,
+    "avgWatchTimeMinutes": 44.5,
+    "completionRate": 0.783
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-01-25",
+    "viewers": 719561,
+    "avgWatchTimeMinutes": 43.7,
+    "completionRate": 0.745
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-02-02",
+    "viewers": 567060,
+    "avgWatchTimeMinutes": 39,
+    "completionRate": 0.7
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-02-10",
+    "viewers": 548736,
+    "avgWatchTimeMinutes": 47,
+    "completionRate": 0.784
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-02-22",
+    "viewers": 619196,
+    "avgWatchTimeMinutes": 45.9,
+    "completionRate": 0.793
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-02-27",
+    "viewers": 443633,
+    "avgWatchTimeMinutes": 42.1,
+    "completionRate": 0.717
+  },
+  {
+    "programmeId": "prg_008",
+    "date": "2026-03-12",
+    "viewers": 623032,
+    "avgWatchTimeMinutes": 46.8,
+    "completionRate": 0.786
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-01-13",
+    "viewers": 442926,
+    "avgWatchTimeMinutes": 31.8,
+    "completionRate": 0.698
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-02-03",
+    "viewers": 400322,
+    "avgWatchTimeMinutes": 27.6,
+    "completionRate": 0.661
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-02-17",
+    "viewers": 298451,
+    "avgWatchTimeMinutes": 26.3,
+    "completionRate": 0.625
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-02-26",
+    "viewers": 389822,
+    "avgWatchTimeMinutes": 30.8,
+    "completionRate": 0.685
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-03-05",
+    "viewers": 461295,
+    "avgWatchTimeMinutes": 31.6,
+    "completionRate": 0.734
+  },
+  {
+    "programmeId": "prg_009",
+    "date": "2026-03-11",
+    "viewers": 413903,
+    "avgWatchTimeMinutes": 26.5,
+    "completionRate": 0.634
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-01-02",
+    "viewers": 397399,
+    "avgWatchTimeMinutes": 22.1,
+    "completionRate": 0.734
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-01-16",
+    "viewers": 341207,
+    "avgWatchTimeMinutes": 22.6,
+    "completionRate": 0.764
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-01-30",
+    "viewers": 389720,
+    "avgWatchTimeMinutes": 21,
+    "completionRate": 0.69
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-02-13",
+    "viewers": 390416,
+    "avgWatchTimeMinutes": 20.8,
+    "completionRate": 0.737
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-02-16",
+    "viewers": 427593,
+    "avgWatchTimeMinutes": 20.2,
+    "completionRate": 0.689
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-03-25",
+    "viewers": 285464,
+    "avgWatchTimeMinutes": 21.6,
+    "completionRate": 0.774
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-03-27",
+    "viewers": 316800,
+    "avgWatchTimeMinutes": 20.8,
+    "completionRate": 0.686
+  },
+  {
+    "programmeId": "prg_010",
+    "date": "2026-03-29",
+    "viewers": 366854,
+    "avgWatchTimeMinutes": 20.6,
+    "completionRate": 0.741
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-01-24",
+    "viewers": 162053,
+    "avgWatchTimeMinutes": 42.2,
+    "completionRate": 0.813
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-02-09",
+    "viewers": 185962,
+    "avgWatchTimeMinutes": 39.4,
+    "completionRate": 0.784
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-02-10",
+    "viewers": 178062,
+    "avgWatchTimeMinutes": 42.6,
+    "completionRate": 0.872
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-02-16",
+    "viewers": 189203,
+    "avgWatchTimeMinutes": 41.2,
+    "completionRate": 0.79
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-02-28",
+    "viewers": 195803,
+    "avgWatchTimeMinutes": 37.7,
+    "completionRate": 0.776
+  },
+  {
+    "programmeId": "prg_011",
+    "date": "2026-03-18",
+    "viewers": 149290,
+    "avgWatchTimeMinutes": 40.5,
+    "completionRate": 0.814
+  },
+  {
+    "programmeId": "prg_012",
+    "date": "2026-01-13",
+    "viewers": 131723,
+    "avgWatchTimeMinutes": 34.7,
+    "completionRate": 0.762
+  },
+  {
+    "programmeId": "prg_012",
+    "date": "2026-01-22",
+    "viewers": 122148,
+    "avgWatchTimeMinutes": 33.8,
+    "completionRate": 0.75
+  },
+  {
+    "programmeId": "prg_012",
+    "date": "2026-02-06",
+    "viewers": 102191,
+    "avgWatchTimeMinutes": 40.4,
+    "completionRate": 0.834
+  },
+  {
+    "programmeId": "prg_012",
+    "date": "2026-02-09",
+    "viewers": 128877,
+    "avgWatchTimeMinutes": 36.4,
+    "completionRate": 0.756
+  },
+  {
+    "programmeId": "prg_012",
+    "date": "2026-02-22",
+    "viewers": 111035,
+    "avgWatchTimeMinutes": 36.7,
+    "completionRate": 0.766
+  },
+  {
+    "programmeId": "prg_013",
+    "date": "2026-01-16",
+    "viewers": 141704,
+    "avgWatchTimeMinutes": 17.3,
+    "completionRate": 0.654
+  },
+  {
+    "programmeId": "prg_013",
+    "date": "2026-02-10",
+    "viewers": 145532,
+    "avgWatchTimeMinutes": 19.7,
+    "completionRate": 0.75
+  },
+  {
+    "programmeId": "prg_013",
+    "date": "2026-03-03",
+    "viewers": 132097,
+    "avgWatchTimeMinutes": 18.9,
+    "completionRate": 0.735
+  },
+  {
+    "programmeId": "prg_013",
+    "date": "2026-03-28",
+    "viewers": 140955,
+    "avgWatchTimeMinutes": 17.8,
+    "completionRate": 0.732
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-01-13",
+    "viewers": 135253,
+    "avgWatchTimeMinutes": 16.1,
+    "completionRate": 0.693
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-02-08",
+    "viewers": 139676,
+    "avgWatchTimeMinutes": 19.2,
+    "completionRate": 0.763
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-02-24",
+    "viewers": 157925,
+    "avgWatchTimeMinutes": 17.2,
+    "completionRate": 0.683
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-03-01",
+    "viewers": 133538,
+    "avgWatchTimeMinutes": 18.7,
+    "completionRate": 0.764
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-03-04",
+    "viewers": 160556,
+    "avgWatchTimeMinutes": 16.4,
+    "completionRate": 0.671
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-03-08",
+    "viewers": 128318,
+    "avgWatchTimeMinutes": 15.9,
+    "completionRate": 0.664
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-03-21",
+    "viewers": 92860,
+    "avgWatchTimeMinutes": 18.8,
+    "completionRate": 0.75
+  },
+  {
+    "programmeId": "prg_014",
+    "date": "2026-03-22",
+    "viewers": 129362,
+    "avgWatchTimeMinutes": 18.5,
+    "completionRate": 0.754
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-01-09",
+    "viewers": 150612,
+    "avgWatchTimeMinutes": 33,
+    "completionRate": 0.694
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-01-21",
+    "viewers": 148991,
+    "avgWatchTimeMinutes": 32.8,
+    "completionRate": 0.694
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-01-27",
+    "viewers": 140147,
+    "avgWatchTimeMinutes": 37.6,
+    "completionRate": 0.764
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-01-30",
+    "viewers": 169812,
+    "avgWatchTimeMinutes": 34.4,
+    "completionRate": 0.68
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-02-02",
+    "viewers": 196279,
+    "avgWatchTimeMinutes": 35.7,
+    "completionRate": 0.702
+  },
+  {
+    "programmeId": "prg_015",
+    "date": "2026-03-04",
+    "viewers": 141114,
+    "avgWatchTimeMinutes": 35.6,
+    "completionRate": 0.726
+  },
+  {
+    "programmeId": "prg_016",
+    "date": "2026-01-12",
+    "viewers": 231555,
+    "avgWatchTimeMinutes": 40.5,
+    "completionRate": 0.88
+  },
+  {
+    "programmeId": "prg_016",
+    "date": "2026-02-13",
+    "viewers": 211343,
+    "avgWatchTimeMinutes": 40.4,
+    "completionRate": 0.846
+  },
+  {
+    "programmeId": "prg_016",
+    "date": "2026-02-19",
+    "viewers": 219610,
+    "avgWatchTimeMinutes": 40.5,
+    "completionRate": 0.797
+  },
+  {
+    "programmeId": "prg_016",
+    "date": "2026-02-25",
+    "viewers": 205578,
+    "avgWatchTimeMinutes": 39.5,
+    "completionRate": 0.786
+  },
+  {
+    "programmeId": "prg_016",
+    "date": "2026-02-28",
+    "viewers": 274985,
+    "avgWatchTimeMinutes": 40.5,
+    "completionRate": 0.806
+  },
+  {
+    "programmeId": "prg_017",
+    "date": "2026-01-09",
+    "viewers": 195778,
+    "avgWatchTimeMinutes": 42.5,
+    "completionRate": 0.801
+  },
+  {
+    "programmeId": "prg_017",
+    "date": "2026-01-14",
+    "viewers": 161702,
+    "avgWatchTimeMinutes": 42.4,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_017",
+    "date": "2026-02-17",
+    "viewers": 218687,
+    "avgWatchTimeMinutes": 45.5,
+    "completionRate": 0.817
+  },
+  {
+    "programmeId": "prg_017",
+    "date": "2026-02-20",
+    "viewers": 230935,
+    "avgWatchTimeMinutes": 46.4,
+    "completionRate": 0.854
+  },
+  {
+    "programmeId": "prg_017",
+    "date": "2026-03-22",
+    "viewers": 242033,
+    "avgWatchTimeMinutes": 40.7,
+    "completionRate": 0.797
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-01-07",
+    "viewers": 248139,
+    "avgWatchTimeMinutes": 35.1,
+    "completionRate": 0.814
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-01-09",
+    "viewers": 347408,
+    "avgWatchTimeMinutes": 37.1,
+    "completionRate": 0.821
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-01-12",
+    "viewers": 252919,
+    "avgWatchTimeMinutes": 34.3,
+    "completionRate": 0.816
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-01-28",
+    "viewers": 283668,
+    "avgWatchTimeMinutes": 37.3,
+    "completionRate": 0.819
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-03-19",
+    "viewers": 299820,
+    "avgWatchTimeMinutes": 34.5,
+    "completionRate": 0.802
+  },
+  {
+    "programmeId": "prg_018",
+    "date": "2026-03-25",
+    "viewers": 304983,
+    "avgWatchTimeMinutes": 35.9,
+    "completionRate": 0.83
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-01-02",
+    "viewers": 267562,
+    "avgWatchTimeMinutes": 33.8,
+    "completionRate": 0.759
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-01-17",
+    "viewers": 339799,
+    "avgWatchTimeMinutes": 37.7,
+    "completionRate": 0.775
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-01-18",
+    "viewers": 304870,
+    "avgWatchTimeMinutes": 32.5,
+    "completionRate": 0.721
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-02-04",
+    "viewers": 280496,
+    "avgWatchTimeMinutes": 36.7,
+    "completionRate": 0.824
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-02-13",
+    "viewers": 251301,
+    "avgWatchTimeMinutes": 37.1,
+    "completionRate": 0.829
+  },
+  {
+    "programmeId": "prg_019",
+    "date": "2026-02-17",
+    "viewers": 381683,
+    "avgWatchTimeMinutes": 39.5,
+    "completionRate": 0.822
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-01-23",
+    "viewers": 192769,
+    "avgWatchTimeMinutes": 13.9,
+    "completionRate": 0.696
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-01-29",
+    "viewers": 174057,
+    "avgWatchTimeMinutes": 11.8,
+    "completionRate": 0.636
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-02-04",
+    "viewers": 272955,
+    "avgWatchTimeMinutes": 12.4,
+    "completionRate": 0.662
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-02-27",
+    "viewers": 194573,
+    "avgWatchTimeMinutes": 14,
+    "completionRate": 0.702
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-03-09",
+    "viewers": 186160,
+    "avgWatchTimeMinutes": 12.4,
+    "completionRate": 0.635
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-03-22",
+    "viewers": 194050,
+    "avgWatchTimeMinutes": 14.2,
+    "completionRate": 0.736
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-03-25",
+    "viewers": 225842,
+    "avgWatchTimeMinutes": 14.5,
+    "completionRate": 0.723
+  },
+  {
+    "programmeId": "prg_020",
+    "date": "2026-03-28",
+    "viewers": 148785,
+    "avgWatchTimeMinutes": 13,
+    "completionRate": 0.661
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-01-07",
+    "viewers": 1056459,
+    "avgWatchTimeMinutes": 34.6,
+    "completionRate": 0.869
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-02-06",
+    "viewers": 987494,
+    "avgWatchTimeMinutes": 32.1,
+    "completionRate": 0.829
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-02-26",
+    "viewers": 960604,
+    "avgWatchTimeMinutes": 33.8,
+    "completionRate": 0.836
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-03-09",
+    "viewers": 1148825,
+    "avgWatchTimeMinutes": 32.2,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-03-11",
+    "viewers": 1295111,
+    "avgWatchTimeMinutes": 31,
+    "completionRate": 0.789
+  },
+  {
+    "programmeId": "prg_021",
+    "date": "2026-03-31",
+    "viewers": 824974,
+    "avgWatchTimeMinutes": 32.3,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_022",
+    "date": "2026-01-01",
+    "viewers": 778778,
+    "avgWatchTimeMinutes": 27.6,
+    "completionRate": 0.832
+  },
+  {
+    "programmeId": "prg_022",
+    "date": "2026-02-06",
+    "viewers": 707884,
+    "avgWatchTimeMinutes": 26.6,
+    "completionRate": 0.814
+  },
+  {
+    "programmeId": "prg_022",
+    "date": "2026-03-15",
+    "viewers": 668880,
+    "avgWatchTimeMinutes": 25.3,
+    "completionRate": 0.774
+  },
+  {
+    "programmeId": "prg_022",
+    "date": "2026-03-16",
+    "viewers": 761270,
+    "avgWatchTimeMinutes": 28.5,
+    "completionRate": 0.822
+  },
+  {
+    "programmeId": "prg_022",
+    "date": "2026-03-18",
+    "viewers": 644317,
+    "avgWatchTimeMinutes": 28.5,
+    "completionRate": 0.82
+  },
+  {
+    "programmeId": "prg_023",
+    "date": "2026-02-12",
+    "viewers": 521970,
+    "avgWatchTimeMinutes": 21.7,
+    "completionRate": 0.772
+  },
+  {
+    "programmeId": "prg_023",
+    "date": "2026-03-03",
+    "viewers": 850257,
+    "avgWatchTimeMinutes": 20.4,
+    "completionRate": 0.757
+  },
+  {
+    "programmeId": "prg_023",
+    "date": "2026-03-12",
+    "viewers": 541285,
+    "avgWatchTimeMinutes": 20.2,
+    "completionRate": 0.749
+  },
+  {
+    "programmeId": "prg_023",
+    "date": "2026-03-15",
+    "viewers": 707779,
+    "avgWatchTimeMinutes": 20.3,
+    "completionRate": 0.754
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-01-07",
+    "viewers": 1326324,
+    "avgWatchTimeMinutes": 59.1,
+    "completionRate": 0.805
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-02-07",
+    "viewers": 1797058,
+    "avgWatchTimeMinutes": 56.8,
+    "completionRate": 0.769
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-02-12",
+    "viewers": 1359274,
+    "avgWatchTimeMinutes": 60.8,
+    "completionRate": 0.877
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-03-05",
+    "viewers": 980371,
+    "avgWatchTimeMinutes": 65.5,
+    "completionRate": 0.883
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-03-06",
+    "viewers": 931507,
+    "avgWatchTimeMinutes": 59.9,
+    "completionRate": 0.819
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-03-11",
+    "viewers": 1093146,
+    "avgWatchTimeMinutes": 54,
+    "completionRate": 0.769
+  },
+  {
+    "programmeId": "prg_024",
+    "date": "2026-03-26",
+    "viewers": 1351462,
+    "avgWatchTimeMinutes": 59.4,
+    "completionRate": 0.852
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-01-09",
+    "viewers": 789954,
+    "avgWatchTimeMinutes": 44.4,
+    "completionRate": 0.784
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-01-20",
+    "viewers": 925292,
+    "avgWatchTimeMinutes": 45.3,
+    "completionRate": 0.77
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-02-03",
+    "viewers": 810990,
+    "avgWatchTimeMinutes": 45.3,
+    "completionRate": 0.798
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-03-07",
+    "viewers": 905239,
+    "avgWatchTimeMinutes": 41.3,
+    "completionRate": 0.739
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-03-10",
+    "viewers": 751108,
+    "avgWatchTimeMinutes": 45.1,
+    "completionRate": 0.76
+  },
+  {
+    "programmeId": "prg_025",
+    "date": "2026-03-18",
+    "viewers": 751640,
+    "avgWatchTimeMinutes": 45.8,
+    "completionRate": 0.749
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-01-10",
+    "viewers": 862622,
+    "avgWatchTimeMinutes": 81,
+    "completionRate": 0.712
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-01-22",
+    "viewers": 1158659,
+    "avgWatchTimeMinutes": 81.7,
+    "completionRate": 0.716
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-01-27",
+    "viewers": 1089797,
+    "avgWatchTimeMinutes": 88.4,
+    "completionRate": 0.762
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-01-29",
+    "viewers": 1283523,
+    "avgWatchTimeMinutes": 84.7,
+    "completionRate": 0.766
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-02-26",
+    "viewers": 1108565,
+    "avgWatchTimeMinutes": 89.1,
+    "completionRate": 0.739
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-03-13",
+    "viewers": 1166586,
+    "avgWatchTimeMinutes": 92.7,
+    "completionRate": 0.774
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-03-17",
+    "viewers": 812962,
+    "avgWatchTimeMinutes": 85.3,
+    "completionRate": 0.761
+  },
+  {
+    "programmeId": "prg_026",
+    "date": "2026-03-29",
+    "viewers": 897984,
+    "avgWatchTimeMinutes": 85.7,
+    "completionRate": 0.714
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-01-17",
+    "viewers": 966664,
+    "avgWatchTimeMinutes": 49.5,
+    "completionRate": 0.811
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-01-31",
+    "viewers": 755019,
+    "avgWatchTimeMinutes": 48.8,
+    "completionRate": 0.828
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-02-02",
+    "viewers": 1060509,
+    "avgWatchTimeMinutes": 41.8,
+    "completionRate": 0.746
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-03-02",
+    "viewers": 1376980,
+    "avgWatchTimeMinutes": 41.5,
+    "completionRate": 0.751
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-03-05",
+    "viewers": 1162051,
+    "avgWatchTimeMinutes": 43.2,
+    "completionRate": 0.72
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-03-18",
+    "viewers": 1033714,
+    "avgWatchTimeMinutes": 46.8,
+    "completionRate": 0.785
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-03-23",
+    "viewers": 1015800,
+    "avgWatchTimeMinutes": 46.4,
+    "completionRate": 0.795
+  },
+  {
+    "programmeId": "prg_027",
+    "date": "2026-03-24",
+    "viewers": 906936,
+    "avgWatchTimeMinutes": 48.8,
+    "completionRate": 0.815
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-01-16",
+    "viewers": 1088729,
+    "avgWatchTimeMinutes": 30.4,
+    "completionRate": 0.722
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-01-20",
+    "viewers": 821129,
+    "avgWatchTimeMinutes": 28.1,
+    "completionRate": 0.662
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-02-01",
+    "viewers": 830332,
+    "avgWatchTimeMinutes": 28,
+    "completionRate": 0.614
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-02-02",
+    "viewers": 965600,
+    "avgWatchTimeMinutes": 28.8,
+    "completionRate": 0.688
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-02-23",
+    "viewers": 1066906,
+    "avgWatchTimeMinutes": 32,
+    "completionRate": 0.704
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-02-27",
+    "viewers": 1188626,
+    "avgWatchTimeMinutes": 29.1,
+    "completionRate": 0.694
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-03-14",
+    "viewers": 876705,
+    "avgWatchTimeMinutes": 30.4,
+    "completionRate": 0.679
+  },
+  {
+    "programmeId": "prg_028",
+    "date": "2026-03-18",
+    "viewers": 854496,
+    "avgWatchTimeMinutes": 30.5,
+    "completionRate": 0.719
+  },
+  {
+    "programmeId": "prg_029",
+    "date": "2026-01-15",
+    "viewers": 796902,
+    "avgWatchTimeMinutes": 41,
+    "completionRate": 0.744
+  },
+  {
+    "programmeId": "prg_029",
+    "date": "2026-01-18",
+    "viewers": 969214,
+    "avgWatchTimeMinutes": 41.4,
+    "completionRate": 0.792
+  },
+  {
+    "programmeId": "prg_029",
+    "date": "2026-02-11",
+    "viewers": 852619,
+    "avgWatchTimeMinutes": 37.7,
+    "completionRate": 0.744
+  },
+  {
+    "programmeId": "prg_029",
+    "date": "2026-02-25",
+    "viewers": 713460,
+    "avgWatchTimeMinutes": 47.3,
+    "completionRate": 0.852
+  },
+  {
+    "programmeId": "prg_029",
+    "date": "2026-02-27",
+    "viewers": 1079024,
+    "avgWatchTimeMinutes": 38.5,
+    "completionRate": 0.74
+  },
+  {
+    "programmeId": "prg_030",
+    "date": "2026-01-14",
+    "viewers": 802691,
+    "avgWatchTimeMinutes": 28.2,
+    "completionRate": 0.701
+  },
+  {
+    "programmeId": "prg_030",
+    "date": "2026-01-31",
+    "viewers": 1094639,
+    "avgWatchTimeMinutes": 29.1,
+    "completionRate": 0.73
+  },
+  {
+    "programmeId": "prg_030",
+    "date": "2026-02-08",
+    "viewers": 738685,
+    "avgWatchTimeMinutes": 26.8,
+    "completionRate": 0.72
+  },
+  {
+    "programmeId": "prg_030",
+    "date": "2026-03-15",
+    "viewers": 1080635,
+    "avgWatchTimeMinutes": 25.9,
+    "completionRate": 0.636
+  },
+  {
+    "programmeId": "prg_031",
+    "date": "2026-01-20",
+    "viewers": 133746,
+    "avgWatchTimeMinutes": 18.9,
+    "completionRate": 0.862
+  },
+  {
+    "programmeId": "prg_031",
+    "date": "2026-03-25",
+    "viewers": 112065,
+    "avgWatchTimeMinutes": 18,
+    "completionRate": 0.822
+  },
+  {
+    "programmeId": "prg_031",
+    "date": "2026-03-29",
+    "viewers": 142324,
+    "avgWatchTimeMinutes": 18.4,
+    "completionRate": 0.836
+  },
+  {
+    "programmeId": "prg_031",
+    "date": "2026-03-30",
+    "viewers": 115694,
+    "avgWatchTimeMinutes": 17.1,
+    "completionRate": 0.789
+  },
+  {
+    "programmeId": "prg_032",
+    "date": "2026-01-21",
+    "viewers": 134607,
+    "avgWatchTimeMinutes": 11.6,
+    "completionRate": 0.79
+  },
+  {
+    "programmeId": "prg_032",
+    "date": "2026-02-15",
+    "viewers": 140007,
+    "avgWatchTimeMinutes": 11.7,
+    "completionRate": 0.782
+  },
+  {
+    "programmeId": "prg_032",
+    "date": "2026-02-17",
+    "viewers": 127607,
+    "avgWatchTimeMinutes": 10.5,
+    "completionRate": 0.75
+  },
+  {
+    "programmeId": "prg_032",
+    "date": "2026-02-25",
+    "viewers": 140206,
+    "avgWatchTimeMinutes": 10.8,
+    "completionRate": 0.726
+  },
+  {
+    "programmeId": "prg_033",
+    "date": "2026-02-19",
+    "viewers": 138813,
+    "avgWatchTimeMinutes": 8.7,
+    "completionRate": 0.764
+  },
+  {
+    "programmeId": "prg_033",
+    "date": "2026-02-22",
+    "viewers": 160263,
+    "avgWatchTimeMinutes": 9.5,
+    "completionRate": 0.824
+  },
+  {
+    "programmeId": "prg_033",
+    "date": "2026-02-26",
+    "viewers": 136923,
+    "avgWatchTimeMinutes": 9.2,
+    "completionRate": 0.813
+  },
+  {
+    "programmeId": "prg_033",
+    "date": "2026-03-24",
+    "viewers": 110659,
+    "avgWatchTimeMinutes": 9.5,
+    "completionRate": 0.781
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-01-01",
+    "viewers": 151687,
+    "avgWatchTimeMinutes": 21.4,
+    "completionRate": 0.726
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-01-17",
+    "viewers": 136698,
+    "avgWatchTimeMinutes": 20.2,
+    "completionRate": 0.705
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-01-31",
+    "viewers": 130737,
+    "avgWatchTimeMinutes": 22,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-02-09",
+    "viewers": 115217,
+    "avgWatchTimeMinutes": 19.7,
+    "completionRate": 0.713
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-02-23",
+    "viewers": 151581,
+    "avgWatchTimeMinutes": 19.9,
+    "completionRate": 0.712
+  },
+  {
+    "programmeId": "prg_034",
+    "date": "2026-03-30",
+    "viewers": 122460,
+    "avgWatchTimeMinutes": 21.9,
+    "completionRate": 0.731
+  },
+  {
+    "programmeId": "prg_035",
+    "date": "2026-02-17",
+    "viewers": 124195,
+    "avgWatchTimeMinutes": 15.6,
+    "completionRate": 0.805
+  },
+  {
+    "programmeId": "prg_035",
+    "date": "2026-02-24",
+    "viewers": 152988,
+    "avgWatchTimeMinutes": 16.3,
+    "completionRate": 0.867
+  },
+  {
+    "programmeId": "prg_035",
+    "date": "2026-03-14",
+    "viewers": 171901,
+    "avgWatchTimeMinutes": 16.6,
+    "completionRate": 0.827
+  },
+  {
+    "programmeId": "prg_035",
+    "date": "2026-03-21",
+    "viewers": 154836,
+    "avgWatchTimeMinutes": 18.3,
+    "completionRate": 0.903
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-02-07",
+    "viewers": 152709,
+    "avgWatchTimeMinutes": 40.5,
+    "completionRate": 0.838
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-02-17",
+    "viewers": 106531,
+    "avgWatchTimeMinutes": 37.9,
+    "completionRate": 0.773
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-02-21",
+    "viewers": 145332,
+    "avgWatchTimeMinutes": 40.1,
+    "completionRate": 0.822
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-02-28",
+    "viewers": 140622,
+    "avgWatchTimeMinutes": 38.2,
+    "completionRate": 0.762
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-03-18",
+    "viewers": 109875,
+    "avgWatchTimeMinutes": 40.2,
+    "completionRate": 0.828
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-03-20",
+    "viewers": 100142,
+    "avgWatchTimeMinutes": 36.8,
+    "completionRate": 0.774
+  },
+  {
+    "programmeId": "prg_036",
+    "date": "2026-03-31",
+    "viewers": 136456,
+    "avgWatchTimeMinutes": 35.9,
+    "completionRate": 0.738
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-01-23",
+    "viewers": 92082,
+    "avgWatchTimeMinutes": 26.5,
+    "completionRate": 0.683
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-01-25",
+    "viewers": 92598,
+    "avgWatchTimeMinutes": 25.4,
+    "completionRate": 0.677
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-01-29",
+    "viewers": 92666,
+    "avgWatchTimeMinutes": 26.9,
+    "completionRate": 0.694
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-02-20",
+    "viewers": 104059,
+    "avgWatchTimeMinutes": 27.7,
+    "completionRate": 0.694
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-03-13",
+    "viewers": 120971,
+    "avgWatchTimeMinutes": 29.8,
+    "completionRate": 0.735
+  },
+  {
+    "programmeId": "prg_037",
+    "date": "2026-03-30",
+    "viewers": 90975,
+    "avgWatchTimeMinutes": 26.3,
+    "completionRate": 0.706
+  },
+  {
+    "programmeId": "prg_038",
+    "date": "2026-01-18",
+    "viewers": 65791,
+    "avgWatchTimeMinutes": 38,
+    "completionRate": 0.858
+  },
+  {
+    "programmeId": "prg_038",
+    "date": "2026-01-21",
+    "viewers": 70102,
+    "avgWatchTimeMinutes": 36.7,
+    "completionRate": 0.822
+  },
+  {
+    "programmeId": "prg_038",
+    "date": "2026-01-24",
+    "viewers": 90369,
+    "avgWatchTimeMinutes": 34.5,
+    "completionRate": 0.786
+  },
+  {
+    "programmeId": "prg_038",
+    "date": "2026-03-12",
+    "viewers": 70220,
+    "avgWatchTimeMinutes": 34.4,
+    "completionRate": 0.803
+  },
+  {
+    "programmeId": "prg_038",
+    "date": "2026-03-27",
+    "viewers": 92445,
+    "avgWatchTimeMinutes": 38.2,
+    "completionRate": 0.844
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-01-09",
+    "viewers": 113002,
+    "avgWatchTimeMinutes": 61.7,
+    "completionRate": 0.698
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-02-14",
+    "viewers": 205069,
+    "avgWatchTimeMinutes": 68.8,
+    "completionRate": 0.789
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-02-17",
+    "viewers": 147740,
+    "avgWatchTimeMinutes": 66.9,
+    "completionRate": 0.766
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-02-18",
+    "viewers": 152834,
+    "avgWatchTimeMinutes": 72.8,
+    "completionRate": 0.803
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-02-26",
+    "viewers": 134113,
+    "avgWatchTimeMinutes": 64.6,
+    "completionRate": 0.707
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-03-17",
+    "viewers": 118256,
+    "avgWatchTimeMinutes": 71.7,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_039",
+    "date": "2026-03-27",
+    "viewers": 101247,
+    "avgWatchTimeMinutes": 62.2,
+    "completionRate": 0.712
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-01-08",
+    "viewers": 103111,
+    "avgWatchTimeMinutes": 39.1,
+    "completionRate": 0.796
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-01-20",
+    "viewers": 122118,
+    "avgWatchTimeMinutes": 34.8,
+    "completionRate": 0.75
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-01-26",
+    "viewers": 92245,
+    "avgWatchTimeMinutes": 40.9,
+    "completionRate": 0.853
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-03-09",
+    "viewers": 139086,
+    "avgWatchTimeMinutes": 36.4,
+    "completionRate": 0.791
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-03-13",
+    "viewers": 131551,
+    "avgWatchTimeMinutes": 37.6,
+    "completionRate": 0.754
+  },
+  {
+    "programmeId": "prg_040",
+    "date": "2026-03-21",
+    "viewers": 150872,
+    "avgWatchTimeMinutes": 39.3,
+    "completionRate": 0.787
+  }
+]

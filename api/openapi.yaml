@@ -1,0 +1,690 @@
+openapi: 3.1.0
+info:
+  title: Streamhub Audience Analytics API (mock)
+  version: 1.0.0
+  summary: Read-only channels, programmes and daily audience metrics served from JSON fixtures.
+  description: |
+    A small, deterministic API built for the Streamhub QA Automation Assessment. It serves TV/video
+    audience-analytics data (channels, programmes, daily audience rows) from committed JSON files so that
+    API tests have a stable, inspectable target.
+
+    ## Conventions
+    * Every endpoint is `GET` and returns `application/json; charset=utf-8`.
+    * Every response carries an `X-Request-Id` header: the incoming value is echoed when it matches
+      `^[A-Za-z0-9._-]{1,128}$`, otherwise a UUID is generated.
+    * Query strings are validated strictly: unknown parameters are rejected, numeric parameters must be
+      well-formed numbers (`1.5` is not an integer, `abc` is not a number) and every invalid parameter is
+      reported in `error.details[]` in a single response.
+    * Path ids are validated against their pattern before any lookup: a malformed id is `400 INVALID_ID`,
+      a well-formed but unknown id is `404 NOT_FOUND`.
+    * A known path with any method other than `GET` (including `OPTIONS`) answers `405 METHOD_NOT_ALLOWED`
+      with an `Allow: GET` header. `HEAD` is served with `GET` semantics by Express.
+    * An unknown path answers `404 NOT_FOUND` with the message `Route not found`.
+    * Any unexpected failure answers `500 INTERNAL_ERROR` with a generic message; details go to the server
+      log, keyed by request id.
+    * String sorting is by UTF-16 code unit (not locale-aware); ties are always broken by `id` ascending.
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:4010
+    description: Local server. The port comes from the PORT environment variable (default 4010).
+tags:
+  - name: health
+  - name: channels
+  - name: programmes
+  - name: audience
+
+paths:
+  /health:
+    get:
+      tags: [health]
+      operationId: getHealth
+      summary: Liveness probe
+      responses:
+        '200':
+          description: The server is up.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+              example:
+                status: ok
+                uptimeSeconds: 42
+                version: 1.0.0
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/channels:
+    get:
+      tags: [channels]
+      operationId: listChannels
+      summary: List channels
+      description: Returns every channel that matches the optional filters, sorted as requested. Not paginated.
+      parameters:
+        - name: country
+          in: query
+          description: Exactly two uppercase letters (ISO-3166 alpha-2). Lowercase or three-letter codes are rejected.
+          schema:
+            type: string
+            pattern: '^[A-Z]{2}$'
+            examples: [GB, FR]
+        - name: type
+          in: query
+          schema:
+            $ref: '#/components/schemas/ChannelType'
+        - name: sort
+          in: query
+          description: Field to sort by; prefix with `-` for descending. Ties are broken by `id` ascending.
+          schema:
+            type: string
+            enum: [name, -name, launchedAt, -launchedAt]
+            default: name
+      responses:
+        '200':
+          description: Matching channels.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelList'
+              example:
+                data:
+                  - id: ch_008
+                    name: Alpine Stream
+                    country: DE
+                    type: vod
+                    launchedAt: '2018-04-25'
+                  - id: ch_003
+                    name: Canal Lumière
+                    country: FR
+                    type: vod
+                    launchedAt: '2019-05-21'
+                meta:
+                  total: 2
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/channels/{id}:
+    get:
+      tags: [channels]
+      operationId: getChannel
+      summary: Get one channel
+      parameters:
+        - $ref: '#/components/parameters/ChannelIdPath'
+      responses:
+        '200':
+          description: The channel.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+        '400':
+          $ref: '#/components/responses/InvalidIdOrUnexpectedQuery'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/programmes:
+    get:
+      tags: [programmes]
+      operationId: listProgrammes
+      summary: Search and page through programmes
+      description: |
+        Filters are combined with AND. Sorting is applied after filtering and pagination after sorting, so
+        the page boundaries are stable for a given query. A page beyond `totalPages` returns `200` with an
+        empty `data` array; `totalPages` is `0` when nothing matches.
+      parameters:
+        - name: channelId
+          in: query
+          schema:
+            type: string
+            pattern: '^ch_\d{3}$'
+            examples: [ch_001]
+        - name: genre
+          in: query
+          schema:
+            $ref: '#/components/schemas/Genre'
+        - name: q
+          in: query
+          description: Case-insensitive substring match on `title`. Surrounding whitespace is trimmed before the length check.
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 50
+            examples: [morning]
+        - name: minRating
+          in: query
+          description: Inclusive lower bound on `rating`. Must be a plain decimal number such as `8` or `8.5`.
+          schema:
+            type: number
+            minimum: 0
+            maximum: 10
+        - name: sort
+          in: query
+          description: Field to sort by; prefix with `-` for descending. Ties are broken by `id` ascending.
+          schema:
+            type: string
+            enum: [title, -title, firstAiredAt, -firstAiredAt, rating, -rating]
+            default: title
+        - name: page
+          in: query
+          description: 1-based page number. Must be a plain integer (`1.5`, `abc` and `0` are rejected).
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Page size.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: One page of programmes.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammeList'
+              example:
+                data:
+                  - id: prg_001
+                    channelId: ch_001
+                    title: Morning Brief
+                    genre: news
+                    durationMinutes: 60
+                    firstAiredAt: '2016-01-11'
+                    rating: 7.4
+                  - id: prg_026
+                    channelId: ch_006
+                    title: Morning Glory Hour
+                    genre: news
+                    durationMinutes: 120
+                    firstAiredAt: '2005-07-04'
+                    rating: 7.2
+                meta:
+                  page: 1
+                  limit: 2
+                  total: 3
+                  totalPages: 2
+                  sort: title
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/programmes/{id}:
+    get:
+      tags: [programmes]
+      operationId: getProgramme
+      summary: Get one programme with its channel
+      parameters:
+        - $ref: '#/components/parameters/ProgrammeIdPath'
+      responses:
+        '200':
+          description: The programme, embedding the id and name of its channel.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammeDetail'
+              example:
+                id: prg_001
+                channelId: ch_001
+                title: Morning Brief
+                genre: news
+                durationMinutes: 60
+                firstAiredAt: '2016-01-11'
+                rating: 7.4
+                channel:
+                  id: ch_001
+                  name: Streamhub One
+        '400':
+          $ref: '#/components/responses/InvalidIdOrUnexpectedQuery'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/audience/summary:
+    get:
+      tags: [audience]
+      operationId: getAudienceSummary
+      summary: Aggregate daily audience rows over a date range
+      description: |
+        Aggregates every daily audience row whose `date` lies within `from`..`to` (both inclusive), optionally
+        restricted to one channel, grouped by channel, genre or date. Groups are sorted by `key` ascending.
+        A range with no rows yields `200` with an empty `data` array.
+
+        Aggregation rules:
+        * `totalViewers` is the sum of `viewers`.
+        * `avgWatchTimeMinutes` and `avgCompletionRate` are arithmetic means over the matched rows
+          (not weighted by viewers), rounded to 1 and 3 decimal places respectively.
+        * `programmes` is the number of distinct programmes contributing to the group.
+        * `meta.rows` is the number of daily rows that matched the filter and were aggregated.
+      parameters:
+        - name: from
+          in: query
+          required: true
+          description: Start date (inclusive). Must be a real calendar date; `2026-02-30` is rejected.
+          schema:
+            type: string
+            format: date
+            examples: ['2026-01-01']
+        - name: to
+          in: query
+          required: true
+          description: End date (inclusive). Must be on or after `from`, and at most 366 days after it.
+          schema:
+            type: string
+            format: date
+            examples: ['2026-03-31']
+        - name: channelId
+          in: query
+          description: Restrict to programmes of one channel. A well-formed id with no data yields an empty result, not an error.
+          schema:
+            type: string
+            pattern: '^ch_\d{3}$'
+        - name: groupBy
+          in: query
+          schema:
+            type: string
+            enum: [channel, genre, date]
+            default: channel
+      responses:
+        '200':
+          description: Aggregated metrics per group.
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/X-Request-Id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceSummary'
+              example:
+                data:
+                  - key: comedy
+                    label: Comedy
+                    totalViewers: 8756889
+                    avgWatchTimeMinutes: 21.6
+                    avgCompletionRate: 0.716
+                    programmes: 4
+                  - key: documentary
+                    label: Documentary
+                    totalViewers: 11149455
+                    avgWatchTimeMinutes: 37.5
+                    avgCompletionRate: 0.803
+                    programmes: 6
+                meta:
+                  from: '2026-01-01'
+                  to: '2026-03-31'
+                  groupBy: genre
+                  rows: 240
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  headers:
+    X-Request-Id:
+      description: Correlation id. Echoes a well-formed incoming `X-Request-Id`, otherwise a generated UUID.
+      schema:
+        type: string
+        examples: [4f3c2a1e-7b6d-4e8f-9a0b-1c2d3e4f5a6b]
+    Allow:
+      description: Methods accepted on this route.
+      schema:
+        type: string
+        const: GET
+
+  parameters:
+    ChannelIdPath:
+      name: id
+      in: path
+      required: true
+      description: Must match `^ch_\d{3}$`; anything else is `400 INVALID_ID` before any lookup.
+      schema:
+        type: string
+        pattern: '^ch_\d{3}$'
+        examples: [ch_001]
+    ProgrammeIdPath:
+      name: id
+      in: path
+      required: true
+      description: Must match `^prg_\d{3}$`; anything else is `400 INVALID_ID` before any lookup.
+      schema:
+        type: string
+        pattern: '^prg_\d{3}$'
+        examples: [prg_001]
+
+  responses:
+    ValidationError:
+      description: One or more query parameters are invalid or unknown. Every problem is listed in `details`.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              code: VALIDATION_ERROR
+              message: Request validation failed
+              details:
+                - field: page
+                  message: must be an integer
+                - field: limit
+                  message: must be at most 50
+                - field: foo
+                  message: is not a recognised query parameter
+    InvalidIdOrUnexpectedQuery:
+      description: |
+        `INVALID_ID` when the path id does not match the required pattern (checked first), or
+        `VALIDATION_ERROR` when the request carries query parameters - this endpoint accepts none,
+        and unknown parameters are rejected everywhere rather than silently ignored.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              code: INVALID_ID
+              message: Invalid id format
+              details:
+                - field: id
+                  message: must match /^ch_\d{3}$/ (for example "ch_001")
+    NotFound:
+      description: The id is well-formed but no such resource exists (or, for unknown paths, `Route not found`).
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              code: NOT_FOUND
+              message: Channel ch_999 not found
+    MethodNotAllowed:
+      description: Returned by every documented path for any method other than GET (and HEAD).
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+        Allow:
+          $ref: '#/components/headers/Allow'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              code: METHOD_NOT_ALLOWED
+              message: POST is not allowed on this route
+    InternalError:
+      description: Unexpected failure. Never expected in practice; the stack is logged server-side with the request id.
+      headers:
+        X-Request-Id:
+          $ref: '#/components/headers/X-Request-Id'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+          example:
+            error:
+              code: INTERNAL_ERROR
+              message: An unexpected error occurred
+
+  schemas:
+    ChannelType:
+      type: string
+      enum: [linear, vod]
+    Genre:
+      type: string
+      enum: [drama, news, sport, documentary, comedy, kids, reality]
+    IsoDate:
+      type: string
+      format: date
+      pattern: '^\d{4}-\d{2}-\d{2}$'
+      examples: ['2026-01-15']
+
+    Health:
+      type: object
+      required: [status, uptimeSeconds, version]
+      additionalProperties: false
+      properties:
+        status:
+          type: string
+          const: ok
+        uptimeSeconds:
+          type: integer
+          minimum: 0
+          description: Whole seconds since the process started.
+        version:
+          type: string
+          description: Version of the package serving the API.
+
+    Channel:
+      type: object
+      required: [id, name, country, type, launchedAt]
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          pattern: '^ch_\d{3}$'
+        name:
+          type: string
+        country:
+          type: string
+          pattern: '^[A-Z]{2}$'
+          description: ISO-3166 alpha-2, uppercase.
+        type:
+          $ref: '#/components/schemas/ChannelType'
+        launchedAt:
+          $ref: '#/components/schemas/IsoDate'
+    ChannelList:
+      type: object
+      required: [data, meta]
+      additionalProperties: false
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+        meta:
+          type: object
+          required: [total]
+          additionalProperties: false
+          properties:
+            total:
+              type: integer
+              minimum: 0
+
+    Programme:
+      type: object
+      required: [id, channelId, title, genre, durationMinutes, firstAiredAt, rating]
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          pattern: '^prg_\d{3}$'
+        channelId:
+          type: string
+          pattern: '^ch_\d{3}$'
+        title:
+          type: string
+        genre:
+          $ref: '#/components/schemas/Genre'
+        durationMinutes:
+          type: integer
+          minimum: 1
+        firstAiredAt:
+          $ref: '#/components/schemas/IsoDate'
+        rating:
+          type: number
+          minimum: 0
+          maximum: 10
+          multipleOf: 0.1
+    ProgrammeDetail:
+      allOf:
+        - $ref: '#/components/schemas/Programme'
+        - type: object
+          required: [channel]
+          properties:
+            channel:
+              type: object
+              required: [id, name]
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                  pattern: '^ch_\d{3}$'
+                name:
+                  type: string
+    ProgrammeList:
+      type: object
+      required: [data, meta]
+      additionalProperties: false
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Programme'
+        meta:
+          type: object
+          required: [page, limit, total, totalPages, sort]
+          additionalProperties: false
+          properties:
+            page:
+              type: integer
+              minimum: 1
+            limit:
+              type: integer
+              minimum: 1
+              maximum: 50
+            total:
+              type: integer
+              minimum: 0
+              description: Number of programmes matching the filters, across all pages.
+            totalPages:
+              type: integer
+              minimum: 0
+              description: '`ceil(total / limit)`; 0 when nothing matches.'
+            sort:
+              type: string
+              enum: [title, -title, firstAiredAt, -firstAiredAt, rating, -rating]
+              description: The sort that was applied (the default when none was requested).
+
+    AudienceSummaryRow:
+      type: object
+      required: [key, label, totalViewers, avgWatchTimeMinutes, avgCompletionRate, programmes]
+      additionalProperties: false
+      properties:
+        key:
+          type: string
+          description: Channel id, genre or date depending on `groupBy`. Rows are sorted by this field.
+        label:
+          type: string
+          description: Display name - the channel name, the genre in title case, or the date.
+        totalViewers:
+          type: integer
+          minimum: 0
+        avgWatchTimeMinutes:
+          type: number
+          minimum: 0
+          description: Mean of the daily `avgWatchTimeMinutes`, 1 decimal place.
+        avgCompletionRate:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Mean of the daily `completionRate`, 3 decimal places.
+        programmes:
+          type: integer
+          minimum: 1
+          description: Distinct programmes in the group.
+    AudienceSummary:
+      type: object
+      required: [data, meta]
+      additionalProperties: false
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceSummaryRow'
+        meta:
+          type: object
+          required: [from, to, groupBy, rows]
+          additionalProperties: false
+          properties:
+            from:
+              $ref: '#/components/schemas/IsoDate'
+            to:
+              $ref: '#/components/schemas/IsoDate'
+            groupBy:
+              type: string
+              enum: [channel, genre, date]
+            channelId:
+              type: string
+              pattern: '^ch_\d{3}$'
+              description: Present only when the request filtered by channel.
+            rows:
+              type: integer
+              minimum: 0
+              description: Daily audience rows that matched the filter and were aggregated.
+
+    ErrorCode:
+      type: string
+      enum: [VALIDATION_ERROR, INVALID_ID, NOT_FOUND, METHOD_NOT_ALLOWED, INTERNAL_ERROR]
+    ErrorDetail:
+      type: object
+      required: [field, message]
+      additionalProperties: false
+      properties:
+        field:
+          type: string
+          description: The query parameter or path parameter at fault (`id` for path ids, `url` for undecodable paths).
+        message:
+          type: string
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      additionalProperties: false
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          additionalProperties: false
+          properties:
+            code:
+              $ref: '#/components/schemas/ErrorCode'
+            message:
+              type: string
+            details:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/ErrorDetail'
+              description: Present for VALIDATION_ERROR and INVALID_ID; one entry per invalid field.

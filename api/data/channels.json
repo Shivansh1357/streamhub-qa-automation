@@ -1,0 +1,16 @@
+[
+  { "id": "ch_001", "name": "Streamhub One", "country": "GB", "type": "linear", "launchedAt": "2009-03-16" },
+  { "id": "ch_002", "name": "Thames Sports", "country": "GB", "type": "linear", "launchedAt": "2014-08-02" },
+  { "id": "ch_003", "name": "Canal Lumière", "country": "FR", "type": "vod", "launchedAt": "2019-05-21" },
+  { "id": "ch_004", "name": "Rhein Doku", "country": "DE", "type": "linear", "launchedAt": "2011-11-01" },
+  { "id": "ch_005", "name": "Mumbai Prime", "country": "IN", "type": "vod", "launchedAt": "2020-02-14" },
+  {
+    "id": "ch_006",
+    "name": "Liberty News Network",
+    "country": "US",
+    "type": "linear",
+    "launchedAt": "2005-06-30"
+  },
+  { "id": "ch_007", "name": "Kidsville", "country": "GB", "type": "vod", "launchedAt": "2021-09-09" },
+  { "id": "ch_008", "name": "Alpine Stream", "country": "DE", "type": "vod", "launchedAt": "2018-04-25" }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "prg_001",
+    "channelId": "ch_001",
+    "title": "Morning Brief",
+    "genre": "news",
+    "durationMinutes": 60,
+    "firstAiredAt": "2016-01-11",
+    "rating": 7.4
+  },
+  {
+    "id": "prg_002",
+    "channelId": "ch_001",
+    "title": "The Harbour",
+    "genre": "drama",
+    "durationMinutes": 55,
+    "firstAiredAt": "2021-09-05",
+    "rating": 8.6
+  },
+  {
+    "id": "prg_003",
+    "channelId": "ch_001",
+    "title": "Laugh Track",
+    "genre": "comedy",
+    "durationMinutes": 30,
+    "firstAiredAt": "2018-04-02",
+    "rating": 6.9
+  },
+  {
+    "id": "prg_004",
+    "channelId": "ch_001",
+    "title": "Island Rivals",
+    "genre": "reality",
+    "durationMinutes": 45,
+    "firstAiredAt": "2023-06-18",
+    "rating": 7.1
+  },
+  {
+    "id": "prg_005",
+    "channelId": "ch_001",
+    "title": "Evening Report",
+    "genre": "news",
+    "durationMinutes": 30,
+    "firstAiredAt": "2010-02-01",
+    "rating": 7.8
+  },
+  {
+    "id": "prg_006",
+    "channelId": "ch_002",
+    "title": "Match of the Weekend",
+    "genre": "sport",
+    "durationMinutes": 90,
+    "firstAiredAt": "2014-08-09",
+    "rating": 8.4
+  },
+  {
+    "id": "prg_007",
+    "channelId": "ch_002",
+    "title": "Premier Kick-off",
+    "genre": "sport",
+    "durationMinutes": 120,
+    "firstAiredAt": "2015-08-08",
+    "rating": 8.8
+  },
+  {
+    "id": "prg_008",
+    "channelId": "ch_002",
+    "title": "Grand Tour Daily",
+    "genre": "sport",
+    "durationMinutes": 60,
+    "firstAiredAt": "2019-07-06",
+    "rating": 7.6
+  },
+  {
+    "id": "prg_009",
+    "channelId": "ch_002",
+    "title": "The Locker Room",
+    "genre": "reality",
+    "durationMinutes": 45,
+    "firstAiredAt": "2022-01-15",
+    "rating": 6.4
+  },
+  {
+    "id": "prg_010",
+    "channelId": "ch_002",
+    "title": "Sports Desk Tonight",
+    "genre": "news",
+    "durationMinutes": 30,
+    "firstAiredAt": "2014-08-04",
+    "rating": 7.0
+  },
+  {
+    "id": "prg_011",
+    "channelId": "ch_003",
+    "title": "Rue des Ombres",
+    "genre": "drama",
+    "durationMinutes": 52,
+    "firstAiredAt": "2020-10-02",
+    "rating": 8.9
+  },
+  {
+    "id": "prg_012",
+    "channelId": "ch_003",
+    "title": "Paris After Dark",
+    "genre": "documentary",
+    "durationMinutes": 48,
+    "firstAiredAt": "2021-03-19",
+    "rating": 8.1
+  },
+  {
+    "id": "prg_013",
+    "channelId": "ch_003",
+    "title": "Le Grand Rire",
+    "genre": "comedy",
+    "durationMinutes": 26,
+    "firstAiredAt": "2019-06-14",
+    "rating": 6.7
+  },
+  {
+    "id": "prg_014",
+    "channelId": "ch_003",
+    "title": "Morning Markets",
+    "genre": "news",
+    "durationMinutes": 25,
+    "firstAiredAt": "2022-01-10",
+    "rating": 6.8
+  },
+  {
+    "id": "prg_015",
+    "channelId": "ch_003",
+    "title": "Cuisine Royale",
+    "genre": "reality",
+    "durationMinutes": 50,
+    "firstAiredAt": "2023-02-03",
+    "rating": 7.3
+  },
+  {
+    "id": "prg_016",
+    "channelId": "ch_004",
+    "title": "Wild Rhine",
+    "genre": "documentary",
+    "durationMinutes": 50,
+    "firstAiredAt": "2012-04-22",
+    "rating": 8.7
+  },
+  {
+    "id": "prg_017",
+    "channelId": "ch_004",
+    "title": "Engineering Giants",
+    "genre": "documentary",
+    "durationMinutes": 55,
+    "firstAiredAt": "2016-10-09",
+    "rating": 8.4
+  },
+  {
+    "id": "prg_018",
+    "channelId": "ch_004",
+    "title": "Black Forest Mysteries",
+    "genre": "drama",
+    "durationMinutes": 45,
+    "firstAiredAt": "2019-11-03",
+    "rating": 7.9
+  },
+  {
+    "id": "prg_019",
+    "channelId": "ch_004",
+    "title": "Night Shift",
+    "genre": "drama",
+    "durationMinutes": 48,
+    "firstAiredAt": "2024-01-14",
+    "rating": 8.0
+  },
+  {
+    "id": "prg_020",
+    "channelId": "ch_004",
+    "title": "Rhine Valley News",
+    "genre": "news",
+    "durationMinutes": 20,
+    "firstAiredAt": "2011-11-01",
+    "rating": 6.5
+  },
+  {
+    "id": "prg_021",
+    "channelId": "ch_005",
+    "title": "Monsoon Hearts",
+    "genre": "drama",
+    "durationMinutes": 42,
+    "firstAiredAt": "2021-07-07",
+    "rating": 9.1
+  },
+  {
+    "id": "prg_022",
+    "channelId": "ch_005",
+    "title": "Mumbai Street Eats",
+    "genre": "documentary",
+    "durationMinutes": 35,
+    "firstAiredAt": "2022-05-20",
+    "rating": 8.2
+  },
+  {
+    "id": "prg_023",
+    "channelId": "ch_005",
+    "title": "Comedy Express",
+    "genre": "comedy",
+    "durationMinutes": 28,
+    "firstAiredAt": "2020-02-14",
+    "rating": 7.5
+  },
+  {
+    "id": "prg_024",
+    "channelId": "ch_005",
+    "title": "Cricket Fever",
+    "genre": "sport",
+    "durationMinutes": 75,
+    "firstAiredAt": "2023-03-25",
+    "rating": 8.8
+  },
+  {
+    "id": "prg_025",
+    "channelId": "ch_005",
+    "title": "Bollywood Dance Battle",
+    "genre": "reality",
+    "durationMinutes": 60,
+    "firstAiredAt": "2024-08-30",
+    "rating": 7.7
+  },
+  {
+    "id": "prg_026",
+    "channelId": "ch_006",
+    "title": "Morning Glory Hour",
+    "genre": "news",
+    "durationMinutes": 120,
+    "firstAiredAt": "2005-07-04",
+    "rating": 7.2
+  },
+  {
+    "id": "prg_027",
+    "channelId": "ch_006",
+    "title": "Capitol Watch",
+    "genre": "news",
+    "durationMinutes": 60,
+    "firstAiredAt": "2009-01-20",
+    "rating": 7.9
+  },
+  {
+    "id": "prg_028",
+    "channelId": "ch_006",
+    "title": "The Late Debate",
+    "genre": "news",
+    "durationMinutes": 45,
+    "firstAiredAt": "2015-09-14",
+    "rating": 6.1
+  },
+  {
+    "id": "prg_029",
+    "channelId": "ch_006",
+    "title": "Frontline America",
+    "genre": "documentary",
+    "durationMinutes": 55,
+    "firstAiredAt": "2018-11-05",
+    "rating": 8.3
+  },
+  {
+    "id": "prg_030",
+    "channelId": "ch_006",
+    "title": "Liberty Late Night",
+    "genre": "comedy",
+    "durationMinutes": 40,
+    "firstAiredAt": "2017-02-20",
+    "rating": 6.6
+  },
+  {
+    "id": "prg_031",
+    "channelId": "ch_007",
+    "title": "Dino Detectives",
+    "genre": "kids",
+    "durationMinutes": 22,
+    "firstAiredAt": "2021-09-09",
+    "rating": 8.5
+  },
+  {
+    "id": "prg_032",
+    "channelId": "ch_007",
+    "title": "Pocket Planet",
+    "genre": "kids",
+    "durationMinutes": 15,
+    "firstAiredAt": "2022-04-01",
+    "rating": 7.8
+  },
+  {
+    "id": "prg_033",
+    "channelId": "ch_007",
+    "title": "Rocket Rabbits",
+    "genre": "kids",
+    "durationMinutes": 12,
+    "firstAiredAt": "2023-10-10",
+    "rating": 8.0
+  },
+  {
+    "id": "prg_034",
+    "channelId": "ch_007",
+    "title": "Junior Bake Battle",
+    "genre": "reality",
+    "durationMinutes": 30,
+    "firstAiredAt": "2024-03-16",
+    "rating": 7.4
+  },
+  {
+    "id": "prg_035",
+    "channelId": "ch_007",
+    "title": "Story Lantern",
+    "genre": "kids",
+    "durationMinutes": 20,
+    "firstAiredAt": "2021-12-24",
+    "rating": 9.3
+  },
+  {
+    "id": "prg_036",
+    "channelId": "ch_008",
+    "title": "Summit Chasers",
+    "genre": "sport",
+    "durationMinutes": 50,
+    "firstAiredAt": "2018-12-01",
+    "rating": 8.1
+  },
+  {
+    "id": "prg_037",
+    "channelId": "ch_008",
+    "title": "Alpine Kitchen",
+    "genre": "reality",
+    "durationMinutes": 40,
+    "firstAiredAt": "2019-09-27",
+    "rating": 6.9
+  },
+  {
+    "id": "prg_038",
+    "channelId": "ch_008",
+    "title": "Glacier Watch",
+    "genre": "documentary",
+    "durationMinutes": 45,
+    "firstAiredAt": "2020-06-05",
+    "rating": 8.6
+  },
+  {
+    "id": "prg_039",
+    "channelId": "ch_008",
+    "title": "Ski Season Live",
+    "genre": "sport",
+    "durationMinutes": 90,
+    "firstAiredAt": "2022-11-26",
+    "rating": 7.5
+  },
+  {
+    "id": "prg_040",
+    "channelId": "ch_008",
+    "title": "The Chalet",
+    "genre": "drama",
+    "durationMinutes": 50,
+    "firstAiredAt": "2025-01-12",
+    "rating": 8.4
+  }
+]
