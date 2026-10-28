@@ -61,8 +61,16 @@ export function buildLocator(page: Page, candidate: Candidate): Locator {
   }
 }
 
+/** Single-quoted TypeScript string literal; model-supplied text is escaped so it can never break out of the literal. */
 function quote(text: string): string {
-  return `'${text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+  const escaped = text
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+  return `'${escaped}'`;
 }
 
 /** The locator as it should appear in the page object; `receiver` is prepended when given (this.page). */

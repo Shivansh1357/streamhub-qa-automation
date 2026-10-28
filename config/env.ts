@@ -44,7 +44,8 @@ function int(name: string, fallback: number): number {
   const value = process.env[name];
   if (value === undefined) return fallback;
   const parsed = Number.parseInt(value, 10);
-  if (Number.isNaN(parsed)) throw new Error(`Environment variable ${name} must be an integer, got "${value}"`);
+  if (Number.isNaN(parsed))
+    throw new Error(`Environment variable ${name} must be an integer, got "${value}"`);
   return parsed;
 }
 

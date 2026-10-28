@@ -1,4 +1,12 @@
-import { After, AfterAll, Before, BeforeAll, ITestCaseHookParameter, Status, setDefaultTimeout } from '@cucumber/cucumber';
+import {
+  After,
+  AfterAll,
+  Before,
+  BeforeAll,
+  ITestCaseHookParameter,
+  Status,
+  setDefaultTimeout,
+} from '@cucumber/cucumber';
 import { Browser, chromium, firefox, request, webkit } from '@playwright/test';
 import fs from 'node:fs';
 import { env } from '../../config/env';
@@ -65,7 +73,10 @@ After({ tags: '@ui' }, async function (this: CustomWorld, { result, pickle }: IT
       fs.writeFileSync(artifactPath(this.profile, 'screenshots', `${slug}.png`), png);
       this.attach(png, 'image/png');
       // DOM + accessibility snapshots: the raw material the self-healing tool works from.
-      fs.writeFileSync(artifactPath(this.profile, 'dom-snapshots', `${slug}.html`), await this.page.content());
+      fs.writeFileSync(
+        artifactPath(this.profile, 'dom-snapshots', `${slug}.html`),
+        await this.page.content(),
+      );
       fs.writeFileSync(
         artifactPath(this.profile, 'dom-snapshots', `${slug}.aria.yml`),
         await this.page.locator('body').ariaSnapshot(),

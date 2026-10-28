@@ -85,7 +85,20 @@ export class ClaudeCliProvider implements LocatorProvider {
 
   async suggest(input: HealingInput): Promise<ProviderResult> {
     const prompt = `${SYSTEM_PROMPT}\n\n${buildUserPrompt(input)}`;
-    const args = ['-p', prompt, '--output-format', 'json', '--model', input.model, '--max-turns', '1'];
+    // The prompt embeds DOM captured from a third-party site, so the CLI runs with every tool disabled: a
+    // prompt-injection attempt can at worst produce bad candidates, which the validator then rejects.
+    const args = [
+      '-p',
+      prompt,
+      '--output-format',
+      'json',
+      '--model',
+      input.model,
+      '--max-turns',
+      '1',
+      '--tools',
+      '',
+    ];
     const run = await runCli(this.executable, args);
     if (run.code !== 0) {
       throw new Error(

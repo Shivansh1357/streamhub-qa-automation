@@ -33,7 +33,11 @@ export function ensureApiServer(): Promise<void> {
     const log = fs.openSync(path.join(logDir, 'api-server.log'), 'a');
     child = spawn(
       process.execPath,
-      [require.resolve('ts-node/dist/bin.js'), '--transpile-only', path.join(env.rootDir, 'api', 'src', 'server.ts')],
+      [
+        require.resolve('ts-node/dist/bin.js'),
+        '--transpile-only',
+        path.join(env.rootDir, 'api', 'src', 'server.ts'),
+      ],
       { cwd: env.rootDir, env: { ...process.env, PORT: String(env.api.port) }, stdio: ['ignore', log, log] },
     );
     const deadline = Date.now() + 30_000;

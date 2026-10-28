@@ -57,7 +57,9 @@ export function buildFix(failure: DetectedFailure, chosen: ValidationResult): { 
       note: 'the source line only matched the locator literal (expression split or formatted differently); the fix is report-only',
     };
   }
-  const replacement = source.lineText.replace(locator.expression, toPlaywrightCode(chosen.candidate));
+  // Replacer function so the generated code is inserted literally ($& / $1 in model output must never expand).
+  const generated = toPlaywrightCode(chosen.candidate);
+  const replacement = source.lineText.replace(locator.expression, () => generated);
   return { fix: { file: source.file, line: source.line, original: source.lineText, replacement } };
 }
 
