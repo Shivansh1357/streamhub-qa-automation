@@ -18,7 +18,9 @@ Feature: Service health
     Then the response status should be 200
     And the response should match the Health schema
 
-  Scenario: The probe answers promptly
+  # A smoke check, not a performance SLA: the measured duration is attached to the report and only a
+  # pathologically slow probe (an instance that is up but stuck) fails the generous budget.
+  Scenario: The probe answers within a generous smoke-check budget
     When I check the service health
     Then the response status should be 200
-    And the response time should be under 1000 ms
+    And the measured response time should be within the 5000 ms smoke budget

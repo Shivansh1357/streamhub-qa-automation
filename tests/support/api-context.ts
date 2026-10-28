@@ -1,19 +1,18 @@
 import type { DataTable } from '@cucumber/cucumber';
 import type { z } from 'zod';
-import { AudienceClient } from '../../api-clients/AudienceClient';
-import { BaseApiClient } from '../../api-clients/BaseApiClient';
-import { ChannelsClient } from '../../api-clients/ChannelsClient';
-import { HealthClient } from '../../api-clients/HealthClient';
-import { ProgrammesClient } from '../../api-clients/ProgrammesClient';
-import type { SortDirection } from '../../api-clients/fixtures';
-import { queryFromRows, type QueryInput } from '../../api-clients/query-string';
-import { assertMatchesSchema, type ErrorEnvelope, errorEnvelopeSchema } from '../../schemas';
-import type { CustomWorld, RecordedResponse } from '../../support/world';
+import { AudienceClient } from '../api-clients/AudienceClient';
+import { BaseApiClient } from '../api-clients/BaseApiClient';
+import { ChannelsClient } from '../api-clients/ChannelsClient';
+import { HealthClient } from '../api-clients/HealthClient';
+import { ProgrammesClient } from '../api-clients/ProgrammesClient';
+import type { SortDirection } from '../api-clients/fixtures';
+import { queryFromRows, type QueryInput } from '../api-clients/query-string';
+import { assertMatchesSchema, type ErrorEnvelope, errorEnvelopeSchema } from '../schemas';
+import type { CustomWorld, RecordedResponse } from './world';
 
 /**
  * Glue shared by the API step files: client construction, the scratch keys under which a "When"
  * step remembers its query for a later oracle-based "Then", and typed access to the last response.
- * Not a step definition file - cucumber loads it because it lives under tests/steps, which is harmless.
  */
 export const Remembered = {
   channelQuery: 'api.channels.query',

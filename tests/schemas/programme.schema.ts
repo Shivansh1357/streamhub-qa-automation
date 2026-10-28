@@ -10,6 +10,14 @@ export const PROGRAMME_SORT_OPTIONS = [
   '-rating',
 ] as const;
 
+/**
+ * The contract declares `rating` as `multipleOf: 0.1`. Compared in tenths with a tolerance because
+ * `7.4 * 10` is `74.00000000000001` in floating point, which a plain modulo check would reject.
+ */
+export function hasAtMostOneDecimalPlace(rating: number): boolean {
+  return Math.abs(rating * 10 - Math.round(rating * 10)) < 1e-9;
+}
+
 export const programmeSchema = z
   .object({
     id: programmeId,
@@ -18,7 +26,11 @@ export const programmeSchema = z
     genre: z.enum(GENRES),
     durationMinutes: z.number().int().positive(),
     firstAiredAt: isoDate,
-    rating: z.number().min(0).max(10),
+    rating: z
+      .number()
+      .min(0)
+      .max(10)
+      .refine(hasAtMostOneDecimalPlace, { error: 'must have at most one decimal place' }),
   })
   .strict();
 

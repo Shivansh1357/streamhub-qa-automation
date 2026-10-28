@@ -17,11 +17,11 @@ import {
   type Genre,
   type Programme,
   type ProgrammeList,
+  PROGRAMME_SORT_OPTIONS,
   type ProgrammeSort,
   programmeDetailSchema,
   programmeListSchema,
 } from '../../schemas';
-import type { CustomWorld } from '../../support/world';
 import {
   asSortDirection,
   clients,
@@ -30,7 +30,8 @@ import {
   queryFromTable,
   Remembered,
   stringParams,
-} from './api-context';
+} from '../../support/api-context';
+import type { CustomWorld } from '../../support/world';
 
 const MAX_PAGE_SIZE = 50;
 const STRING_KEYS = ['channelId', 'genre', 'q', 'sort'] as const;
@@ -40,6 +41,12 @@ function asGenre(word: string): Genre {
   const genre = GENRES.find((option) => option === word);
   if (!genre) throw new Error(`genre must be one of ${GENRES.join(', ')}, got "${word}"`);
   return genre;
+}
+
+function asProgrammeSort(token: string): ProgrammeSort {
+  const sort = PROGRAMME_SORT_OPTIONS.find((option) => option === token);
+  if (!sort) throw new Error(`sort must be one of ${PROGRAMME_SORT_OPTIONS.join(', ')}, got "${token}"`);
+  return sort;
 }
 
 /** Rebuilds the typed query the oracle needs from what the "When" step sent (valid scenarios only). */
@@ -59,12 +66,19 @@ function rememberedProgrammeQuery(world: CustomWorld): ProgrammeListQuery {
     channelId: strings.channelId,
     genre: strings.genre === undefined ? undefined : asGenre(strings.genre),
     q: strings.q,
-    sort: strings.sort as ProgrammeSort | undefined,
+    sort: strings.sort === undefined ? undefined : asProgrammeSort(strings.sort),
     ...numbers,
   };
 }
 
-async function listProgrammes(world: CustomWorld, query: QueryInput): Promise<void> {
+/** Valid, structured queries go through the typed client, so a misspelt parameter fails at compile time. */
+async function listProgrammes(world: CustomWorld, query: ProgrammeListQuery): Promise<void> {
+  world.remember(Remembered.programmeQuery, query);
+  world.lastResponse = await clients(world).programmes.list(query);
+}
+
+/** Data-table and repeated-key input is sent verbatim through the untyped client. */
+async function listProgrammesWith(world: CustomWorld, query: QueryInput): Promise<void> {
   world.remember(Remembered.programmeQuery, query);
   world.lastResponse = await clients(world).programmes.listWith(query);
 }
@@ -86,7 +100,7 @@ When('I list programmes', async function (this: CustomWorld) {
 });
 
 When('I list programmes with parameters:', async function (this: CustomWorld, table: DataTable) {
-  await listProgrammes(this, queryFromTable(table));
+  await listProgrammesWith(this, queryFromTable(table));
 });
 
 When('I list programmes on channel {string}', async function (this: CustomWorld, channelId: string) {
@@ -94,7 +108,7 @@ When('I list programmes on channel {string}', async function (this: CustomWorld,
 });
 
 When('I list programmes in genre {string}', async function (this: CustomWorld, genre: string) {
-  await listProgrammes(this, { genre });
+  await listProgrammes(this, { genre: asGenre(genre) });
 });
 
 When('I list programmes rated at least {float}', async function (this: CustomWorld, minRating: number) {
@@ -115,7 +129,7 @@ When(
 When(
   'I list programmes with the {string} parameter repeated as {string} and {string}',
   async function (this: CustomWorld, name: string, first: string, second: string) {
-    await listProgrammes(this, { [name]: [first, second] });
+    await listProgrammesWith(this, { [name]: [first, second] });
   },
 );
 
@@ -123,7 +137,10 @@ When(
   'I list all programmes sorted by {string} {word}',
   async function (this: CustomWorld, field: string, direction: string) {
     // The largest permitted page: the whole fixture fits, so the full order can be checked at once.
-    await listProgrammes(this, { sort: sortToken(field, asSortDirection(direction)), limit: MAX_PAGE_SIZE });
+    await listProgrammes(this, {
+      sort: asProgrammeSort(sortToken(field, asSortDirection(direction))),
+      limit: MAX_PAGE_SIZE,
+    });
   },
 );
 

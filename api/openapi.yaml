@@ -54,6 +54,8 @@ paths:
                 status: ok
                 uptimeSeconds: 42
                 version: 1.0.0
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -108,6 +110,8 @@ paths:
                   total: 2
         '400':
           $ref: '#/components/responses/ValidationError'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -132,6 +136,8 @@ paths:
           $ref: '#/components/responses/InvalidIdOrUnexpectedQuery'
         '404':
           $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -226,6 +232,8 @@ paths:
                   sort: title
         '400':
           $ref: '#/components/responses/ValidationError'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -261,6 +269,8 @@ paths:
           $ref: '#/components/responses/InvalidIdOrUnexpectedQuery'
         '404':
           $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -340,6 +350,8 @@ paths:
                   rows: 240
         '400':
           $ref: '#/components/responses/ValidationError'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
         '500':
           $ref: '#/components/responses/InternalError'
 
@@ -549,21 +561,45 @@ components:
           maximum: 10
           multipleOf: 0.1
     ProgrammeDetail:
-      allOf:
-        - $ref: '#/components/schemas/Programme'
-        - type: object
-          required: [channel]
+      description: |
+        A Programme plus the id and name of its channel. Declared as a standalone object rather than
+        `allOf: [Programme, ...]` because Programme is closed (`additionalProperties: false`), which
+        under JSON Schema semantics would reject the very `channel` property this view adds.
+      type: object
+      required: [id, channelId, title, genre, durationMinutes, firstAiredAt, rating, channel]
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          pattern: '^prg_\d{3}$'
+        channelId:
+          type: string
+          pattern: '^ch_\d{3}$'
+        title:
+          type: string
+        genre:
+          $ref: '#/components/schemas/Genre'
+        durationMinutes:
+          type: integer
+          minimum: 1
+        firstAiredAt:
+          $ref: '#/components/schemas/IsoDate'
+        rating:
+          type: number
+          minimum: 0
+          maximum: 10
+          multipleOf: 0.1
+        channel:
+          type: object
+          description: The programme's channel, trimmed to what a listing needs.
+          required: [id, name]
+          additionalProperties: false
           properties:
-            channel:
-              type: object
-              required: [id, name]
-              additionalProperties: false
-              properties:
-                id:
-                  type: string
-                  pattern: '^ch_\d{3}$'
-                name:
-                  type: string
+            id:
+              type: string
+              pattern: '^ch_\d{3}$'
+            name:
+              type: string
     ProgrammeList:
       type: object
       required: [data, meta]

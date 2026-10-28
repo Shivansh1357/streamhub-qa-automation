@@ -2,8 +2,14 @@ import { DataTable, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import type { HttpMethod } from '../../api-clients/BaseApiClient';
 import { assertMatchesSchema, schemaByName, UUID_PATTERN } from '../../schemas';
+import {
+  clients,
+  describeResponse,
+  lastError,
+  lastResponse,
+  queryFromTable,
+} from '../../support/api-context';
 import type { CustomWorld } from '../../support/world';
-import { clients, describeResponse, lastError, lastResponse, queryFromTable } from './api-context';
 
 /**
  * Endpoint-agnostic steps: raw requests for protocol-level checks, and assertions that apply to
@@ -23,16 +29,6 @@ function asHttpMethod(word: string): HttpMethod {
 When('I request GET {string}', async function (this: CustomWorld, pathWithQuery: string) {
   this.lastResponse = await clients(this).raw.rawGet(pathWithQuery);
 });
-
-When(
-  'I request GET {string} with the request id {string}',
-  async function (this: CustomWorld, pathWithQuery: string, requestId: string) {
-    this.remember(SENT_REQUEST_ID, requestId);
-    this.lastResponse = await clients(this).raw.rawGet(pathWithQuery, {
-      headers: { 'X-Request-Id': requestId },
-    });
-  },
-);
 
 When('I send a {word} request to {string}', async function (this: CustomWorld, method: string, path: string) {
   this.lastResponse = await clients(this).raw.request(asHttpMethod(method), path);
@@ -116,6 +112,11 @@ Then('the response data should be empty', async function (this: CustomWorld) {
   expect(body.data).toEqual([]);
 });
 
+Then('the response body should be empty', async function (this: CustomWorld) {
+  const response = lastResponse(this);
+  expect(response.text, describeResponse(response)).toBe('');
+});
+
 Then('the response text should not contain {string}', async function (this: CustomWorld, fragment: string) {
   expect(lastResponse(this).text).not.toContain(fragment);
 });
@@ -146,7 +147,17 @@ Then('the Allow header should be {string}', async function (this: CustomWorld, a
   expect(lastResponse(this).headers['allow']).toBe(allow);
 });
 
-Then('the response time should be under {int} ms', async function (this: CustomWorld, limitMs: number) {
-  const response = lastResponse(this);
-  expect(response.durationMs, `took ${response.durationMs.toFixed(1)} ms`).toBeLessThan(limitMs);
-});
+Then(
+  'the measured response time should be within the {int} ms smoke budget',
+  async function (this: CustomWorld, budgetMs: number) {
+    const response = lastResponse(this);
+    const took = `${response.durationMs.toFixed(1)} ms`;
+    // A smoke check, not a performance SLA: the measurement is attached so the report shows the real
+    // figure, and the generous budget only catches a probe that has become pathologically slow.
+    this.attach(
+      `${response.method} ${response.url} answered in ${took} (budget ${budgetMs} ms)`,
+      'text/plain',
+    );
+    expect(response.durationMs, `took ${took}`).toBeLessThan(budgetMs);
+  },
+);

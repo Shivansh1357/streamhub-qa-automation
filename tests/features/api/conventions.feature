@@ -6,7 +6,8 @@ Feature: Cross-cutting HTTP conventions
   So that clients can handle errors uniformly and a request can be traced end to end
 
   This feature deliberately works at the HTTP level (raw paths and methods) because the
-  behaviour under test is the surface itself: read-only routes answer 405 with an Allow header,
+  behaviour under test is the surface itself: read-only routes answer 405 with an Allow header
+  (OPTIONS included, as CORS preflight is out of scope), HEAD is served with GET semantics,
   unknown routes answer 404 with the standard envelope, every response is JSON with a request id,
   and hostile input never produces a 5xx or reflected markup.
 
@@ -38,21 +39,30 @@ Feature: Cross-cutting HTTP conventions
     And the Allow header should be "GET"
 
     Examples:
-      | method | path                       |
-      | POST   | /health                    |
-      | DELETE | /health                    |
-      | POST   | /api/v1/channels           |
-      | DELETE | /api/v1/channels           |
-      | POST   | /api/v1/channels/ch_001    |
-      | DELETE | /api/v1/channels/ch_001    |
-      | PATCH  | /api/v1/channels/ch_001    |
-      | POST   | /api/v1/programmes         |
-      | DELETE | /api/v1/programmes         |
-      | POST   | /api/v1/programmes/prg_001 |
-      | DELETE | /api/v1/programmes/prg_001 |
-      | PUT    | /api/v1/programmes/prg_001 |
-      | POST   | /api/v1/audience/summary   |
-      | DELETE | /api/v1/audience/summary   |
+      | method  | path                       |
+      | POST    | /health                    |
+      | DELETE  | /health                    |
+      | OPTIONS | /health                    |
+      | POST    | /api/v1/channels           |
+      | DELETE  | /api/v1/channels           |
+      | POST    | /api/v1/channels/ch_001    |
+      | DELETE  | /api/v1/channels/ch_001    |
+      | PATCH   | /api/v1/channels/ch_001    |
+      | POST    | /api/v1/programmes         |
+      | DELETE  | /api/v1/programmes         |
+      | OPTIONS | /api/v1/programmes         |
+      | POST    | /api/v1/programmes/prg_001 |
+      | DELETE  | /api/v1/programmes/prg_001 |
+      | PUT     | /api/v1/programmes/prg_001 |
+      | POST    | /api/v1/audience/summary   |
+      | DELETE  | /api/v1/audience/summary   |
+
+  Scenario: HEAD on a known route answers 200 with no body
+    When I send a HEAD request to "/api/v1/channels"
+    Then the response status should be 200
+    And the response content type should be JSON
+    And the response should carry a request id header
+    And the response body should be empty
 
   Scenario Outline: <description> is JSON and carries a request id
     When I request GET "<path>"
@@ -75,10 +85,15 @@ Feature: Cross-cutting HTTP conventions
     Then the response status should be 200
     And the response request id should be "qa-run-0042.alpha_beta"
 
-  Scenario: A malformed incoming request id is replaced with a generated one
-    When I check the service health with the request id "not a safe id!"
+  Scenario Outline: A malformed incoming request id (<description>) is replaced with a generated one
+    When I check the service health with the request id "<requestId>"
     Then the response status should be 200
     And the response request id should be a generated UUID
+
+    Examples: only ids matching ^[A-Za-z0-9._-]{1,128}$ are echoed
+      | description                            | requestId           |
+      | unsafe characters                      | not a safe id!      |
+      | 129 safe characters, one over the cap  | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
 
   Scenario Outline: A search for <description> never breaks the service or reflects markup
     When I search programmes for "<q>"

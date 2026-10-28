@@ -1,6 +1,10 @@
 import { DataTable, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import type { ChannelListQuery, ChannelSort } from '../../api-clients/ChannelsClient';
+import {
+  CHANNEL_SORT_OPTIONS,
+  type ChannelListQuery,
+  type ChannelSort,
+} from '../../api-clients/ChannelsClient';
 import {
   channelById,
   expectedChannelList,
@@ -9,8 +13,13 @@ import {
   type SortableField,
 } from '../../api-clients/fixtures';
 import type { QueryInput } from '../../api-clients/query-string';
-import { type Channel, channelListSchema, channelSchema, CHANNEL_TYPES } from '../../schemas';
-import type { CustomWorld } from '../../support/world';
+import {
+  type Channel,
+  channelListSchema,
+  channelSchema,
+  CHANNEL_TYPES,
+  type ChannelType,
+} from '../../schemas';
 import {
   asSortDirection,
   clients,
@@ -18,20 +27,48 @@ import {
   queryFromTable,
   Remembered,
   stringParams,
-} from './api-context';
+} from '../../support/api-context';
+import type { CustomWorld } from '../../support/world';
 
 const CHANNEL_QUERY_KEYS = ['country', 'type', 'sort'] as const;
+
+function asChannelType(word: string): ChannelType {
+  const type = CHANNEL_TYPES.find((option) => option === word);
+  if (!type) throw new Error(`type must be one of ${CHANNEL_TYPES.join(', ')}, got "${word}"`);
+  return type;
+}
+
+function asChannelSort(token: string): ChannelSort {
+  const sort = CHANNEL_SORT_OPTIONS.find((option) => option === token);
+  if (!sort) throw new Error(`sort must be one of ${CHANNEL_SORT_OPTIONS.join(', ')}, got "${token}"`);
+  return sort;
+}
+
+/** `country "GB"` / `type "vod"` as written in a step -> the one typed filter it names. */
+function channelFilter(name: string, value: string): Pick<ChannelListQuery, 'country' | 'type'> {
+  if (name === 'country') return { country: value };
+  if (name === 'type') return { type: asChannelType(value) };
+  throw new Error(`"${name}" is not a channel filter (country | type)`);
+}
 
 /** Rebuilds the typed query from whatever a "When" step remembered, for the dataset oracle. */
 function rememberedChannelQuery(world: CustomWorld): ChannelListQuery {
   const picked = stringParams(world.recall<QueryInput>(Remembered.channelQuery), CHANNEL_QUERY_KEYS);
-  const type = picked.type === undefined ? undefined : CHANNEL_TYPES.find((option) => option === picked.type);
-  if (picked.type !== undefined && type === undefined)
-    throw new Error(`"${picked.type}" is not a channel type`);
-  return { country: picked.country, type, sort: picked.sort as ChannelSort | undefined };
+  return {
+    country: picked.country,
+    type: picked.type === undefined ? undefined : asChannelType(picked.type),
+    sort: picked.sort === undefined ? undefined : asChannelSort(picked.sort),
+  };
 }
 
-async function listChannels(world: CustomWorld, query: QueryInput): Promise<void> {
+/** Valid, structured queries go through the typed client, so a misspelt parameter fails at compile time. */
+async function listChannels(world: CustomWorld, query: ChannelListQuery): Promise<void> {
+  world.remember(Remembered.channelQuery, query);
+  world.lastResponse = await clients(world).channels.list(query);
+}
+
+/** Data-table input is sent verbatim (unknown keys, wrong types) through the untyped client. */
+async function listChannelsWith(world: CustomWorld, query: QueryInput): Promise<void> {
   world.remember(Remembered.channelQuery, query);
   world.lastResponse = await clients(world).channels.listWith(query);
 }
@@ -47,20 +84,23 @@ When('I list channels', async function (this: CustomWorld) {
 });
 
 When('I list channels with parameters:', async function (this: CustomWorld, table: DataTable) {
-  await listChannels(this, queryFromTable(table));
+  await listChannelsWith(this, queryFromTable(table));
 });
 
 When(
   'I list channels sorted by {string} {word}',
   async function (this: CustomWorld, field: string, direction: string) {
-    await listChannels(this, { sort: sortToken(field, asSortDirection(direction)) });
+    await listChannels(this, { sort: asChannelSort(sortToken(field, asSortDirection(direction))) });
   },
 );
 
 When(
   'I list channels filtered by {word} {string} sorted by {string} {word}',
   async function (this: CustomWorld, filter: string, value: string, field: string, direction: string) {
-    await listChannels(this, { [filter]: value, sort: sortToken(field, asSortDirection(direction)) });
+    await listChannels(this, {
+      ...channelFilter(filter, value),
+      sort: asChannelSort(sortToken(field, asSortDirection(direction))),
+    });
   },
 );
 

@@ -4,15 +4,18 @@ import type { AudienceSummaryQuery } from '../../api-clients/AudienceClient';
 import { compareValues, expectedAudienceSummary } from '../../api-clients/fixtures';
 import type { QueryInput } from '../../api-clients/query-string';
 import { audienceSummarySchema, GROUP_BY_OPTIONS, type GroupBy } from '../../schemas';
+import { clients, lastBodyAs, queryFromTable, Remembered, stringParams } from '../../support/api-context';
 import type { CustomWorld } from '../../support/world';
-import { clients, lastBodyAs, queryFromTable, Remembered, stringParams } from './api-context';
 
 /**
  * The API rounds the means to 1 and 3 decimal places. The oracle keeps them unrounded and allows
- * half a unit in the last place, so the check does not depend on matching a rounding algorithm.
+ * half a unit in the last place, so the value check does not depend on matching a rounding
+ * algorithm; the promised precision itself is asserted separately on every row.
  */
 const WATCH_TIME_TOLERANCE = 0.05 + 1e-9;
 const COMPLETION_TOLERANCE = 0.0005 + 1e-9;
+const WATCH_TIME_DECIMALS = 1;
+const COMPLETION_DECIMALS = 3;
 const AUDIENCE_QUERY_KEYS = ['from', 'to', 'channelId', 'groupBy'] as const;
 
 function asGroupBy(word: string): GroupBy {
@@ -34,9 +37,27 @@ function rememberedAudienceQuery(world: CustomWorld): AudienceSummaryQuery {
   };
 }
 
-async function requestSummary(world: CustomWorld, query: QueryInput): Promise<void> {
+/** Valid, structured queries go through the typed client, so a misspelt parameter fails at compile time. */
+async function requestSummary(world: CustomWorld, query: AudienceSummaryQuery): Promise<void> {
+  world.remember(Remembered.audienceQuery, query);
+  world.lastResponse = await clients(world).audience.summary(query);
+}
+
+/** Data-table input is sent verbatim (missing dates, impossible days, unknown keys) through the untyped client. */
+async function requestSummaryWith(world: CustomWorld, query: QueryInput): Promise<void> {
   world.remember(Remembered.audienceQuery, query);
   world.lastResponse = await clients(world).audience.summaryWith(query);
+}
+
+/**
+ * A value rounded to `places` decimals survives a round trip through toFixed unchanged; `21.63`
+ * does not survive `toFixed(1)`. Exact comparison is safe because the API's own output is already
+ * the nearest double to k / 10^places.
+ */
+function expectDecimalPlaces(value: number, places: number, label: string): void {
+  expect(Number(value.toFixed(places)), `${label} should be rounded to ${places} decimal place(s)`).toBe(
+    value,
+  );
 }
 
 // --- When -------------------------------------------------------------------------------------
@@ -70,7 +91,7 @@ When(
 );
 
 When('I request an audience summary with parameters:', async function (this: CustomWorld, table: DataTable) {
-  await requestSummary(this, queryFromTable(table));
+  await requestSummaryWith(this, queryFromTable(table));
 });
 
 // --- Then -------------------------------------------------------------------------------------
@@ -111,6 +132,8 @@ Then(
         Math.abs(row.avgCompletionRate - want.meanCompletionRate),
         `avgCompletionRate of ${row.key}`,
       ).toBeLessThanOrEqual(COMPLETION_TOLERANCE);
+      expectDecimalPlaces(row.avgWatchTimeMinutes, WATCH_TIME_DECIMALS, `avgWatchTimeMinutes of ${row.key}`);
+      expectDecimalPlaces(row.avgCompletionRate, COMPLETION_DECIMALS, `avgCompletionRate of ${row.key}`);
     }
   },
 );

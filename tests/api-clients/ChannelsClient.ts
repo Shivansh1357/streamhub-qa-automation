@@ -3,7 +3,8 @@ import type { RecordedResponse } from '../support/world';
 import { BaseApiClient } from './BaseApiClient';
 import type { QueryInput } from './query-string';
 
-export type ChannelSort = 'name' | '-name' | 'launchedAt' | '-launchedAt';
+export const CHANNEL_SORT_OPTIONS = ['name', '-name', 'launchedAt', '-launchedAt'] as const;
+export type ChannelSort = (typeof CHANNEL_SORT_OPTIONS)[number];
 
 /**
  * The documented query vocabulary of GET /api/v1/channels. A type alias rather than an interface
