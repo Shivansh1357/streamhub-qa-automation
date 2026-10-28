@@ -85,8 +85,10 @@ export class ClaudeCliProvider implements LocatorProvider {
 
   async suggest(input: HealingInput): Promise<ProviderResult> {
     const prompt = `${SYSTEM_PROMPT}\n\n${buildUserPrompt(input)}`;
-    // The prompt embeds DOM captured from a third-party site, so the CLI runs with every tool disabled: a
-    // prompt-injection attempt can at worst produce bad candidates, which the validator then rejects.
+    // The prompt embeds DOM captured from a third-party site, so the nested CLI is fully sandboxed: no tools,
+    // no MCP servers and no user/project settings (which could re-enable either). A prompt-injection attempt
+    // can at worst produce bad candidates, which the validator then rejects. Isolation also drops the CLI's
+    // own context, so a call costs a fraction of a cent instead of ~40 cents.
     const args = [
       '-p',
       prompt,
@@ -97,6 +99,11 @@ export class ClaudeCliProvider implements LocatorProvider {
       '--max-turns',
       '1',
       '--tools',
+      '',
+      '--strict-mcp-config',
+      '--mcp-config',
+      '{"mcpServers":{}}',
+      '--setting-sources',
       '',
     ];
     const run = await runCli(this.executable, args);
