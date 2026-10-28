@@ -29,10 +29,6 @@ BeforeAll(async () => {
   fs.mkdirSync(env.reportsDir, { recursive: true });
 });
 
-Before(async function (this: CustomWorld, { pickle }: ITestCaseHookParameter) {
-  this.scenarioName = pickle.name;
-});
-
 Before({ tags: '@ui' }, async function (this: CustomWorld) {
   browser ??= await launchBrowser();
   this.browser = browser;

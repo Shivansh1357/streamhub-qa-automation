@@ -40,6 +40,14 @@ function bool(name: string, fallback: boolean): boolean {
   return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase());
 }
 
+function oneOf<T extends string>(name: string, fallback: T, allowed: readonly T[]): T {
+  const value = optional(name, fallback);
+  if (!allowed.includes(value as T)) {
+    throw new Error(`Environment variable ${name} must be one of ${allowed.join(' | ')}, got "${value}"`);
+  }
+  return value as T;
+}
+
 function int(name: string, fallback: number): number {
   const value = process.env[name];
   if (value === undefined) return fallback;
@@ -60,11 +68,11 @@ export const env = {
   ui: {
     baseUrl: required('UI_BASE_URL'),
     headless: bool('HEADLESS', true),
-    browser: optional('BROWSER', 'chromium') as BrowserName,
+    browser: oneOf<BrowserName>('BROWSER', 'chromium', ['chromium', 'firefox', 'webkit']),
     slowMo: int('SLOW_MO_MS', 0),
     stepTimeoutMs: int('UI_STEP_TIMEOUT_MS', 90_000),
     actionTimeoutMs: int('UI_ACTION_TIMEOUT_MS', 20_000),
-    trace: optional('UI_TRACE', 'on-failure') as TraceMode,
+    trace: oneOf<TraceMode>('UI_TRACE', 'on-failure', ['on', 'off', 'on-failure']),
     video: bool('UI_VIDEO', false),
   },
   api: {
@@ -76,7 +84,12 @@ export const env = {
     url: process.env.DATABASE_URL,
   },
   selfHeal: {
-    provider: optional('SELF_HEAL_PROVIDER', 'auto') as SelfHealProvider,
+    provider: oneOf<SelfHealProvider>('SELF_HEAL_PROVIDER', 'auto', [
+      'auto',
+      'anthropic',
+      'claude-cli',
+      'offline',
+    ]),
     model: optional('SELF_HEAL_MODEL', 'claude-opus-5-5'),
   },
 } as const;

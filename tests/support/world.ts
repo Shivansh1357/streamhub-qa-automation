@@ -27,7 +27,6 @@ export class CustomWorld extends World {
   api?: APIRequestContext;
   db?: Pool;
   lastResponse?: RecordedResponse;
-  scenarioName = '';
   private readonly scratch = new Map<string, unknown>();
 
   constructor(options: IWorldOptions) {

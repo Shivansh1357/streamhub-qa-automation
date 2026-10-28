@@ -7,7 +7,8 @@ import { MonthPicker } from './components/MonthPicker';
 import { PaymentScheduleTable } from './components/PaymentScheduleTable';
 import { PieChart } from './components/PieChart';
 
-export type LoanProduct = 'Home Loan' | 'Personal Loan' | 'Car Loan';
+/** Products the framework can drive (the site also has Car Loan, which no scenario needs yet). */
+export type LoanProduct = 'Home Loan' | 'Personal Loan';
 
 export interface LoanSummary {
   emi: number;
@@ -45,7 +46,6 @@ export class EmiCalculatorPage {
 
   constructor(
     protected readonly page: Page,
-    readonly product: LoanProduct,
     amountLabel: string,
     sliders: SliderRanges,
   ) {
@@ -137,14 +137,14 @@ export class EmiCalculatorPage {
     };
   }
 
-  /** Waits for the asynchronous recalculation to land on the expected EMI (within `tolerance` rupees). */
+  /** Waits for the asynchronous recalculation to land within `tolerance` rupees of the expected EMI. */
   async expectEmi(expected: number, tolerance = 1): Promise<void> {
+    // Polling the distance (not just one bound) means a stale value on either side keeps retrying.
     await expect
-      .poll(async () => parseRupees(await this.emiAmount.innerText()), {
+      .poll(async () => Math.abs(parseRupees(await this.emiAmount.innerText()) - expected), {
         message: `displayed EMI should be ${expected} ± ${tolerance}`,
       })
-      .toBeGreaterThanOrEqual(expected - tolerance);
-    expect(parseRupees(await this.emiAmount.innerText())).toBeLessThanOrEqual(expected + tolerance);
+      .toBeLessThanOrEqual(tolerance);
   }
 
   private async fillAndCommit(input: Locator, value: string): Promise<void> {

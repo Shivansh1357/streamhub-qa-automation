@@ -22,10 +22,6 @@ export class PaymentScheduleTable {
     this.root = page.locator('#emipaymenttable');
   }
 
-  async expectVisible(): Promise<void> {
-    await expect(this.root, 'payment schedule').toBeVisible();
-  }
-
   async yearRow(year: number): Promise<YearlyPaymentRow> {
     const row = this.root
       .locator('tr.yearlypaymentdetails')
@@ -41,10 +37,5 @@ export class PaymentScheduleTable {
       balance: parseRupees(cells[4]),
       loanPaidToDatePercent: parsePercent(cells[5]),
     };
-  }
-
-  async years(): Promise<number[]> {
-    const firstCells = await this.root.locator('tr.yearlypaymentdetails td:first-child').allInnerTexts();
-    return firstCells.map((c) => Number.parseInt(c.trim(), 10));
   }
 }

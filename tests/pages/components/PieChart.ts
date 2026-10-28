@@ -43,11 +43,10 @@ export class PieChart {
   /** Waits until the principal slice shows the expected share - the chart redraws a moment after the EMI text. */
   async expectPrincipalShare(expectedPercent: number, tolerance: number): Promise<void> {
     await expect
-      .poll(async () => (await this.dataLabelPercentages())[0], {
+      .poll(async () => Math.abs((await this.dataLabelPercentages())[0] - expectedPercent), {
         message: `principal slice should show ${expectedPercent.toFixed(1)}% ± ${tolerance}`,
       })
-      .toBeGreaterThanOrEqual(expectedPercent - tolerance);
-    expect((await this.dataLabelPercentages())[0]).toBeLessThanOrEqual(expectedPercent + tolerance);
+      .toBeLessThanOrEqual(tolerance);
   }
 
   /** Reads every section: its legend label, data-label percentage and tooltip (hovering one slice at a time). */

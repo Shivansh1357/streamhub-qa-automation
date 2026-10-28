@@ -30,18 +30,18 @@ module.exports = {
   default: profile('default', {
     paths: ['tests/features/**/*.feature'],
     tags: 'not @self-healing',
+    extra: isCI ? { retry: 1, retryTagFilter: '@ui' } : {},
   }),
   api: profile('api', { paths: ['tests/features/api/**/*.feature'] }),
-  ui: profile('ui', { paths: ['tests/features/ui/**/*.feature'] }),
+  // The UI suite runs against a live, ad-heavy third-party site: one retry in CI absorbs a transient slow load.
+  ui: profile('ui', {
+    paths: ['tests/features/ui/**/*.feature'],
+    extra: isCI ? { retry: 1, retryTagFilter: '@ui' } : {},
+  }),
   sql: profile('sql', { paths: ['tests/features/sql/**/*.feature'] }),
   // Deliberately broken locators for the AI self-healing exercise. Expected to FAIL.
   selfHealing: profile('self-healing', {
     paths: ['tests/features/self-healing/**/*.feature'],
     tags: '@self-healing',
-  }),
-  ci: profile('ci', {
-    paths: ['tests/features/**/*.feature'],
-    tags: 'not @self-healing',
-    extra: { retry: 1, retryTagFilter: '@ui' },
   }),
 };

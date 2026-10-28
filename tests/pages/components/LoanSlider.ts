@@ -17,7 +17,7 @@ export class LoanSlider {
   private readonly handle: Locator;
 
   constructor(
-    private readonly page: Page,
+    page: Page,
     private readonly name: string,
     sliderId: string,
     private readonly boundInput: Locator,
@@ -46,8 +46,10 @@ export class LoanSlider {
     if (!box) throw new Error(`${this.name}: slider track has no bounding box`);
 
     // 1. Coarse move: click the track at the proportional position (jQuery UI snaps to the nearest step).
-    const x = box.x + Math.min(Math.max(fraction * box.width, 1), box.width - 1);
-    await this.page.mouse.click(x, box.y + box.height / 2);
+    //    Clicking through the locator keeps Playwright's actionability checks, so an ad overlay fails loudly.
+    await this.track.click({
+      position: { x: Math.min(Math.max(fraction * box.width, 1), box.width - 1), y: box.height / 2 },
+    });
 
     // 2. Fine move: one arrow key = one step. Bounded loop so a misbehaving widget fails instead of hanging.
     await this.handle.focus();
