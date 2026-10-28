@@ -10,3 +10,5 @@ reports/**/dom-snapshots/
 .playwright-mcp/
 *.log
 .DS_Store
+# self-healing apply demo evidence (otherwise caught by *.log)
+!reports/self-healing/apply-demo.log
