@@ -59,8 +59,9 @@ After({ tags: '@ui' }, async function (this: CustomWorld, { result, pickle }: IT
   const slug = slugify(pickle.name);
   if (this.page && failed) {
     try {
-      // Screenshot: attached to the Cucumber report and saved to disk.
-      const png = await this.page.screenshot({ fullPage: true });
+      // Viewport screenshot (full-page captures of this ad-heavy site run to ~9000px and bloat the committed reports);
+      // the DOM snapshot and trace cover the rest of the page.
+      const png = await this.page.screenshot();
       fs.writeFileSync(artifactPath(this.profile, 'screenshots', `${slug}.png`), png);
       this.attach(png, 'image/png');
       // DOM + accessibility snapshots: the raw material the self-healing tool works from.
