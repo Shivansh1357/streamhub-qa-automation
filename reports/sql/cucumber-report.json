@@ -1,0 +1,2465 @@
+[
+  {
+    "description": "  As a payments analyst\n  I want to find money that leaves an account and comes straight back\n  So that quick round trips and payment reversals can be reviewed\n\n  A round trip is a transfer A -> B followed by a transfer B -> A that happens\n  at the same instant or after it and no more than 24 hours later, for an amount\n  within 10% of what A sent. Both limits are inclusive. Each pair is reported once,\n  with the earlier transfer as the original; when both legs carry the identical\n  txn_time the lower txn_id is the original. The scenarios run\n  sql/queries/01_round_trip_transfers.sql against sql/seed.sql, whose cases are\n  documented in sql/README.md.",
+    "elements": [
+      {
+        "description": "",
+        "id": "round-trip-transfers;every-round-trip-is-reported-once,-with-the-earlier-transfer-as-the-original",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Every round trip is reported once, with the earlier transfer as the original",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 186417
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 134457
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 63256624
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 3222290
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 20,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12220125
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "original_txn",
+                      "return_txn",
+                      "account_a",
+                      "account_b",
+                      "amount_out",
+                      "amount_back",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-101",
+                      "TXN-102",
+                      "AC-1001",
+                      "AC-1002",
+                      "1000.00",
+                      "980.00",
+                      "6.50",
+                      "2.00"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-201",
+                      "TXN-202",
+                      "AC-1003",
+                      "AC-1004",
+                      "500.00",
+                      "500.00",
+                      "24.00",
+                      "0.00"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-301",
+                      "TXN-302",
+                      "AC-1005",
+                      "AC-1006",
+                      "2000.00",
+                      "1800.00",
+                      "12.00",
+                      "10.00"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-401",
+                      "TXN-402",
+                      "AC-1007",
+                      "AC-1008",
+                      "1250.00",
+                      "1150.00",
+                      "3.25",
+                      "8.00"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-501",
+                      "TXN-502",
+                      "AC-1009",
+                      "AC-1010",
+                      "750.00",
+                      "700.00",
+                      "3.00",
+                      "6.67"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-501",
+                      "TXN-503",
+                      "AC-1009",
+                      "AC-1010",
+                      "750.00",
+                      "745.00",
+                      "21.00",
+                      "0.67"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-1501",
+                      "TXN-1502",
+                      "AC-1004",
+                      "AC-1007",
+                      "450.00",
+                      "441.00",
+                      "0.00",
+                      "2.00"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-1601",
+                      "TXN-1602",
+                      "AC-1003",
+                      "AC-1006",
+                      "1000.00",
+                      "1100.00",
+                      "8.00",
+                      "10.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 21,
+            "name": "the result should contain exactly these round trips:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:80"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;two-legs-posted-at-the-same-instant-are-one-round-trip,-reported-once-with-the-lower-txn_id-as-the-original",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Two legs posted at the same instant are one round trip, reported once with the lower txn_id as the original",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 58833
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 39500
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 31019708
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1026665
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1795458
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "original_txn",
+                      "return_txn",
+                      "amount_out",
+                      "amount_back",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-1501",
+                      "TXN-1502",
+                      "450.00",
+                      "441.00",
+                      "0.00",
+                      "2.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 34,
+            "name": "the round trips involving transaction \"TXN-1502\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:99"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;the-limits-are-inclusive---returned-exactly-24-hours-later",
+        "keyword": "Scenario Outline",
+        "line": 46,
+        "name": "The limits are inclusive - returned exactly 24 hours later",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 47958
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 32249
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23222874
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 979000
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1627124
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "return_txn",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-202",
+                      "24.00",
+                      "0.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "the round trips originating from transaction \"TXN-201\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:87"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;the-limits-are-inclusive---returned-exactly-10-percent-lower",
+        "keyword": "Scenario Outline",
+        "line": 47,
+        "name": "The limits are inclusive - returned exactly 10 percent lower",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 58708
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 31958
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 25585915
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 806750
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 604500
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "return_txn",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-302",
+                      "12.00",
+                      "10.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "the round trips originating from transaction \"TXN-301\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:87"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;the-limits-are-inclusive---returned-exactly-10-percent-higher",
+        "keyword": "Scenario Outline",
+        "line": 48,
+        "name": "The limits are inclusive - returned exactly 10 percent higher",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 31375
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 25417
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12035082
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 661374
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 450958
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "return_txn",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-1602",
+                      "8.00",
+                      "10.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "the round trips originating from transaction \"TXN-1601\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:87"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;a-partial-reversal-within-the-tolerance-is-a-round-trip",
+        "keyword": "Scenario",
+        "line": 50,
+        "name": "A partial reversal within the tolerance is a round trip",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 87916
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 30290
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12201124
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 591166
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 51,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 388042
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "return_txn",
+                      "amount_out",
+                      "amount_back",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-402",
+                      "1250.00",
+                      "1150.00",
+                      "8.00"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 52,
+            "name": "the round trips originating from transaction \"TXN-401\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:87"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;a-payment-returned-in-two-instalments-inside-24-hours-is-reported-once-per-return",
+        "keyword": "Scenario",
+        "line": 56,
+        "name": "A payment returned in two instalments inside 24 hours is reported once per return",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 31000
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23750
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 14831957
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 722332
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 57,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 420125
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "return_txn",
+                      "amount_out",
+                      "amount_back",
+                      "hours_between",
+                      "pct_difference"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-502",
+                      "750.00",
+                      "700.00",
+                      "3.00",
+                      "6.67"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "TXN-503",
+                      "750.00",
+                      "745.00",
+                      "21.00",
+                      "0.67"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 58,
+            "name": "the round trips originating from transaction \"TXN-501\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:87"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---returned-25-hours-later",
+        "keyword": "Scenario Outline",
+        "line": 69,
+        "name": "Look-alike transfers are not reported - returned 25 hours later",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 34374
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 22750
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 18216957
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 660750
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1346667
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-601\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---returned-24-hours-and-one-second-later",
+        "keyword": "Scenario Outline",
+        "line": 70,
+        "name": "Look-alike transfers are not reported - returned 24 hours and one second later",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 30790
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 71875
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 14974750
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 710374
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 674250
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-1301\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---returned-15-percent-lower",
+        "keyword": "Scenario Outline",
+        "line": 71,
+        "name": "Look-alike transfers are not reported - returned 15 percent lower",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 29166
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 30166
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12385582
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 785875
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 392875
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-701\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---returned-10.01-percent-lower",
+        "keyword": "Scenario Outline",
+        "line": 72,
+        "name": "Look-alike transfers are not reported - returned 10.01 percent lower",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 29541
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 20458
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 14538709
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 749082
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 439041
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-1201\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---returned-10.001-percent-higher",
+        "keyword": "Scenario Outline",
+        "line": 73,
+        "name": "Look-alike transfers are not reported - returned 10.001 percent higher",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 105458
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 22875
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 15550083
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 845082
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 425750
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-1701\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---the-same-payment-was-sent-twice-in-one-direction",
+        "keyword": "Scenario Outline",
+        "line": 74,
+        "name": "Look-alike transfers are not reported - the same payment was sent twice in one direction",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 30874
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23875
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 18331208
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 969499
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 456875
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-801\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---the-money-was-forwarded-to-a-third-account",
+        "keyword": "Scenario Outline",
+        "line": 75,
+        "name": "Look-alike transfers are not reported - the money was forwarded to a third account",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 38291
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 28749
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 14351875
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 753750
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 389625
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-901\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---the-\"reversal\"-was-booked-before-the-original",
+        "keyword": "Scenario Outline",
+        "line": 76,
+        "name": "Look-alike transfers are not reported - the \"reversal\" was booked before the original",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 40082
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 25834
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12126666
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 591749
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 359875
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-1002\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "round-trip-transfers;look-alike-transfers-are-not-reported---the-money-came-back-through-a-chain-a->b->c->a",
+        "keyword": "Scenario Outline",
+        "line": 77,
+        "name": "Look-alike transfers are not reported - the money came back through a chain A->B->C->A",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 32291
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 44040
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 13961749
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 602249
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 344542
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "transaction \"TXN-1101\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:109"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "    The query's own hours_between and pct_difference are rounded for display, so they\n    are not trusted here. Each reported pair is looked up again in the transactions\n    table and the rule is re-applied to the raw txn_time and amount values.",
+        "id": "round-trip-transfers;every-reported-round-trip-satisfies-the-business-rule-on-the-raw-ledger",
+        "keyword": "Scenario",
+        "line": 79,
+        "name": "Every reported round trip satisfies the business rule on the raw ledger",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 41542
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 20208
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12225207
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 543666
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 84,
+            "name": "I run the \"01_round_trip_transfers\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 6438750
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 85,
+            "name": "the raw transactions table should show every reported return posted at or after its original and within 24 hours",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:119"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 3983249
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 86,
+            "name": "the raw transactions table should show every reported return within 10 percent of its original amount",
+            "match": {
+              "location": "tests/steps/sql/round-trip-transfers.steps.ts:134"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "round-trip-transfers",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Round-trip transfers",
+    "tags": [
+      {
+        "name": "@sql",
+        "line": 1
+      }
+    ],
+    "uri": "tests/features/sql/round-trip-transfers.feature"
+  },
+  {
+    "description": "  As a performance analyst for the 2024 season\n  I want to know which players scored 30+ runs in at least three consecutive matches\n  So that in-form players can be highlighted together with the date their streak commenced\n\n  \"Consecutive\" is taken to mean consecutive innings the player batted in\n  (sql/queries/02_scoring_streaks.sql). The stricter reading, consecutive team\n  fixtures where a missed match breaks the streak, is provided as\n  sql/queries/02b_scoring_streaks_team_matches.sql and the two are compared below.\n  The data set is synthetic and documented in sql/README.md.",
+    "elements": [
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;every-qualifying-streak-is-reported-with-the-date-it-commenced",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Every qualifying streak is reported with the date it commenced",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 39541
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 20625
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 15163749
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 910458
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 836208
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "player_name",
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Arjun Vellore",
+                      "2024-03-31",
+                      "2024-04-12",
+                      "3",
+                      "105"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Devansh Kulkarni",
+                      "2024-04-12",
+                      "2024-05-05",
+                      "3",
+                      "90"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Ishaan Mehra",
+                      "2024-03-23",
+                      "2024-04-14",
+                      "3",
+                      "129"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Rohan Dasgupta",
+                      "2024-03-23",
+                      "2024-04-24",
+                      "5",
+                      "232"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Siddharth Rao",
+                      "2024-03-24",
+                      "2024-04-07",
+                      "3",
+                      "116"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Siddharth Rao",
+                      "2024-04-21",
+                      "2024-05-21",
+                      "3",
+                      "139"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the result should contain exactly these streaks:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:6"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;a-streak-of-exactly-three-innings-qualifies-and-ends-when-the-player-falls-short",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "A streak of exactly three innings qualifies and ends when the player falls short",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 26542
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 17624
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 16646333
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 674040
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 935290
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-03-31",
+                      "2024-04-12",
+                      "3",
+                      "105"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "the streaks for player \"Arjun Vellore\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:13"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;a-longer-streak-is-reported-as-one-row-covering-every-innings-in-it",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "A longer streak is reported as one row covering every innings in it",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 19082
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 15124
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 11590334
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 567000
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 414083
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-03-23",
+                      "2024-04-24",
+                      "5",
+                      "232"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "the streaks for player \"Rohan Dasgupta\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:13"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;a-player-with-two-separate-streaks-gets-one-row-per-streak",
+        "keyword": "Scenario",
+        "line": 40,
+        "name": "A player with two separate streaks gets one row per streak",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 43083
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 20833
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 15586166
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 591499
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 41,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 363125
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-03-24",
+                      "2024-04-07",
+                      "3",
+                      "116"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-04-21",
+                      "2024-05-21",
+                      "3",
+                      "139"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 42,
+            "name": "the streaks for player \"Siddharth Rao\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:13"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;scoring-exactly-30-counts-towards-a-streak",
+        "keyword": "Scenario",
+        "line": 47,
+        "name": "Scoring exactly 30 counts towards a streak",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 37125
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23333
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12087582
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 536333
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 48,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 266958
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-04-12",
+                      "2024-05-05",
+                      "3",
+                      "90"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 49,
+            "name": "the streaks for player \"Devansh Kulkarni\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:13"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;players-without-three-consecutive-30+-innings-are-not-reported---the-streak-was-broken-by-an-innings-of-29",
+        "keyword": "Scenario Outline",
+        "line": 59,
+        "name": "Players without three consecutive 30+ innings are not reported - the streak was broken by an innings of 29",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 32249
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 20667
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 11225124
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 478583
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 54,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1057249
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 55,
+            "name": "player \"Kabir Anand\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:24"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;players-without-three-consecutive-30+-innings-are-not-reported---batted-in-every-match-but-never-reached-30",
+        "keyword": "Scenario Outline",
+        "line": 60,
+        "name": "Players without three consecutive 30+ innings are not reported - batted in every match but never reached 30",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 38334
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 25832
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12895999
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 456165
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 54,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 291041
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 55,
+            "name": "player \"Vikram Sethi\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:24"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;players-without-three-consecutive-30+-innings-are-not-reported---only-two-consecutive-innings-of-30-or-more",
+        "keyword": "Scenario Outline",
+        "line": 61,
+        "name": "Players without three consecutive 30+ innings are not reported - only two consecutive innings of 30 or more",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 32417
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23416
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12285417
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 467542
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 54,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 242457
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 55,
+            "name": "player \"Naveen Pillai\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:24"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;a-missed-fixture-between-two-30+-innings-does-not-break-a-streak-of-innings",
+        "keyword": "Scenario",
+        "line": 63,
+        "name": "A missed fixture between two 30+ innings does not break a streak of innings",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 81457
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 26209
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12684666
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2392749
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 64,
+            "name": "I run the \"02_scoring_streaks\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1368625
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2024-03-23",
+                      "2024-04-14",
+                      "3",
+                      "129"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 65,
+            "name": "the streaks for player \"Ishaan Mehra\" should be exactly:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:13"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "batting-streaks-of-30-or-more-runs;under-the-stricter-team-fixture-definition-a-missed-fixture-breaks-the-streak",
+        "keyword": "Scenario",
+        "line": 69,
+        "name": "Under the stricter team-fixture definition a missed fixture breaks the streak",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 35208
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 23374
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 14616125
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 15,
+            "name": "the analytics schema and seed data are loaded",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:6"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 671458
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 70,
+            "name": "I run the \"02b_scoring_streaks_team_matches\" query",
+            "match": {
+              "location": "tests/steps/sql/analytics.steps.ts:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 259499
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 71,
+            "name": "player \"Ishaan Mehra\" should not appear in the result",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:24"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 383499
+            },
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "player_name",
+                      "streak_start_date",
+                      "streak_end_date",
+                      "matches_in_streak",
+                      "runs_in_streak"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Arjun Vellore",
+                      "2024-03-31",
+                      "2024-04-12",
+                      "3",
+                      "105"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Devansh Kulkarni",
+                      "2024-04-12",
+                      "2024-05-05",
+                      "3",
+                      "90"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Rohan Dasgupta",
+                      "2024-03-23",
+                      "2024-04-24",
+                      "5",
+                      "232"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Siddharth Rao",
+                      "2024-03-24",
+                      "2024-04-07",
+                      "3",
+                      "116"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Siddharth Rao",
+                      "2024-04-21",
+                      "2024-05-21",
+                      "3",
+                      "139"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 72,
+            "name": "the result should contain exactly these streaks:",
+            "match": {
+              "location": "tests/steps/sql/scoring-streaks.steps.ts:6"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@sql",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "batting-streaks-of-30-or-more-runs",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Batting streaks of 30 or more runs",
+    "tags": [
+      {
+        "name": "@sql",
+        "line": 1
+      }
+    ],
+    "uri": "tests/features/sql/scoring-streaks.feature"
+  }
+]

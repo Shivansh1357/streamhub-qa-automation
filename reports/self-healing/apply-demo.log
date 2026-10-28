@@ -1,0 +1,10 @@
+# 2026-10-28T14:49:03.857Z npm run heal -- --provider offline --apply --max-failures 1
+APPLY tests/pages/self-healing/BrittleEmiCalculatorPage.ts:29
+  - return this.page.locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a');
+  + return this.page.getByRole('link', { name: 'Personal Loan', exact: true });
+RUN npx cucumber-js --profile selfHealing --name "^Switch to the Personal Loan tab \(positional CSS locator\)$"
+  | 2 hooks (2 passed)
+  | 1 scenario (1 passed)
+  | 6 steps (6 passed)
+  | 0m 2.819s (0m 2.372s executing your code)
+KEEP tests/pages/self-healing/BrittleEmiCalculatorPage.ts:29 (scenario passed)

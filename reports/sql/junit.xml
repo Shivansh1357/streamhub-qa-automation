@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="1.059" tests="27" skipped="0" failures="0" errors="0" timestamp="2026-10-28T15:06:34.892Z">
+  <testcase classname="Round-trip transfers" name="Every round trip is reported once, with the earlier transfer as the original" time="0.079">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the result should contain exactly these round trips:...................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Two legs posted at the same instant are one round trip, reported once with the lower txn_id as the original" time="0.034">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips involving transaction "TXN-1502" should be exactly:....passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="The limits are inclusive - &lt;case> - #1.1: The limits are inclusive - returned exactly 24 hours later" time="0.026">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips originating from transaction "TXN-201" should be exactly:..passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="The limits are inclusive - &lt;case> - #1.2: The limits are inclusive - returned exactly 10 percent lower" time="0.027">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips originating from transaction "TXN-301" should be exactly:..passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="The limits are inclusive - &lt;case> - #1.3: The limits are inclusive - returned exactly 10 percent higher" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips originating from transaction "TXN-1601" should be exactly:..passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="A partial reversal within the tolerance is a round trip" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips originating from transaction "TXN-401" should be exactly:..passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="A payment returned in two instalments inside 24 hours is reported once per return" time="0.016">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the round trips originating from transaction "TXN-501" should be exactly:..passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.1: Look-alike transfers are not reported - returned 25 hours later" time="0.021">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-601" should not appear in the result..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.2: Look-alike transfers are not reported - returned 24 hours and one second later" time="0.017">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-1301" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.3: Look-alike transfers are not reported - returned 15 percent lower" time="0.014">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-701" should not appear in the result..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.4: Look-alike transfers are not reported - returned 10.01 percent lower" time="0.016">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-1201" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.5: Look-alike transfers are not reported - returned 10.001 percent higher" time="0.017">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-1701" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.6: Look-alike transfers are not reported - the same payment was sent twice in one direction" time="0.02">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-801" should not appear in the result..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.7: Look-alike transfers are not reported - the money was forwarded to a third account" time="0.016">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-901" should not appear in the result..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.8: Look-alike transfers are not reported - the &quot;reversal&quot; was booked before the original" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-1002" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Look-alike transfers are not reported - &lt;reason> - #1.9: Look-alike transfers are not reported - the money came back through a chain A->B->C->A" time="0.015">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then transaction "TXN-1101" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Round-trip transfers" name="Every reported round trip satisfies the business rule on the raw ledger" time="0.024">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "01_round_trip_transfers" query..............................passed
+Then the raw transactions table should show every reported return posted at or after its original and within 24 hours..passed
+And the raw transactions table should show every reported return within 10 percent of its original amount..passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Every qualifying streak is reported with the date it commenced" time="0.017">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the result should contain exactly these streaks:.......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="A streak of exactly three innings qualifies and ends when the player falls short" time="0.018">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the streaks for player "Arjun Vellore" should be exactly:..............passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="A longer streak is reported as one row covering every innings in it" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the streaks for player "Rohan Dasgupta" should be exactly:.............passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="A player with two separate streaks gets one row per streak" time="0.016">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the streaks for player "Siddharth Rao" should be exactly:..............passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Scoring exactly 30 counts towards a streak" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the streaks for player "Devansh Kulkarni" should be exactly:...........passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Players without three consecutive 30+ innings are not reported - &lt;reason> - #1.1: Players without three consecutive 30+ innings are not reported - the streak was broken by an innings of 29" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then player "Kabir Anand" should not appear in the result...................passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Players without three consecutive 30+ innings are not reported - &lt;reason> - #1.2: Players without three consecutive 30+ innings are not reported - batted in every match but never reached 30" time="0.014">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then player "Vikram Sethi" should not appear in the result..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Players without three consecutive 30+ innings are not reported - &lt;reason> - #1.3: Players without three consecutive 30+ innings are not reported - only two consecutive innings of 30 or more" time="0.013">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then player "Naveen Pillai" should not appear in the result.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="A missed fixture between two 30+ innings does not break a streak of innings" time="0.018">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02_scoring_streaks" query...................................passed
+Then the streaks for player "Ishaan Mehra" should be exactly:...............passed]]></system-out>
+  </testcase>
+  <testcase classname="Batting streaks of 30 or more runs" name="Under the stricter team-fixture definition a missed fixture breaks the streak" time="0.016">
+    <system-out><![CDATA[Given the analytics schema and seed data are loaded.........................passed
+When I run the "02b_scoring_streaks_team_matches" query.....................passed
+Then player "Ishaan Mehra" should not appear in the result..................passed
+And the result should contain exactly these streaks:........................passed]]></system-out>
+  </testcase>
+</testsuite>

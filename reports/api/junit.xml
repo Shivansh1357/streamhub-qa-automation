@@ -1,0 +1,1169 @@
+<?xml version="1.0"?>
+<testsuite name="Cucumber" time="1.34" tests="173" skipped="0" failures="0" errors="0" timestamp="2026-10-28T15:14:16.004Z">
+  <testcase classname="Audience summary" name="The full quarter can be grouped by &lt;groupBy> - #1.1: The full quarter can be grouped by channel" time="0.312">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" grouped by "channel"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should be sorted by key ascending......................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="The full quarter can be grouped by &lt;groupBy> - #1.2: The full quarter can be grouped by genre" time="0.021">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" grouped by "genre"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should be sorted by key ascending......................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="The full quarter can be grouped by &lt;groupBy> - #1.3: The full quarter can be grouped by date" time="0.055">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" grouped by "date"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should be sorted by key ascending......................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A single channel can be summarised by &lt;groupBy> - #1.1: A single channel can be summarised by channel" time="0.005">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_002" grouped by "channel"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A single channel can be summarised by &lt;groupBy> - #1.2: A single channel can be summarised by genre" time="0.005">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_002" grouped by "genre"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A single channel can be summarised by &lt;groupBy> - #1.3: A single channel can be summarised by date" time="0.021">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_002" grouped by "date"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A single channel can be summarised by &lt;groupBy> - #1.4: A single channel can be summarised by genre" time="0.004">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_007" grouped by "genre"..passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary meta should echo the request................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="Grouping by channel is the default" time="0.009">
+    <system-out><![CDATA[When I request an audience summary from "2026-02-01" to "2026-02-28"........passed
+Then the response status should be 200......................................passed
+And the summary meta should echo the request................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="Summarising one channel by channel yields exactly that channel" time="0.005">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_002"..passed
+Then the response status should be 200......................................passed
+And the summary should contain 1 row........................................passed
+And the summary should include a row for key "ch_002" labelled "Thames Sports"..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="Rows are labelled with the channel name or the genre in title case" time="0.003">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" grouped by "genre"..passed
+Then the response status should be 200......................................passed
+And the summary should include a row for key "documentary" labelled "Documentary"..passed
+When I request an audience summary from "2026-01-01" to "2026-03-31" grouped by "channel"..passed
+Then the summary should include a row for key "ch_003" labelled "Canal Lumière"..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A range with no measured days is an empty summary, not an error" time="0.002">
+    <system-out><![CDATA[When I request an audience summary from "2025-01-01" to "2025-01-31"........passed
+Then the response status should be 200......................................passed
+And the response should match the AudienceSummary schema....................passed
+And the summary should contain no rows......................................passed
+And the summary meta should echo the request................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A well-formed channel with no data is an empty summary, not an error" time="0.002">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-03-31" for channel "ch_999"..passed
+Then the response status should be 200......................................passed
+And the summary should contain no rows......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A one-day range on the &lt;boundary> boundary includes that day - #1.1: A one-day range on the first boundary includes that day" time="0.004">
+    <system-out><![CDATA[When I request an audience summary from "2026-01-01" to "2026-01-01"........passed
+Then the response status should be 200......................................passed
+And the summary should include a row for key "ch_001" labelled "Streamhub One"..passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="A one-day range on the &lt;boundary> boundary includes that day - #1.2: A one-day range on the last boundary includes that day" time="0.003">
+    <system-out><![CDATA[When I request an audience summary from "2026-03-31" to "2026-03-31"........passed
+Then the response status should be 200......................................passed
+And the summary should include a row for key "ch_001" labelled "Streamhub One"..passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="Grouping by date only yields days inside the requested range" time="0.011">
+    <system-out><![CDATA[When I request an audience summary from "2026-02-10" to "2026-02-20" grouped by "date"..passed
+Then the response status should be 200......................................passed
+And every summary row key should be a date between "2026-02-10" and "2026-02-20"..passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Audience summary" name="The maximum span of 366 days is accepted" time="0.006">
+    <system-out><![CDATA[When I request an audience summary from "2025-03-30" to "2026-03-31"........passed
+Then the response status should be 200......................................passed
+And the summary rows should match the aggregates computed from the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Listing without filters returns every channel ordered by name" time="0.004">
+    <system-out><![CDATA[When I list channels........................................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And the channel list should match the dataset for the same query............passed
+And the channels should be sorted by "name" ascending.......................passed
+And the reported total should equal the number of channels returned.........passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be filtered by &lt;filter> - #1.1: Channels can be filtered by country" time="0.003">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And every returned channel should have country "GB".........................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be filtered by &lt;filter> - #1.2: Channels can be filtered by country" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And every returned channel should have country "DE".........................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be filtered by &lt;filter> - #1.3: Channels can be filtered by country" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And every returned channel should have country "FR".........................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be filtered by &lt;filter> - #1.4: Channels can be filtered by type" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And every returned channel should have type "linear"........................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be filtered by &lt;filter> - #1.5: Channels can be filtered by type" time="0.003">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And every returned channel should have type "vod"...........................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be sorted by &lt;field> &lt;direction> - #1.1: Channels can be sorted by name ascending" time="0.002">
+    <system-out><![CDATA[When I list channels sorted by "name" ascending.............................passed
+Then the response status should be 200......................................passed
+And the channels should be sorted by "name" ascending.......................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be sorted by &lt;field> &lt;direction> - #1.2: Channels can be sorted by name descending" time="0.002">
+    <system-out><![CDATA[When I list channels sorted by "name" descending............................passed
+Then the response status should be 200......................................passed
+And the channels should be sorted by "name" descending......................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be sorted by &lt;field> &lt;direction> - #1.3: Channels can be sorted by launchedAt ascending" time="0.002">
+    <system-out><![CDATA[When I list channels sorted by "launchedAt" ascending.......................passed
+Then the response status should be 200......................................passed
+And the channels should be sorted by "launchedAt" ascending.................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="Channels can be sorted by &lt;field> &lt;direction> - #1.4: Channels can be sorted by launchedAt descending" time="0.002">
+    <system-out><![CDATA[When I list channels sorted by "launchedAt" descending......................passed
+Then the response status should be 200......................................passed
+And the channels should be sorted by "launchedAt" descending................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A filter and a sort order can be combined" time="0.003">
+    <system-out><![CDATA[When I list channels filtered by country "GB" sorted by "launchedAt" descending..passed
+Then the response status should be 200......................................passed
+And every returned channel should have country "GB".........................passed
+And the channels should be sorted by "launchedAt" descending................passed
+And the channel list should match the dataset for the same query............passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A combination that matches nothing is an empty list, not an error" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 200......................................passed
+And the response should match the ChannelList schema........................passed
+And the channel list should contain 0 channels..............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A channel can be fetched by its id" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "ch_003"...........................................passed
+Then the response status should be 200......................................passed
+And the response should match the Channel schema............................passed
+And the channel should equal the dataset entry for "ch_003".................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A malformed channel id is rejected before any lookup - #1.1" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "ch_1".............................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A malformed channel id is rejected before any lookup - #1.2" time="0.003">
+    <system-out><![CDATA[When I fetch the channel "CH_001"...........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A malformed channel id is rejected before any lookup - #1.3" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "ch_0001"..........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A malformed channel id is rejected before any lookup - #1.4" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "prg_001"..........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A malformed channel id is rejected before any lookup - #1.5" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "001"..............................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Channel catalogue" name="A well-formed id with no channel behind it is not found" time="0.001">
+    <system-out><![CDATA[When I fetch the channel "ch_999"...........................................passed
+Then the response status should be 404......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "NOT_FOUND"....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="An unknown route is reported with the standard error envelope" time="0.002">
+    <system-out><![CDATA[When I request GET "/api/v1/unknown"........................................passed
+Then the response status should be 404......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "NOT_FOUND"....................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="An absurdly long path is still answered with a clean 404" time="0.002">
+    <system-out><![CDATA[When I request an unknown route 5000 characters long........................passed
+Then the response status should be 404......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "NOT_FOUND"....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A path that cannot be percent-decoded is a client error, not a crash" time="0.002">
+    <system-out><![CDATA[When I request GET "/api/v1/channels/%E0%A4"................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.1: POST is refused on /health because the API is read-only" time="0.003">
+    <system-out><![CDATA[When I send a POST request to "/health".....................................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.2: DELETE is refused on /health because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a DELETE request to "/health"...................................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.3: OPTIONS is refused on /health because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a OPTIONS request to "/health"..................................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.4: POST is refused on /api/v1/channels because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a POST request to "/api/v1/channels"............................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.5: DELETE is refused on /api/v1/channels because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a DELETE request to "/api/v1/channels"..........................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.6: POST is refused on /api/v1/channels/ch_001 because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a POST request to "/api/v1/channels/ch_001".....................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.7: DELETE is refused on /api/v1/channels/ch_001 because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a DELETE request to "/api/v1/channels/ch_001"...................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.8: PATCH is refused on /api/v1/channels/ch_001 because the API is read-only" time="0.001">
+    <system-out><![CDATA[When I send a PATCH request to "/api/v1/channels/ch_001"....................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.9: POST is refused on /api/v1/programmes because the API is read-only" time="0.001">
+    <system-out><![CDATA[When I send a POST request to "/api/v1/programmes"..........................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.10: DELETE is refused on /api/v1/programmes because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a DELETE request to "/api/v1/programmes"........................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.11: OPTIONS is refused on /api/v1/programmes because the API is read-only" time="0.003">
+    <system-out><![CDATA[When I send a OPTIONS request to "/api/v1/programmes".......................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.12: POST is refused on /api/v1/programmes/prg_001 because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a POST request to "/api/v1/programmes/prg_001"..................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.13: DELETE is refused on /api/v1/programmes/prg_001 because the API is read-only" time="0.003">
+    <system-out><![CDATA[When I send a DELETE request to "/api/v1/programmes/prg_001"................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.14: PUT is refused on /api/v1/programmes/prg_001 because the API is read-only" time="0.002">
+    <system-out><![CDATA[When I send a PUT request to "/api/v1/programmes/prg_001"...................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.15: POST is refused on /api/v1/audience/summary because the API is read-only" time="0.001">
+    <system-out><![CDATA[When I send a POST request to "/api/v1/audience/summary"....................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;method> is refused on &lt;path> because the API is read-only - #1.16: DELETE is refused on /api/v1/audience/summary because the API is read-only" time="0.001">
+    <system-out><![CDATA[When I send a DELETE request to "/api/v1/audience/summary"..................passed
+Then the response status should be 405......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "METHOD_NOT_ALLOWED"...........................passed
+And the Allow header should be "GET"........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="HEAD on a known route answers 200 with no body" time="0.002">
+    <system-out><![CDATA[When I send a HEAD request to "/api/v1/channels"............................passed
+Then the response status should be 200......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed
+And the response body should be empty.......................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.1: A successful list is JSON and carries a request id" time="0.001">
+    <system-out><![CDATA[When I request GET "/api/v1/channels".......................................passed
+Then the response status should be 200......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.2: A single resource is JSON and carries a request id" time="0.003">
+    <system-out><![CDATA[When I request GET "/api/v1/programmes/prg_001".............................passed
+Then the response status should be 200......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.3: An aggregate is JSON and carries a request id" time="0.001">
+    <system-out><![CDATA[When I request GET "/api/v1/audience/summary?from=2026-01-01&to=2026-01-07"..passed
+Then the response status should be 200......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.4: A validation error is JSON and carries a request id" time="0.002">
+    <system-out><![CDATA[When I request GET "/api/v1/programmes?limit=0".............................passed
+Then the response status should be 400......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.5: A malformed id is JSON and carries a request id" time="0.001">
+    <system-out><![CDATA[When I request GET "/api/v1/channels/ch_1"..................................passed
+Then the response status should be 400......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.6: A missing resource is JSON and carries a request id" time="0.001">
+    <system-out><![CDATA[When I request GET "/api/v1/channels/ch_999"................................passed
+Then the response status should be 404......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="&lt;description> is JSON and carries a request id - #1.7: An unknown route is JSON and carries a request id" time="0.002">
+    <system-out><![CDATA[When I request GET "/api/v1/nothing-here"...................................passed
+Then the response status should be 404......................................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A well-formed incoming request id is echoed back for tracing" time="0.003">
+    <system-out><![CDATA[When I check the service health with the request id "qa-run-0042.alpha_beta"..passed
+Then the response status should be 200......................................passed
+And the response request id should be "qa-run-0042.alpha_beta"..............passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A malformed incoming request id (&lt;description>) is replaced with a generated one - only ids matching ^[A-Za-z0-9._-]{1,128}$ are echoed - #1.1: A malformed incoming request id (unsafe characters) is replaced with a generated one" time="0.002">
+    <system-out><![CDATA[When I check the service health with the request id "not a safe id!"........passed
+Then the response status should be 200......................................passed
+And the response request id should be a generated UUID......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A malformed incoming request id (&lt;description>) is replaced with a generated one - only ids matching ^[A-Za-z0-9._-]{1,128}$ are echoed - #1.2: A malformed incoming request id (129 safe characters, one over the cap) is replaced with a generated one" time="0.001">
+    <system-out><![CDATA[When I check the service health with the request id "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"..passed
+Then the response status should be 200......................................passed
+And the response request id should be a generated UUID......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.1: A search for unicode symbols never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "☃☃"...........................................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.2: A search for accented letters never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "Lumière"......................................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.3: A search for emoji never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "😀😀".........................................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.4: A search for an html tag never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "<script>alert(1)</script>"....................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.5: A search for query delimiters never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "a&b=c"........................................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.6: A search for a percent sign never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "100%".........................................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.7: A search for an sql fragment never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "'; DROP TABLE programmes;--"..................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Cross-cutting HTTP conventions" name="A search for &lt;description> never breaks the service or reflects markup - #1.8: A search for a path traversal never breaks the service or reflects markup" time="0.002">
+    <system-out><![CDATA[When I search programmes for "../../etc/passwd".............................passed
+Then the response should not be a server error..............................passed
+And the response content type should be JSON................................passed
+And the response text should not contain "<script"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Service health" name="A running instance reports that it is healthy" time="0.002">
+    <system-out><![CDATA[When I check the service health.............................................passed
+Then the response status should be 200......................................passed
+And the response should match the Health schema.............................passed
+And the response content type should be JSON................................passed
+And the response should carry a request id header...........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Service health" name="The probe tolerates a cache-busting query parameter" time="0.001">
+    <system-out><![CDATA[When I check the service health with parameters:............................passed
+Then the response status should be 200......................................passed
+And the response should match the Health schema.............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Service health" name="The probe answers within a generous smoke-check budget" time="0.001">
+    <system-out><![CDATA[When I check the service health.............................................passed
+Then the response status should be 200......................................passed
+And the measured response time should be within the 5000 ms smoke budget....passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="With &lt;limit> per page the catalogue spans &lt;pages> pages - page sizes including both documented boundaries - #1.1: With 1 per page the catalogue spans 40 pages" time="0.004">
+    <system-out><![CDATA[When I request page 1 of programmes with 1 per page.........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report page 1 and limit 1..........................passed
+And totalPages should be the dataset total divided by 1 rounded up..........passed
+And the reported total should equal the number of programmes in the dataset..passed
+And the page should contain 1 programmes....................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="With &lt;limit> per page the catalogue spans &lt;pages> pages - page sizes including both documented boundaries - #1.2: With 7 per page the catalogue spans 6 pages" time="0.003">
+    <system-out><![CDATA[When I request page 1 of programmes with 7 per page.........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report page 1 and limit 7..........................passed
+And totalPages should be the dataset total divided by 7 rounded up..........passed
+And the reported total should equal the number of programmes in the dataset..passed
+And the page should contain 7 programmes....................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="With &lt;limit> per page the catalogue spans &lt;pages> pages - page sizes including both documented boundaries - #1.3: With 10 per page the catalogue spans 4 pages" time="0.003">
+    <system-out><![CDATA[When I request page 1 of programmes with 10 per page........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report page 1 and limit 10.........................passed
+And totalPages should be the dataset total divided by 10 rounded up.........passed
+And the reported total should equal the number of programmes in the dataset..passed
+And the page should contain 10 programmes...................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="With &lt;limit> per page the catalogue spans &lt;pages> pages - page sizes including both documented boundaries - #1.4: With 50 per page the catalogue spans 1 pages" time="0.003">
+    <system-out><![CDATA[When I request page 1 of programmes with 50 per page........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report page 1 and limit 50.........................passed
+And totalPages should be the dataset total divided by 50 rounded up.........passed
+And the reported total should equal the number of programmes in the dataset..passed
+And the page should contain 40 programmes...................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="The last page holds only the remainder" time="0.002">
+    <system-out><![CDATA[When I request page 6 of programmes with 7 per page.........................passed
+Then the response status should be 200......................................passed
+And the page should be the final page.......................................passed
+And the page should contain 5 programmes....................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="A page beyond the end is empty but still describes the whole set - #1.1" time="0.002">
+    <system-out><![CDATA[When I request page 7 of programmes with 7 per page.........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the response data should be empty.......................................passed
+And the page meta should report page 7 and limit 7..........................passed
+And the reported total should equal the number of programmes in the dataset..passed
+And totalPages should be the dataset total divided by 7 rounded up..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="A page beyond the end is empty but still describes the whole set - #1.2" time="0.002">
+    <system-out><![CDATA[When I request page 1000 of programmes with 7 per page......................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the response data should be empty.......................................passed
+And the page meta should report page 1000 and limit 7.......................passed
+And the reported total should equal the number of programmes in the dataset..passed
+And totalPages should be the dataset total divided by 7 rounded up..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="Walking every page visits each programme exactly once" time="0.009">
+    <system-out><![CDATA[When I collect every page of programmes with 7 per page.....................passed
+Then the number of collected pages should equal the reported totalPages.....passed
+And no two collected pages should share a programme.........................passed
+And every programme in the dataset should appear exactly once across the collected pages..passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme pagination" name="Pagination applies to the filtered set, not the whole catalogue" time="0.003">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "news".......................passed
+And the page should be the final page.......................................passed
+And the page should contain 2 programmes....................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Listing with no parameters uses the documented defaults" time="0.003">
+    <system-out><![CDATA[When I list programmes......................................................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report page 1 and limit 10.........................passed
+And the page meta should report sort "title"................................passed
+And the reported total should equal the number of programmes in the dataset..passed
+And the page should contain 10 programmes...................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by channel &lt;channelId> - #1.1: Programmes can be filtered by channel ch_001" time="0.003">
+    <system-out><![CDATA[When I list programmes on channel "ch_001"..................................passed
+Then the response status should be 200......................................passed
+And every returned programme should belong to channel "ch_001"..............passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by channel &lt;channelId> - #1.2: Programmes can be filtered by channel ch_005" time="0.002">
+    <system-out><![CDATA[When I list programmes on channel "ch_005"..................................passed
+Then the response status should be 200......................................passed
+And every returned programme should belong to channel "ch_005"..............passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by channel &lt;channelId> - #1.3: Programmes can be filtered by channel ch_008" time="0.002">
+    <system-out><![CDATA[When I list programmes on channel "ch_008"..................................passed
+Then the response status should be 200......................................passed
+And every returned programme should belong to channel "ch_008"..............passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.1: Programmes can be filtered by genre drama" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "drama".....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "drama"......................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.2: Programmes can be filtered by genre news" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "news"......................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "news".......................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.3: Programmes can be filtered by genre sport" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "sport".....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "sport"......................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.4: Programmes can be filtered by genre documentary" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "documentary"...............................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "documentary"................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.5: Programmes can be filtered by genre comedy" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "comedy"....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "comedy".....................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.6: Programmes can be filtered by genre kids" time="0.002">
+    <system-out><![CDATA[When I list programmes in genre "kids"......................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "kids".......................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Programmes can be filtered by genre &lt;genre> - #1.7: Programmes can be filtered by genre reality" time="0.003">
+    <system-out><![CDATA[When I list programmes in genre "reality"...................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "reality"....................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A minimum rating of &lt;minRating> is inclusive - #1.1: A minimum rating of 8.4 is inclusive" time="0.003">
+    <system-out><![CDATA[When I list programmes rated at least 8.4...................................passed
+Then the response status should be 200......................................passed
+And every returned programme should be rated at least 8.4...................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A minimum rating of &lt;minRating> is inclusive - #1.2: A minimum rating of 7.5 is inclusive" time="0.003">
+    <system-out><![CDATA[When I list programmes rated at least 7.5...................................passed
+Then the response status should be 200......................................passed
+And every returned programme should be rated at least 7.5...................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A minimum rating of &lt;minRating> is inclusive - #1.3: A minimum rating of 9 is inclusive" time="0.002">
+    <system-out><![CDATA[When I list programmes rated at least 9.....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should be rated at least 9.....................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A minimum rating of &lt;minRating> is inclusive - #1.4: A minimum rating of 0 is inclusive" time="0.002">
+    <system-out><![CDATA[When I list programmes rated at least 0.....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should be rated at least 0.....................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A minimum rating above every programme yields an empty page rather than an error" time="0.003">
+    <system-out><![CDATA[When I list programmes rated at least 10....................................passed
+Then the response status should be 200......................................passed
+And the response data should be empty.......................................passed
+And the reported total should be 0..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Title search &quot;&lt;q>&quot; is a case-insensitive substring match - #1.1: Title search &quot;morning&quot; is a case-insensitive substring match" time="0.003">
+    <system-out><![CDATA[When I search programmes for "morning"......................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "morning" ignoring case...passed
+And the reported total should be 3..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Title search &quot;&lt;q>&quot; is a case-insensitive substring match - #1.2: Title search &quot;MORNING&quot; is a case-insensitive substring match" time="0.002">
+    <system-out><![CDATA[When I search programmes for "MORNING"......................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "MORNING" ignoring case...passed
+And the reported total should be 3..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Title search &quot;&lt;q>&quot; is a case-insensitive substring match - #1.3: Title search &quot;MoRnInG&quot; is a case-insensitive substring match" time="0.002">
+    <system-out><![CDATA[When I search programmes for "MoRnInG"......................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "MoRnInG" ignoring case...passed
+And the reported total should be 3..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Title search &quot;&lt;q>&quot; is a case-insensitive substring match - #1.4: Title search &quot;late&quot; is a case-insensitive substring match" time="0.002">
+    <system-out><![CDATA[When I search programmes for "late".........................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "late" ignoring case......passed
+And the reported total should be 2..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Title search &quot;&lt;q>&quot; is a case-insensitive substring match - #1.5: Title search &quot;The&quot; is a case-insensitive substring match" time="0.002">
+    <system-out><![CDATA[When I search programmes for "The"..........................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "The" ignoring case.......passed
+And the reported total should be 5..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="Surrounding whitespace in the search term is ignored" time="0.002">
+    <system-out><![CDATA[When I search programmes for "   late   "...................................passed
+Then the response status should be 200......................................passed
+And every returned programme title should contain "late" ignoring case......passed
+And the reported total should be 2..........................................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A search that matches nothing is an empty page" time="0.002">
+    <system-out><![CDATA[When I search programmes for "zzzz".........................................passed
+Then the response status should be 200......................................passed
+And the response data should be empty.......................................passed
+And the reported total should be 0..........................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="All filters can be combined and narrow the result together" time="0.003">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should belong to channel "ch_001"..............passed
+And every returned programme should have genre "news".......................passed
+And every returned programme should be rated at least 7.5...................passed
+And every returned programme title should contain "report" ignoring case....passed
+And the page should contain exactly the programmes "prg_005"................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A programme can be fetched by id together with its channel" time="0.003">
+    <system-out><![CDATA[When I fetch the programme "prg_012"........................................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeDetail schema....................passed
+And the programme should equal the dataset entry for "prg_012"..............passed
+And the embedded channel should match the programme's channel in the dataset..passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A malformed programme id is rejected before any lookup - #1.1" time="0.002">
+    <system-out><![CDATA[When I fetch the programme "prg_1"..........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A malformed programme id is rejected before any lookup - #1.2" time="0.001">
+    <system-out><![CDATA[When I fetch the programme "PRG_001"........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A malformed programme id is rejected before any lookup - #1.3" time="0.002">
+    <system-out><![CDATA[When I fetch the programme "prg_0001".......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A malformed programme id is rejected before any lookup - #1.4" time="0.002">
+    <system-out><![CDATA[When I fetch the programme "ch_001".........................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "INVALID_ID"...................................passed
+And the error details should mention the field "id".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme search and lookup" name="A well-formed id with no programme behind it is not found" time="0.001">
+    <system-out><![CDATA[When I fetch the programme "prg_999"........................................passed
+Then the response status should be 404......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "NOT_FOUND"....................................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.1: Programmes can be sorted by title ascending" time="0.004">
+    <system-out><![CDATA[When I list all programmes sorted by "title" ascending......................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "title"................................passed
+And the programmes should be sorted by "title" ascending....................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.2: Programmes can be sorted by title descending" time="0.003">
+    <system-out><![CDATA[When I list all programmes sorted by "title" descending.....................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "-title"...............................passed
+And the programmes should be sorted by "title" descending...................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.3: Programmes can be sorted by firstAiredAt ascending" time="0.003">
+    <system-out><![CDATA[When I list all programmes sorted by "firstAiredAt" ascending...............passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "firstAiredAt".........................passed
+And the programmes should be sorted by "firstAiredAt" ascending.............passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.4: Programmes can be sorted by firstAiredAt descending" time="0.002">
+    <system-out><![CDATA[When I list all programmes sorted by "firstAiredAt" descending..............passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "-firstAiredAt"........................passed
+And the programmes should be sorted by "firstAiredAt" descending............passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.5: Programmes can be sorted by rating ascending" time="0.002">
+    <system-out><![CDATA[When I list all programmes sorted by "rating" ascending.....................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "rating"...............................passed
+And the programmes should be sorted by "rating" ascending...................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Programmes can be sorted by &lt;field> &lt;direction> - #1.6: Programmes can be sorted by rating descending" time="0.003">
+    <system-out><![CDATA[When I list all programmes sorted by "rating" descending....................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed
+And the page meta should report sort "-rating"..............................passed
+And the programmes should be sorted by "rating" descending..................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Equal ratings are broken by id ascending even when sorting descending" time="0.004">
+    <system-out><![CDATA[When I list all programmes sorted by "rating" descending....................passed
+Then the response status should be 200......................................passed
+And programmes with equal "rating" should be ordered by id ascending........passed
+And the programmes rated 8.4 should appear in the order "prg_006, prg_017, prg_040"..passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Title ascending is the default sort" time="0.002">
+    <system-out><![CDATA[When I list programmes......................................................passed
+Then the response status should be 200......................................passed
+And the page meta should report sort "title"................................passed
+And the programmes should be sorted by "title" ascending....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Programme sort order" name="Sorting applies within a filtered set" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 200......................................passed
+And every returned programme should have genre "sport"......................passed
+And the programmes should be sorted by "rating" descending..................passed
+And the programme page should match the dataset for the same query..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page size outside 1..50 or not an integer - #1.1: limit=0 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page size outside 1..50 or not an integer - #1.2: limit=51 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page size outside 1..50 or not an integer - #1.3: limit=abc is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page size outside 1..50 or not an integer - #1.4: limit=1.5 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page size outside 1..50 or not an integer - #1.5: limit=-1 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page number below 1 or not an integer - #2.1: page=0 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "page".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page number below 1 or not an integer - #2.2: page=-1 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "page".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page number below 1 or not an integer - #2.3: page=abc is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "page".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - page number below 1 or not an integer - #2.4: page=1.5 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "page".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - rating outside 0..10 or not a number - #3.1: minRating=11 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "minRating"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - rating outside 0..10 or not a number - #3.2: minRating=-1 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "minRating"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - rating outside 0..10 or not a number - #3.3: minRating=foo is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "minRating"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - values outside the documented vocabulary - #4.1: genre=unknown is rejected" time="0.001">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "genre"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - values outside the documented vocabulary - #4.2: channelId=ch_1 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "channelId"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - values outside the documented vocabulary - #4.3: channelId=CH_001 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "channelId"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - values outside the documented vocabulary - #4.4: sort=foo is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "sort".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - values outside the documented vocabulary - #4.5: sort=-foo is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "sort".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - search term shorter than 2 characters - #5.1: q=a is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "q"..........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - parameters the endpoint does not know - #6.1: genere=news is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "genere".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - parameters the endpoint does not know - #6.2: offset=10 is rejected" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "offset".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - A single-programme lookup accepts no query parameters at all" time="0.002">
+    <system-out><![CDATA[When I fetch the programme "prg_001" with parameters:.......................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "expand".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - A search term longer than 50 characters is rejected" time="0.003">
+    <system-out><![CDATA[When I search programmes for a title of 51 characters.......................passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error detail for field "q" should say "must be at most 50 characters"..passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - A search term of &lt;length> characters sits inside the allowed range - #1.1: A search term of 2 characters sits inside the allowed range" time="0.002">
+    <system-out><![CDATA[When I search programmes for a title of 2 characters........................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - A search term of &lt;length> characters sits inside the allowed range - #1.2: A search term of 50 characters sits inside the allowed range" time="0.001">
+    <system-out><![CDATA[When I search programmes for a title of 50 characters.......................passed
+Then the response status should be 200......................................passed
+And the response should match the ProgrammeList schema......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - An empty value is a validation error, not an absent parameter" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "limit"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - A repeated parameter is rejected rather than silently picking one value" time="0.003">
+    <system-out><![CDATA[When I list programmes with the "genre" parameter repeated as "news" and "drama"..passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "genre"......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Programme listing parameters are validated strictly - Every invalid parameter is reported in a single response" time="0.002">
+    <system-out><![CDATA[When I list programmes with parameters:.....................................passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the fields:............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.1: country=gbr is rejected" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "country"....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.2: country=gb is rejected" time="0.005">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "country"....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.3: country=G1 is rejected" time="0.003">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "country"....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.4: type=cable is rejected" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "type".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.5: sort=foo is rejected" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "sort".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.6: sort=-genre is rejected" time="0.001">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "sort".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - &lt;param>=&lt;value> is rejected - #1.7: region=GB is rejected" time="0.002">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "region".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - A single-channel lookup accepts no query parameters at all" time="0.002">
+    <system-out><![CDATA[When I fetch the channel "ch_001" with parameters:..........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "fields".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Channel listing parameters are validated strictly - Several bad channel parameters are reported together" time="0.001">
+    <system-out><![CDATA[When I list channels with parameters:.......................................passed
+Then the response status should be 400......................................passed
+And the error details should mention the fields:............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.1: a start date after the end date is rejected" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "from".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.2: an impossible calendar day is rejected" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "from".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.3: an impossible month is rejected" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "to".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.4: a date in the wrong format is rejected" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "from".......................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.5: a span of 367 days is rejected" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "to".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.6: a span of well over a year is rejected" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "to".........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.7: an unknown grouping is rejected" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "groupBy"....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.8: a malformed channel id is rejected" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "channelId"..................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - &lt;description> is rejected - #1.9: a parameter the endpoint lacks is rejected" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the response should match the ErrorEnvelope schema......................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error details should mention the field "region".....................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - A missing start date is reported as required" time="0.001">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error detail for field "from" should say "is required"..............passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - A missing end date is reported as required" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the error code should be "VALIDATION_ERROR".............................passed
+And the error detail for field "to" should say "is required"................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - Both dates missing are reported together" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the error details should mention the fields:............................passed]]></system-out>
+  </testcase>
+  <testcase classname="Request validation" name="Audience summary parameters are validated strictly - Every invalid summary parameter is reported in a single response" time="0.002">
+    <system-out><![CDATA[When I request an audience summary with parameters:.........................passed
+Then the response status should be 400......................................passed
+And the error details should mention the fields:............................passed]]></system-out>
+  </testcase>
+</testsuite>

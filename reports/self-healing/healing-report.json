@@ -1,0 +1,624 @@
+{
+  "meta": {
+    "generatedAt": "2026-10-28T14:54:40.357Z",
+    "rootDir": "/Users/shivansh/Projects/Streamhub/streamhub-qa-automation",
+    "reportPath": "/Users/shivansh/Projects/Streamhub/streamhub-qa-automation/reports/self-healing/cucumber-report.json",
+    "provider": "offline",
+    "providerReason": "requested",
+    "model": "claude-opus-5-5",
+    "live": false,
+    "apply": false,
+    "command": "npm run heal -- --provider offline"
+  },
+  "records": [
+    {
+      "failure": {
+        "featureName": "EMI calculator - deliberately brittle locators (self-healing exercise)",
+        "featureUri": "tests/features/self-healing/brittle-locators.feature",
+        "scenarioName": "Switch to the Personal Loan tab (positional CSS locator)",
+        "scenarioLine": 13,
+        "stepKeyword": "When",
+        "stepText": "I choose the \"Personal Loan\" loan product tab",
+        "stepLine": 14,
+        "stepDefinition": "tests/steps/self-healing/brittle.steps.ts:23",
+        "errorExcerpt": "locator.click: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a')",
+        "apiCall": "locator.click",
+        "locator": {
+          "expression": "locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a')",
+          "kind": "css",
+          "literal": "#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a"
+        },
+        "failureClass": "locator-not-found",
+        "classificationReason": "Playwright waited for the locator and it never resolved to an element.",
+        "intent": {
+          "action": "click",
+          "expectedTags": [
+            "a"
+          ],
+          "expectedRoles": [
+            "link",
+            "tab"
+          ],
+          "summary": "action=click, roles=link|tab, tags=a"
+        },
+        "source": {
+          "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+          "line": 29,
+          "lineText": "    return this.page.locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a');",
+          "match": "expression"
+        },
+        "sourceCandidates": [
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 29,
+            "lineText": "    return this.page.locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a');",
+            "match": "expression"
+          }
+        ]
+      },
+      "provider": {
+        "name": "offline",
+        "model": "heuristic (no model)",
+        "usage": {
+          "durationMs": 1
+        },
+        "warnings": []
+      },
+      "candidates": [
+        {
+          "candidate": {
+            "strategy": "role",
+            "role": "link",
+            "name": "Personal Loan",
+            "exact": true,
+            "value": "Personal Loan",
+            "rationale": "getByRole keeps the link role the step relies on. Matched <div#emicalculatordashboard.col-sm-8 > ul.loanproduct-nav > li#personal-loan > a> (score 1.00): lexical match 0.77 to the step and the broken locator; its name equals \"personal loan\", quoted in the step.",
+            "confidence": 1
+          },
+          "code": "this.page.getByRole('link', { name: 'Personal Loan', exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "a",
+            "role": "link",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "text",
+            "value": "Personal Loan",
+            "exact": true,
+            "rationale": "The element is static text the user reads. Matched <div#emicalculatordashboard.col-sm-8 > ul.loanproduct-nav > li#personal-loan > a> (score 1.00): lexical match 0.77 to the step and the broken locator; its name equals \"personal loan\", quoted in the step.",
+            "confidence": 0.85
+          },
+          "code": "this.page.getByText('Personal Loan', { exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "a",
+            "role": "link",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        }
+      ],
+      "notes": [],
+      "context": {
+        "originalChars": 445667,
+        "trimmedChars": 25070,
+        "elements": 1848,
+        "containers": 15
+      },
+      "chosen": {
+        "candidate": {
+          "strategy": "role",
+          "role": "link",
+          "name": "Personal Loan",
+          "exact": true,
+          "value": "Personal Loan",
+          "rationale": "getByRole keeps the link role the step relies on. Matched <div#emicalculatordashboard.col-sm-8 > ul.loanproduct-nav > li#personal-loan > a> (score 1.00): lexical match 0.77 to the step and the broken locator; its name equals \"personal loan\", quoted in the step.",
+          "confidence": 1
+        },
+        "code": "this.page.getByRole('link', { name: 'Personal Loan', exact: true })",
+        "snapshot": {
+          "matches": 1,
+          "tag": "a",
+          "role": "link",
+          "compatible": true,
+          "visible": true
+        },
+        "ok": true,
+        "notes": []
+      },
+      "fix": {
+        "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+        "line": 29,
+        "original": "    return this.page.locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a');",
+        "replacement": "    return this.page.getByRole('link', { name: 'Personal Loan', exact: true });"
+      }
+    },
+    {
+      "failure": {
+        "featureName": "EMI calculator - deliberately brittle locators (self-healing exercise)",
+        "featureUri": "tests/features/self-healing/brittle-locators.feature",
+        "scenarioName": "Enter an interest rate (index-based XPath locator)",
+        "scenarioLine": 17,
+        "stepKeyword": "When",
+        "stepText": "I type \"9.5\" into the interest rate field",
+        "stepLine": 18,
+        "stepDefinition": "tests/steps/self-healing/brittle.steps.ts:31",
+        "errorExcerpt": "locator.fill: Error: strict mode violation: locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input') resolved to 3 elements:\n    1) <input value=\"20\" type=\"text\" id=\"loanterm\" name=\"loanterm\" class=\"form-control\"/> aka getByRole('textbox', { name: 'Loan Tenure' })\n    2) <input type=\"radio\" tabindex=\"4\" id=\"loanyears\" name=\"loantenure\" value=\"loanyears\" checked=\"checked\" autocomplete=\"off\"/> aka getByRole('radio', { name: 'Yr' })\n    3) <input type=\"radio\" tabindex=\"5\" id=\"loanmonths\" name=\"loantenure\" value=\"loanmonths\" autocomplete=\"off\"/> aka getByRole('radio', { name: 'Mo' })\n\nCall log:\n  - waiting for locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input')",
+        "apiCall": "locator.fill",
+        "locator": {
+          "expression": "locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input')",
+          "kind": "xpath",
+          "literal": "xpath=(//div[contains(@class,\"form-group\")])[3]//input"
+        },
+        "resolvedCount": 3,
+        "failureClass": "ambiguous",
+        "classificationReason": "Strict mode violation: the locator resolved to 3 elements, so it is not specific enough.",
+        "intent": {
+          "action": "fill",
+          "expectedTags": [
+            "input"
+          ],
+          "expectedRoles": [
+            "textbox",
+            "searchbox",
+            "spinbutton",
+            "combobox"
+          ],
+          "summary": "action=fill, roles=textbox|searchbox|spinbutton|combobox, tags=input"
+        },
+        "source": {
+          "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+          "line": 40,
+          "lineText": "    return this.page.locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input');",
+          "match": "expression"
+        },
+        "sourceCandidates": [
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 40,
+            "lineText": "    return this.page.locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input');",
+            "match": "expression"
+          }
+        ]
+      },
+      "provider": {
+        "name": "offline",
+        "model": "heuristic (no model)",
+        "usage": {
+          "durationMs": 0
+        },
+        "warnings": []
+      },
+      "candidates": [
+        {
+          "candidate": {
+            "strategy": "role",
+            "role": "textbox",
+            "name": "Interest Rate",
+            "exact": true,
+            "value": "Interest Rate",
+            "rationale": "getByRole keeps the textbox role the step relies on. Matched <div.sep > div.col-lg-6 > div.input-group > input#loaninterest.form-control> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+            "confidence": 0.77
+          },
+          "code": "this.page.getByRole('textbox', { name: 'Interest Rate', exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "label",
+            "value": "Interest Rate",
+            "exact": true,
+            "rationale": "The control has a visible <label>. Matched <div.sep > div.col-lg-6 > div.input-group > input#loaninterest.form-control> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+            "confidence": 0.73
+          },
+          "code": "this.page.getByLabel('Interest Rate', { exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "css",
+            "value": "#loaninterest",
+            "rationale": "Its id is short, human-readable and not generated. Matched <div.sep > div.col-lg-6 > div.input-group > input#loaninterest.form-control> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+            "confidence": 0.58
+          },
+          "code": "this.page.locator('#loaninterest')",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        }
+      ],
+      "notes": [],
+      "context": {
+        "originalChars": 445426,
+        "trimmedChars": 25088,
+        "elements": 1848,
+        "containers": 15
+      },
+      "chosen": {
+        "candidate": {
+          "strategy": "role",
+          "role": "textbox",
+          "name": "Interest Rate",
+          "exact": true,
+          "value": "Interest Rate",
+          "rationale": "getByRole keeps the textbox role the step relies on. Matched <div.sep > div.col-lg-6 > div.input-group > input#loaninterest.form-control> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+          "confidence": 0.77
+        },
+        "code": "this.page.getByRole('textbox', { name: 'Interest Rate', exact: true })",
+        "snapshot": {
+          "matches": 1,
+          "tag": "input",
+          "role": "textbox",
+          "compatible": true,
+          "visible": true
+        },
+        "ok": true,
+        "notes": []
+      },
+      "fix": {
+        "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+        "line": 40,
+        "original": "    return this.page.locator('xpath=(//div[contains(@class,\"form-group\")])[3]//input');",
+        "replacement": "    return this.page.getByRole('textbox', { name: 'Interest Rate', exact: true });"
+      }
+    },
+    {
+      "failure": {
+        "featureName": "EMI calculator - deliberately brittle locators (self-healing exercise)",
+        "featureUri": "tests/features/self-healing/brittle-locators.feature",
+        "scenarioName": "Enter a loan amount (typo in the id locator)",
+        "scenarioLine": 21,
+        "stepKeyword": "When",
+        "stepText": "I type \"30,00,000\" into the loan amount field",
+        "stepLine": 22,
+        "stepDefinition": "tests/steps/self-healing/brittle.steps.ts:39",
+        "errorExcerpt": "locator.fill: Timeout 20000ms exceeded.\nCall log:\n  - waiting for locator('#loanamountt')",
+        "apiCall": "locator.fill",
+        "locator": {
+          "expression": "locator('#loanamountt')",
+          "kind": "css",
+          "literal": "#loanamountt"
+        },
+        "failureClass": "locator-not-found",
+        "classificationReason": "Playwright waited for the locator and it never resolved to an element.",
+        "intent": {
+          "action": "fill",
+          "expectedTags": [
+            "input",
+            "textarea"
+          ],
+          "expectedRoles": [
+            "textbox",
+            "searchbox",
+            "spinbutton",
+            "combobox"
+          ],
+          "summary": "action=fill, roles=textbox|searchbox|spinbutton|combobox, tags=input|textarea"
+        },
+        "source": {
+          "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+          "line": 47,
+          "lineText": "    return this.page.locator('#loanamountt');",
+          "match": "expression"
+        },
+        "sourceCandidates": [
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 47,
+            "lineText": "    return this.page.locator('#loanamountt');",
+            "match": "expression"
+          },
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 43,
+            "lineText": "  // BRITTLE ON PURPOSE (self-healing exercise #3): a typo in the id (#loanamountt instead of",
+            "match": "literal"
+          }
+        ]
+      },
+      "provider": {
+        "name": "offline",
+        "model": "heuristic (no model)",
+        "usage": {
+          "durationMs": 0
+        },
+        "warnings": []
+      },
+      "candidates": [
+        {
+          "candidate": {
+            "strategy": "role",
+            "role": "textbox",
+            "name": "Home Loan Amount",
+            "exact": true,
+            "value": "Home Loan Amount",
+            "rationale": "getByRole keeps the textbox role the step relies on. Matched <div.row > div.col-lg-6 > div.input-group > input#loanamount.form-control> (score 1.00): lexical match 0.77 to the step and the broken locator; id \"loanamount\" is within a typo of \"loanamountt\".",
+            "confidence": 1
+          },
+          "code": "this.page.getByRole('textbox', { name: 'Home Loan Amount', exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "label",
+            "value": "Home Loan Amount",
+            "exact": true,
+            "rationale": "The control has a visible <label>. Matched <div.row > div.col-lg-6 > div.input-group > input#loanamount.form-control> (score 1.00): lexical match 0.77 to the step and the broken locator; id \"loanamount\" is within a typo of \"loanamountt\".",
+            "confidence": 0.95
+          },
+          "code": "this.page.getByLabel('Home Loan Amount', { exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "css",
+            "value": "#loanamount",
+            "rationale": "Its id is short, human-readable and not generated. Matched <div.row > div.col-lg-6 > div.input-group > input#loanamount.form-control> (score 1.00): lexical match 0.77 to the step and the broken locator; id \"loanamount\" is within a typo of \"loanamountt\".",
+            "confidence": 0.75
+          },
+          "code": "this.page.locator('#loanamount')",
+          "snapshot": {
+            "matches": 1,
+            "tag": "input",
+            "role": "textbox",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        }
+      ],
+      "notes": [],
+      "context": {
+        "originalChars": 445651,
+        "trimmedChars": 25088,
+        "elements": 1848,
+        "containers": 14
+      },
+      "chosen": {
+        "candidate": {
+          "strategy": "role",
+          "role": "textbox",
+          "name": "Home Loan Amount",
+          "exact": true,
+          "value": "Home Loan Amount",
+          "rationale": "getByRole keeps the textbox role the step relies on. Matched <div.row > div.col-lg-6 > div.input-group > input#loanamount.form-control> (score 1.00): lexical match 0.77 to the step and the broken locator; id \"loanamount\" is within a typo of \"loanamountt\".",
+          "confidence": 1
+        },
+        "code": "this.page.getByRole('textbox', { name: 'Home Loan Amount', exact: true })",
+        "snapshot": {
+          "matches": 1,
+          "tag": "input",
+          "role": "textbox",
+          "compatible": true,
+          "visible": true
+        },
+        "ok": true,
+        "notes": []
+      },
+      "fix": {
+        "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+        "line": 47,
+        "original": "    return this.page.locator('#loanamountt');",
+        "replacement": "    return this.page.getByRole('textbox', { name: 'Home Loan Amount', exact: true });"
+      }
+    },
+    {
+      "failure": {
+        "featureName": "EMI calculator - deliberately brittle locators (self-healing exercise)",
+        "featureUri": "tests/features/self-healing/brittle-locators.feature",
+        "scenarioName": "Read the Loan EMI result (stale text locator)",
+        "scenarioLine": 25,
+        "stepKeyword": "Then",
+        "stepText": "the Loan EMI result heading should be visible",
+        "stepLine": 27,
+        "stepDefinition": "tests/steps/self-healing/brittle.steps.ts:51",
+        "errorExcerpt": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText('Loan EMI Amount', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText('Loan EMI Amount', { exact: true }) with timeout 5000ms\n  - waiting for getByText('Loan EMI Amount', { exact: true })",
+        "apiCall": "expect(locator).toBeVisible()",
+        "locator": {
+          "expression": "getByText('Loan EMI Amount', { exact: true })",
+          "kind": "text",
+          "literal": "Loan EMI Amount"
+        },
+        "failureClass": "locator-not-found",
+        "classificationReason": "The expectation found no element for the locator.",
+        "intent": {
+          "action": "assert",
+          "expectedTags": [],
+          "expectedRoles": [
+            "heading"
+          ],
+          "summary": "action=assert, roles=heading"
+        },
+        "source": {
+          "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+          "line": 58,
+          "lineText": "    return this.page.getByText('Loan EMI Amount', { exact: true });",
+          "match": "expression"
+        },
+        "sourceCandidates": [
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 58,
+            "lineText": "    return this.page.getByText('Loan EMI Amount', { exact: true });",
+            "match": "expression"
+          },
+          {
+            "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+            "line": 55,
+            "lineText": "  // reads \"Loan EMI\"; a previous version of the page said \"Loan EMI Amount\". Exact text locators go",
+            "match": "literal"
+          }
+        ]
+      },
+      "provider": {
+        "name": "offline",
+        "model": "heuristic (no model)",
+        "usage": {
+          "durationMs": 1
+        },
+        "warnings": []
+      },
+      "candidates": [
+        {
+          "candidate": {
+            "strategy": "role",
+            "role": "heading",
+            "name": "Loan EMI",
+            "exact": true,
+            "value": "Loan EMI",
+            "rationale": "getByRole keeps the heading role the step relies on. Matched <div.row > div#emipaymentsummary.col-sm-5 > div#emiamount > h4> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+            "confidence": 0.77
+          },
+          "code": "this.page.getByRole('heading', { name: 'Loan EMI', exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "h4",
+            "role": "heading",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "role",
+            "role": "heading",
+            "name": "Home Loan EMI Calculator",
+            "exact": true,
+            "value": "Home Loan EMI Calculator",
+            "rationale": "getByRole keeps the heading role the step relies on. Matched <ul.sow-features-list > li.sow-features-feature > div.textwidget > h5.sow-features-feature-title> (score 0.50): lexical match 0.50 to the step and the broken locator.",
+            "confidence": 0.5
+          },
+          "code": "this.page.getByRole('heading', { name: 'Home Loan EMI Calculator', exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "h5",
+            "role": "heading",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "text",
+            "value": "Loan EMI",
+            "exact": true,
+            "rationale": "The element is static text the user reads. Matched <div.row > div#emipaymentsummary.col-sm-5 > div#emiamount > h4> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+            "confidence": 0.65
+          },
+          "code": "this.page.getByText('Loan EMI', { exact: true })",
+          "snapshot": {
+            "matches": 1,
+            "tag": "h4",
+            "role": "heading",
+            "compatible": true,
+            "visible": true
+          },
+          "ok": true,
+          "notes": []
+        },
+        {
+          "candidate": {
+            "strategy": "text",
+            "value": "Home Loan EMI Calculator",
+            "exact": true,
+            "rationale": "The element is static text the user reads. Matched <ul.sow-features-list > li.sow-features-feature > div.textwidget > h5.sow-features-feature-title> (score 0.50): lexical match 0.50 to the step and the broken locator.",
+            "confidence": 0.42
+          },
+          "code": "this.page.getByText('Home Loan EMI Calculator', { exact: true })",
+          "snapshot": {
+            "matches": 2
+          },
+          "ok": false,
+          "notes": [
+            "matches 2 elements in the saved DOM (must be exactly 1)"
+          ]
+        }
+      ],
+      "notes": [],
+      "context": {
+        "originalChars": 445607,
+        "trimmedChars": 25088,
+        "elements": 1848,
+        "containers": 17
+      },
+      "chosen": {
+        "candidate": {
+          "strategy": "role",
+          "role": "heading",
+          "name": "Loan EMI",
+          "exact": true,
+          "value": "Loan EMI",
+          "rationale": "getByRole keeps the heading role the step relies on. Matched <div.row > div#emipaymentsummary.col-sm-5 > div#emiamount > h4> (score 0.77): lexical match 0.77 to the step and the broken locator.",
+          "confidence": 0.77
+        },
+        "code": "this.page.getByRole('heading', { name: 'Loan EMI', exact: true })",
+        "snapshot": {
+          "matches": 1,
+          "tag": "h4",
+          "role": "heading",
+          "compatible": true,
+          "visible": true
+        },
+        "ok": true,
+        "notes": []
+      },
+      "fix": {
+        "file": "tests/pages/self-healing/BrittleEmiCalculatorPage.ts",
+        "line": 58,
+        "original": "    return this.page.getByText('Loan EMI Amount', { exact: true });",
+        "replacement": "    return this.page.getByRole('heading', { name: 'Loan EMI', exact: true });"
+      }
+    }
+  ]
+}

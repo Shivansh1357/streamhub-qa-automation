@@ -1,7 +1,40 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="4.766" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-28T10:00:18.419Z">
-  <testcase classname="Framework smoke test" name="The EMI calculator home page loads" time="4.409">
+<testsuite name="Cucumber" time="15.384" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-28T15:07:32.122Z">
+  <testcase classname="EMI calculator page" name="The calculator loads with the Home Loan tab active and default results" time="1.732">
     <system-out><![CDATA[Given I open the EMI calculator.............................................passed
-Then the page title should contain "EMI Calculator".........................passed]]></system-out>
+Then the "Home Loan" tab should be active...................................passed
+And the loan summary should show an EMI, total interest and total payment greater than zero..passed]]></system-out>
+  </testcase>
+  <testcase classname="EMI bar chart on the Personal Loan tab (Test Case 2)" name="Validate the yearly payment bar chart for a 10 lakh personal loan" time="3.02">
+    <system-out><![CDATA[Given I open the EMI calculator.............................................passed
+And I navigate to the "Personal Loan" tab...................................passed
+When I set the loan amount to 1000000 using the slider......................passed
+And I set the interest rate to 12% using the slider.........................passed
+And I set the loan tenure to 5 years using the slider.......................passed
+And I change the schedule start month to January of next year...............passed
+Then the bar chart should be visible........................................passed
+And the bar chart should show 5 years of payments with 2 bars per year......passed
+And the tooltip of a bar should show its year and amounts greater than zero..passed
+And the tooltip amounts should match the payment schedule table for that year..passed]]></system-out>
+  </testcase>
+  <testcase classname="EMI pie chart on the Home Loan tab (Test Case 1)" name="Scenario &lt;scenario> - validate the EMI and the payment break-up pie chart - #1.1: Scenario A - validate the EMI and the payment break-up pie chart" time="2.773">
+    <system-out><![CDATA[Given I open the EMI calculator.............................................passed
+And I navigate to the "Home Loan" tab.......................................passed
+When I enter a loan amount of 2500000, an interest rate of 10% and a tenure of 10 years..passed
+Then the displayed EMI should match the EMI calculated for the same inputs..passed
+And the displayed total interest and total payment should match the calculated values..passed
+And the pie chart should be visible.........................................passed
+And both sections of the pie chart should show values greater than zero.....passed
+And the pie chart sections should match the calculated principal and interest shares..passed]]></system-out>
+  </testcase>
+  <testcase classname="EMI pie chart on the Home Loan tab (Test Case 1)" name="Scenario &lt;scenario> - validate the EMI and the payment break-up pie chart - #1.2: Scenario B - validate the EMI and the payment break-up pie chart" time="7.365">
+    <system-out><![CDATA[Given I open the EMI calculator.............................................passed
+And I navigate to the "Home Loan" tab.......................................passed
+When I enter a loan amount of 5000000, an interest rate of 7.5% and a tenure of 15 years..passed
+Then the displayed EMI should match the EMI calculated for the same inputs..passed
+And the displayed total interest and total payment should match the calculated values..passed
+And the pie chart should be visible.........................................passed
+And both sections of the pie chart should show values greater than zero.....passed
+And the pie chart sections should match the calculated principal and interest shares..passed]]></system-out>
   </testcase>
 </testsuite>

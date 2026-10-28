@@ -1,0 +1,37 @@
+--- a/tests/pages/self-healing/BrittleEmiCalculatorPage.ts
++++ b/tests/pages/self-healing/BrittleEmiCalculatorPage.ts
+@@ -26,7 +26,7 @@
+   // nesting of the dashboard. The tab strip is the dashboard's first child, not the second, and any
+   // wrapper added or removed by a redesign shifts every nth-child index. Resolves to 0 elements.
+   get personalLoanTab(): Locator {
+-    return this.page.locator('#emicalculatordashboard > div:nth-child(2) > div > ul > li:nth-child(2) > a');
++    return this.page.getByRole('link', { name: 'Personal Loan', exact: true });
+   }
+ 
+   get carLoanTab(): Locator {
+@@ -37,14 +37,14 @@
+   // the form groups. The third group is Loan Tenure (a text box plus two radio buttons), so this
+   // "interest rate" locator points at the wrong group and is ambiguous (strict mode violation).
+   get interestRateField(): Locator {
+-    return this.page.locator('xpath=(//div[contains(@class,"form-group")])[3]//input');
++    return this.page.getByRole('textbox', { name: 'Interest Rate', exact: true });
+   }
+ 
+   // BRITTLE ON PURPOSE (self-healing exercise #3): a typo in the id (#loanamountt instead of
+   // #loanamount). Ids are a reasonable second choice, but a raw CSS id gets no help from the
+   // accessibility tree when it is wrong. Resolves to 0 elements.
+   get loanAmountField(): Locator {
+-    return this.page.locator('#loanamountt');
++    return this.page.getByRole('textbox', { name: 'Home Loan Amount', exact: true });
+   }
+ 
+   get loanTenureField(): Locator {
+@@ -55,7 +55,7 @@
+   // reads "Loan EMI"; a previous version of the page said "Loan EMI Amount". Exact text locators go
+   // stale on every copy change.
+   get emiResultHeading(): Locator {
+-    return this.page.getByText('Loan EMI Amount', { exact: true });
++    return this.page.getByRole('heading', { name: 'Loan EMI', exact: true });
+   }
+ 
+   /** The formatted EMI figure shown under the result heading, e.g. "₹44,986". */
